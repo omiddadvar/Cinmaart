@@ -2,26 +2,21 @@
 using Cinamaart.Domain.Entities.Identity;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinamaart.Domain.Entities
+namespace Cinamaart.Domain.Entities.Pivots
 {
-    [Table("Authors")]
-    public class Author : BaseEntity<int>
+    [Table("UserDocuments")]
+    public class UserDocument : BaseAuditableEntity<long>
     {
-        [StringLength(200)]
-        public string Name { get; set; }
-        [StringLength(4000)]
-        public string? Description { get; set; }
-
-        public ICollection<Subtitle>? Subtitles {  get; set; }
-
         [ForeignKey("User")]
         public long UserId { get; set; }
         public User User { get; set; }
+        [ForeignKey("Document")]
+        public long DocumentId { get; set; }
+        public Document Document { get; set; }
     }
 }
