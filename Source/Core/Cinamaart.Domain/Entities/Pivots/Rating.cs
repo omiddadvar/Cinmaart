@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities.Pivots
 {
-    internal class Rating : BaseAuditableEntity<long>
+    [Table("Ratings")]
+    public class Rating : BaseAuditableEntity<long>
     {
         [Range(1,5)]
         public int Rate { get; set; }

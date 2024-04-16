@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
+    [Table("Subtitles")]
     public class Subtitle : BaseAuditableEntity<long>
     {
         [StringLength(1000)]

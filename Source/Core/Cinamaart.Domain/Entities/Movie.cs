@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
+    [Table("Movies")]
     public class Movie : BaseAuditableEntity<int>
     {
         [StringLength(1000)]

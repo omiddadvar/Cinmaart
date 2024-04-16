@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
+    [Table("Artists")]
     public class Artist : BaseEntity<int>
     {
         [StringLength(200)]

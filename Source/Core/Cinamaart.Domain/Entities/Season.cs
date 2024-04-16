@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
+    [Table("Seasons")]
     public class Season : BaseAuditableEntity<int>
     {
         [StringLength(1000)]

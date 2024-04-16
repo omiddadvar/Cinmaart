@@ -1,6 +1,8 @@
 ﻿using Cinamaart.Domain.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,5 @@ namespace Cinamaart.Domain.Entities.Types
     [Table("DocumentTypes")]
     public class DocumentType : BaseTypeEntity
     {
-
     }
 }
