@@ -1,0 +1,16 @@
+﻿using Cinamaart.Domain.Common.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Cinamaart.Domain.Entities.Types
+{
+    [Table("DocumentTypes")]
+    public class DocumentType : BaseTypeEntity
+    {
+
+    }
+}
