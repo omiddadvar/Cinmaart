@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Cinamaart.Domain.Entities.Pivots
 {
     [Table("MovieTags")]
-    public class MovieTag : BaseAuditableEntity<long>
+    public class MovieTag : BaseEntity<long>
     {
         [ForeignKey("Movie")]
         public int MovieId { get; set; }

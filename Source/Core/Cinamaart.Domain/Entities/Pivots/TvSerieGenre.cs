@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Cinamaart.Domain.Entities.Pivots
 {
     [Table("TvSerieGenres")]
-    public class TvSerieGenre : BaseAuditableEntity<long>
+    public class TvSerieGenre : BaseEntity<long>
     {
         [ForeignKey("TVSerie")]
         public int TvSerieId { get; set; }
