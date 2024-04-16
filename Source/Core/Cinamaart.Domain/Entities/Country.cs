@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Domain.Common;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +13,7 @@ namespace Cinamaart.Domain.Entities
     [Table("Countries")]
     public class Country : BaseEntity<int>
     {
-        [StringLength(100) , DataType("VARCHAR")]
+        [StringLength(100) , Unicode(false)]
         public string Name {  get; set; }
     }
 }
