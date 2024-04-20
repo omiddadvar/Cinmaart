@@ -13,4 +13,8 @@
     <Folder Include="Interfaces\Repositories\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Cinamaart.Domain\Cinamaart.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

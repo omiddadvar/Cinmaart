@@ -12,4 +12,8 @@
     <Folder Include="Repositories\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Cinamaart.Application\Cinamaart.Application.csproj" />
+  </ItemGroup>
+
 </Project>
