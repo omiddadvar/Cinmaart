@@ -10,6 +10,6 @@ namespace Cinamaart.Domain.Entities.Identity
 {
     public class User : IdentityUser<long>, IEntity<long>
     {
-
+        public Author? Author { get; set; }
     }
 }
