@@ -22,9 +22,6 @@ namespace Cinamaart.Domain.Entities
         [ForeignKey("Author")]
         public int? AuthorId { get; set; }
         public Author? Author { get; set; }
-        [ForeignKey("Document")]
-        public int DocumentId { get; set; }
-        public Document Document { get; set; }
 
     }
 }
