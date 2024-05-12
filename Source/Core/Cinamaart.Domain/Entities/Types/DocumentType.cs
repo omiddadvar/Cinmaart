@@ -1,4 +1,4 @@
-﻿using Cinamaart.Domain.Common.Interfaces;
+﻿using Cinamaart.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,5 +13,6 @@ namespace Cinamaart.Domain.Entities.Types
     [Table("DocumentTypes")]
     public class DocumentType : BaseTypeEntity
     {
+        public ICollection<Document> Documents { get; set;} = new List<Document>(); 
     }
 }
