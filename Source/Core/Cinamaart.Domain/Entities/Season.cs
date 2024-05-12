@@ -20,6 +20,6 @@ namespace Cinamaart.Domain.Entities
         public int TvSerieId {  get; set; }
         public TvSerie TvSerie {  get; set; }
 
-        public ICollection<Episode> Episodes {  get; set; }
+        public ICollection<Episode> Episodes {  get; set; } = new List<Episode>();
     }
 }
