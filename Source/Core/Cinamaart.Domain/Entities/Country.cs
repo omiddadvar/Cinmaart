@@ -15,5 +15,10 @@ namespace Cinamaart.Domain.Entities
     {
         [StringLength(100) , Unicode(false)]
         public string Name {  get; set; }
+
+        public ICollection<Artist> Artists { get; } = new List<Artist>();
+        public ICollection<Movie> Movies { get; } = new List<Movie>();
+        public ICollection<TvSerie> TvSeries { get; } = new List<TvSerie>();
+
     }
 }
