@@ -21,7 +21,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
-            builder.ToTable("Episodes");
+            builder.ToTable(nameof(Episode));
         }
     }
 }

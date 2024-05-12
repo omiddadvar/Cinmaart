@@ -23,7 +23,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
-            builder.ToTable("Subtitles");
+            builder.ToTable(nameof(Subtitle));
         }
     }
 }

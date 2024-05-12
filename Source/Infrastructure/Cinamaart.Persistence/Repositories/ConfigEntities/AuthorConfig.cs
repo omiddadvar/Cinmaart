@@ -23,7 +23,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
-            builder.ToTable("Authors");
+            builder.ToTable(nameof(Author));
         }
     }
 }

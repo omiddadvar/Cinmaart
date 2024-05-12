@@ -15,7 +15,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Types
         {
             builder.HasKey(t => t.Id);
             builder.Property(t => t.Name).HasMaxLength(maxLength: 100);
-            builder.ToTable("Tags");
+            builder.ToTable(nameof(Tag));
         }
     }
 }

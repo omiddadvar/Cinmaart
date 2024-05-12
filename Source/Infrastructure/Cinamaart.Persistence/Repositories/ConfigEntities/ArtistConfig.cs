@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Domain.Entities;
+using Cinamaart.Domain.Entities.Types;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -30,7 +31,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
-            builder.ToTable("Artists");
+            builder.ToTable(nameof(Artist));
         }
     }
 }

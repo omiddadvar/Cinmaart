@@ -21,7 +21,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
-            builder.ToTable("Movies");
+            builder.ToTable(nameof(Movie));
         }
     }
 }

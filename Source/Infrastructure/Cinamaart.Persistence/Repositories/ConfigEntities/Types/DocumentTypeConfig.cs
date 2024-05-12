@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Entities.Types;
+﻿using Cinamaart.Domain.Entities.Pivots;
+using Cinamaart.Domain.Entities.Types;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -15,7 +16,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Types
         {
             builder.HasKey(t => t.Id);
             builder.Property(t => t.Name).HasMaxLength(maxLength: 100);
-            builder.ToTable("DocumentTypes");
+            builder.ToTable(nameof(DocumentType));
         }
     }
 }
