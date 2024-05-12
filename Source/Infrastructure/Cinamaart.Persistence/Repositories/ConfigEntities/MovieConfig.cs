@@ -13,7 +13,15 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
     {
         public void Configure(EntityTypeBuilder<Movie> builder)
         {
-            throw new NotImplementedException();
+            builder.Property(t => t.Name).HasMaxLength(1000);
+
+            builder.HasOne(t => t.Country)
+                .WithMany(e => e.Movies)
+                .HasForeignKey(t => t.CountryId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
+
+            builder.ToTable("Movies");
         }
     }
 }

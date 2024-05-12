@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Domain.Entities;
+using Cinamaart.Domain.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -13,7 +14,16 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
     {
         public void Configure(EntityTypeBuilder<Author> builder)
         {
-            throw new NotImplementedException();
+            builder.Property(t => t.Name).HasMaxLength(maxLength: 100);
+            builder.Property(t => t.Description).HasMaxLength(maxLength: 4000);
+
+            builder.HasOne(t => t.User)
+                .WithOne(e => e.Author)
+                .HasForeignKey<Author>(e => e.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
+
+            builder.ToTable("Authors");
         }
     }
 }

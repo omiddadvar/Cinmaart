@@ -13,7 +13,15 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
     {
         public void Configure(EntityTypeBuilder<Episode> builder)
         {
-            throw new NotImplementedException();
+            builder.Property(t => t.Name).HasMaxLength(1000);
+
+            builder.HasOne(t => t.Season)
+                .WithMany(e => e.Episodes)
+                .HasForeignKey(t => t.SeasonId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
+
+            builder.ToTable("Episodes");
         }
     }
 }

@@ -13,7 +13,17 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
     {
         public void Configure(EntityTypeBuilder<Document> builder)
         {
-            throw new NotImplementedException();
+            builder.Property(t => t.Name).HasMaxLength(500);
+            builder.Property(t => t.Extention).IsUnicode(false).HasMaxLength(100);
+            builder.Property(t => t.SavedName).IsUnicode(false).HasMaxLength(1000);
+
+            builder.HasOne(t => t.DocumentType)
+                .WithMany(e => e.Documents)
+                .HasForeignKey(t => t.DocumentTypeId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
+
+            builder.ToTable("Documents");
         }
     }
 }

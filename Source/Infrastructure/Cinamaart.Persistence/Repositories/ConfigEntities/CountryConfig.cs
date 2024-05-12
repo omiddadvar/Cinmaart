@@ -13,7 +13,8 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
     {
         public void Configure(EntityTypeBuilder<Country> builder)
         {
-            throw new NotImplementedException();
+            builder.Property(t => t.Name).IsUnicode(false).HasMaxLength(100);
+            builder.ToTable("Countries");
         }
     }
 }

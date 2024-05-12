@@ -13,7 +13,9 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Types
     {
         public void Configure(EntityTypeBuilder<Gender> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(t => t.Id);
+            builder.Property(t => t.Name).HasMaxLength(maxLength: 100);
+            builder.ToTable("Genders");
         }
     }
 }
