@@ -2,9 +2,10 @@
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Entities.Pivots;
 using Cinamaart.Domain.Entities.Types;
+using Cinamaart.Persistence.Repositories.ConfigEntities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
@@ -48,10 +49,9 @@ namespace Cinamaart.Persistence.Contexts
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         #endregion
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {   
+            ConfigureAllEntities.Configure(modelBuilder);   
             base.OnModelCreating(modelBuilder);
         }
     }
