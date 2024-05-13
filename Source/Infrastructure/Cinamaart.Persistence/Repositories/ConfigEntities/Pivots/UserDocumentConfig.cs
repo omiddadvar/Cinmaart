@@ -13,7 +13,19 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Pivots
     {
         public void Configure(EntityTypeBuilder<UserDocument> builder)
         {
-            throw new NotImplementedException();
+            builder.HasOne(t => t.User)
+                .WithMany(e => e.UserDocuments)
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
+
+            builder.HasOne(t => t.Document)
+                 .WithMany(e => e.UserDocuments)
+                 .HasForeignKey(t => t.DocumentId)
+                 .OnDelete(DeleteBehavior.Cascade)
+                 .IsRequired();
+
+            builder.ToTable(nameof(UserDocument));
         }
     }
 }

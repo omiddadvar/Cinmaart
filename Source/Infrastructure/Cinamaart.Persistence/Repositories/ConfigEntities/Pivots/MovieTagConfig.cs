@@ -13,7 +13,19 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Pivots
     {
         public void Configure(EntityTypeBuilder<MovieTag> builder)
         {
-            throw new NotImplementedException();
+            builder.HasOne(t => t.Movie)
+                 .WithMany(e => e.MovieTags)
+                 .HasForeignKey(t => t.MovieId)
+                 .OnDelete(DeleteBehavior.Cascade)
+                 .IsRequired();
+
+            builder.HasOne(t => t.Tag)
+                 .WithMany(e => e.MovieTags)
+                 .HasForeignKey(t => t.TagId)
+                 .OnDelete(DeleteBehavior.Cascade)
+                 .IsRequired();
+
+            builder.ToTable(nameof(MovieTag));
         }
     }
 }

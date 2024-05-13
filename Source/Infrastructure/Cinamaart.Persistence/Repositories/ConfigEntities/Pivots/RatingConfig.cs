@@ -13,7 +13,19 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Pivots
     {
         public void Configure(EntityTypeBuilder<Rating> builder)
         {
-            throw new NotImplementedException();
+            builder.HasOne(t => t.User)
+                 .WithMany(e => e.Ratings)
+                 .HasForeignKey(t => t.UserId)
+                 .OnDelete(DeleteBehavior.Cascade)
+                 .IsRequired();
+
+            builder.HasOne(t => t.Subtitle)
+                 .WithMany(e => e.Ratings)
+                 .HasForeignKey(t => t.SubtitleId)
+                 .OnDelete(DeleteBehavior.Cascade)
+                 .IsRequired();
+
+            builder.ToTable(nameof(Rating));
         }
     }
 }

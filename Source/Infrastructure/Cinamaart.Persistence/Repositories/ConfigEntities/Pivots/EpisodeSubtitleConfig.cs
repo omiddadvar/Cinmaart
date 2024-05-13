@@ -13,7 +13,19 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Pivots
     {
         public void Configure(EntityTypeBuilder<EpisodeSubtitle> builder)
         {
+            builder.HasOne(t => t.Episode)
+                 .WithMany(e => e.EpisodeSubtitles)
+                 .HasForeignKey(t => t.EpisodeId)
+                 .OnDelete(DeleteBehavior.Cascade)
+                 .IsRequired();
 
+            builder.HasOne(t => t.Subtitle)
+                 .WithMany(e => e.EpisodeSubtitles)
+                 .HasForeignKey(t => t.SubtitleId)
+                 .OnDelete(DeleteBehavior.Cascade)
+                 .IsRequired();
+
+            builder.ToTable(nameof(EpisodeSubtitle));
         }
     }
 }
