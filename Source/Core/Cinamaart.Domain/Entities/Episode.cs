@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Domain.Common;
+using Cinamaart.Domain.Entities.Pivots;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,5 +19,7 @@ namespace Cinamaart.Domain.Entities
         [ForeignKey("Season")]
         public int SeasonId { get; set; }
         public Season Season { get; set; }
+
+        public ICollection<EpisodeSubtitle> EpisodeSubtitles {  get; set; } = new List<EpisodeSubtitle>();
     }
 }

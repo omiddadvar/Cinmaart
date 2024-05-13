@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Domain.Common;
+using Cinamaart.Domain.Entities.Pivots;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,5 +20,10 @@ namespace Cinamaart.Domain.Entities
         [ForeignKey("Country")]
         public int CountryId { get; set; }
         public Country Country { get; set; }
+
+        public ICollection<TvSerieArtist> TvSerieArtists { get; set; } = new List<TvSerieArtist>();
+        public ICollection<TvSerieGenre> TvSerieGenres { get; set; } = new List<TvSerieGenre>();
+        public ICollection<TvSerieTag> TvSerieTags { get; set; } = new List<TvSerieTag>();
+
     }
 }

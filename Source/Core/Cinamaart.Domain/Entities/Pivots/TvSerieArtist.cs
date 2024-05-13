@@ -13,7 +13,7 @@ namespace Cinamaart.Domain.Entities.Pivots
     {
         [ForeignKey("TVSerie")]
         public int TvSerieId { get; set; }
-        public TvSerie TVSerie { get; set; }
+        public TvSerie TvSerie { get; set; }
         [ForeignKey("Artist")]
         public int ArtistId { get; set; }
         public Artist Artist { get; set; }

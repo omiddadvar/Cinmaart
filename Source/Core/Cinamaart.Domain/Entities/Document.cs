@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Domain.Common;
+using Cinamaart.Domain.Entities.Pivots;
 using Cinamaart.Domain.Entities.Types;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -23,5 +24,8 @@ namespace Cinamaart.Domain.Entities
         [ForeignKey("DocumentType")]
         public int DocumentTypeId {  get; set; }
         public DocumentType DocumentType {  get; set; }
+
+        public ICollection<SubtitleDocument> SubtitleDocuments { get; set; } = new List<SubtitleDocument>();
+        public ICollection<UserDocument> UserDocuments { get; set; } = new List<UserDocument>();
     }
 }

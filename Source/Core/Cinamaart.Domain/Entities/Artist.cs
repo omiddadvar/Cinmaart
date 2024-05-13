@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Domain.Common;
+using Cinamaart.Domain.Entities.Pivots;
 using Cinamaart.Domain.Entities.Types;
 using System;
 using System.Collections.Generic;
@@ -24,5 +25,8 @@ namespace Cinamaart.Domain.Entities
         [ForeignKey("Country")]
         public int CountryId { get; set; }
         public Country Country { get; set; }
+
+        public ICollection<MovieArtist> MovieArtists { get; set; } = new List<MovieArtist>();
+        public ICollection<TvSerieArtist> TvSerieArtists { get; set; } = new List<TvSerieArtist>();
     }
 }

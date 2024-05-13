@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Domain.Common;
+using Cinamaart.Domain.Entities.Pivots;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,6 +23,11 @@ namespace Cinamaart.Domain.Entities
         [ForeignKey("Author")]
         public int? AuthorId { get; set; }
         public Author? Author { get; set; }
+
+        public ICollection<EpisodeSubtitle> EpisodeSubtitles { get; set; } = new List<EpisodeSubtitle>();
+        public ICollection<MovieSubtitle> MovieSubtitles { get; set; } = new List<MovieSubtitle>();
+        public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+        public ICollection<SubtitleDocument> SubtitleDocuments { get; set; } = new List<SubtitleDocument>();
 
     }
 }
