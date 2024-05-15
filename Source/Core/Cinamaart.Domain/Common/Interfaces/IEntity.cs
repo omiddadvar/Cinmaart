@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Common.Interfaces
 {
-    public interface IBaseEntity<TPrimaryKey> : IEntity
+    public interface IEntity
     {
-        public TPrimaryKey Id { get; set; }
+
     }
 }
