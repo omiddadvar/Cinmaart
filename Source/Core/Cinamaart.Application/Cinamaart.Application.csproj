@@ -10,7 +10,6 @@
     <Folder Include="Common\Mappings\" />
     <Folder Include="Extentions\" />
     <Folder Include="Features\" />
-    <Folder Include="Interfaces\Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
