@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities.Identity
 {
-    public class User : IdentityUser<long>, IEntity<long>
+    public class User : IdentityUser<long>, IBaseEntity<long>
     {
         public Author? Author { get; set; }
         public ICollection<Rating> Ratings { get; set; } = new List<Rating>();

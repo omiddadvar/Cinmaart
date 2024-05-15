@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Common.Interfaces
 {
-    internal interface IAuditablaEntity<TPrimaryKey> : IEntity<TPrimaryKey>
+    internal interface IAuditablaEntity<TPrimaryKey> : IBaseEntity<TPrimaryKey>
     {
         public DateTime CraetedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

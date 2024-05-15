@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Cinamaart.Domain.Common
 {
     [NotMapped]
-    public class BaseEntity<TPrimaryKey> : IEntity<TPrimaryKey>
+    public class BaseEntity<TPrimaryKey> : IBaseEntity<TPrimaryKey>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
