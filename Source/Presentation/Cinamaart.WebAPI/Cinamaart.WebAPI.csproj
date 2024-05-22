@@ -12,11 +12,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Cinamaart.Application\Cinamaart.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Cinamaart.Persistence\Cinamaart.Persistence.csproj" />
+    <ProjectReference Include="..\Cinamaart.Presentation\Cinamaart.Presentation.csproj" />
   </ItemGroup>
 
 </Project>
