@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  cinamaart.webapi:
+    image: ${DOCKER_REGISTRY-}cinamaartwebapi
+    build:
+      context: .
+      dockerfile: Presentation\Cinamaart.WebAPI\Dockerfile
