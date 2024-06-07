@@ -1,4 +1,4 @@
-﻿using Cinamaart.Domain.Common.Interfaces;
+﻿using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Pivots;
 using Microsoft.AspNetCore.Identity;
 using System;
