@@ -21,9 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{37B3E9D9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinamaart.Test", "Tests\Cinamaart.Test\Cinamaart.Test.csproj", "{03054BA6-31AB-4004-96B3-090FDE521BCA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinamaart.Presentation", "Presentation\Cinamaart.Presentation\Cinamaart.Presentation.csproj", "{189D0A7A-7701-4245-BCCF-D6FB92827261}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinamaart.Infrastructure", "Infrastructure\Cinamaart.Infrastructure\Cinamaart.Infrastructure.csproj", "{0E6A4E80-64B8-477E-9DAE-7DFB579D8206}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinamaart.Infrastructure", "Infrastructure\Cinamaart.Infrastructure\Cinamaart.Infrastructure.csproj", "{0E6A4E80-64B8-477E-9DAE-7DFB579D8206}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8A1DCF36-7E53-481A-A40B-EAF1EB354BD5}"
 EndProject
@@ -53,10 +51,6 @@ Global
 		{03054BA6-31AB-4004-96B3-090FDE521BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03054BA6-31AB-4004-96B3-090FDE521BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03054BA6-31AB-4004-96B3-090FDE521BCA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{189D0A7A-7701-4245-BCCF-D6FB92827261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{189D0A7A-7701-4245-BCCF-D6FB92827261}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{189D0A7A-7701-4245-BCCF-D6FB92827261}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{189D0A7A-7701-4245-BCCF-D6FB92827261}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0E6A4E80-64B8-477E-9DAE-7DFB579D8206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E6A4E80-64B8-477E-9DAE-7DFB579D8206}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E6A4E80-64B8-477E-9DAE-7DFB579D8206}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,7 +69,6 @@ Global
 		{D534C02C-724C-4464-94B8-ABF5CAA3C6E5} = {356B0589-CDBE-4BEE-93A4-BEBC90C5ADFA}
 		{A91AFCE2-CF5F-4FFE-9E3E-3C4F0C1BC490} = {29640AB6-06E7-4A49-9AB8-033EACD59FCC}
 		{03054BA6-31AB-4004-96B3-090FDE521BCA} = {37B3E9D9-48CA-4E12-8924-0E57082684A4}
-		{189D0A7A-7701-4245-BCCF-D6FB92827261} = {29640AB6-06E7-4A49-9AB8-033EACD59FCC}
 		{0E6A4E80-64B8-477E-9DAE-7DFB579D8206} = {356B0589-CDBE-4BEE-93A4-BEBC90C5ADFA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
