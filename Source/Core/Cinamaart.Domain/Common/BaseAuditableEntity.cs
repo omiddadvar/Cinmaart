@@ -1,4 +1,4 @@
-﻿using Cinamaart.Domain.Common.Interfaces;
+﻿using Cinamaart.Domain.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
