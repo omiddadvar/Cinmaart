@@ -20,7 +20,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Cinamaart.Application\Cinamaart.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Cinamaart.Persistence\Cinamaart.Persistence.csproj" />
-    <ProjectReference Include="..\Cinamaart.Presentation\Cinamaart.Presentation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extentions\" />
+    <Folder Include="Middlewares\" />
   </ItemGroup>
 
 </Project>
