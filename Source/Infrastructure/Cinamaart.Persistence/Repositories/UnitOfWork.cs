@@ -1,8 +1,9 @@
 ﻿using Cinamaart.Application.Interfaces.Repositories;
+using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Common;
-using Cinamaart.Domain.Common.Interfaces;
 using Cinamaart.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,11 +17,12 @@ namespace Cinamaart.Persistence.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly MainDBContext _dbContext;
-        private Hashtable _repositories;
+        private readonly ILogger<UnitOfWork> _logger;
 
-        public UnitOfWork(MainDBContext dbContext)
+        public UnitOfWork(MainDBContext dbContext , ILogger<UnitOfWork> logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         public async Task<int> SaveAsync(CancellationToken cancellationToken)
@@ -33,9 +35,9 @@ namespace Cinamaart.Persistence.Repositories
                     returnValue = await _dbContext.SaveChangesAsync(cancellationToken);
                     transAction.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    //Log Exception Handling message                      
+                    _logger.LogError(ex, "Exception occured : {Message}", ex.Message);
                     returnValue = 0;
                     transAction.Rollback();
                 }
@@ -52,32 +54,14 @@ namespace Cinamaart.Persistence.Repositories
                     returnValue = _dbContext.SaveChanges();
                     transAction.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    //Log Exception Handling message                      
+                    _logger.LogError(ex, "Exception occured : {Message}", ex.Message);
                     returnValue = 0;
                     transAction.Rollback();
                 }
             }
             return returnValue;
-        }
-        public IGenericRepository<T> Repository<T>() where T : class, IEntity
-        {
-            if (_repositories is null)
-                _repositories = new Hashtable();
-
-            var type = typeof(T).Name;
-
-            if (!_repositories.ContainsKey(type))
-            {
-                var repositoryType = typeof(GenericRepository<>);
-
-                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), _dbContext);
-
-                _repositories.Add(type, repositoryInstance);
-            }
-
-            return (IGenericRepository<T>)_repositories[type];
         }
         public void Dispose()
         {

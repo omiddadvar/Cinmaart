@@ -1,5 +1,5 @@
-﻿using Cinamaart.Domain.Common;
-using Cinamaart.Domain.Common.Interfaces;
+﻿using Cinamaart.Domain.Abstractions;
+using Cinamaart.Domain.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,6 @@ namespace Cinamaart.Application.Interfaces.Repositories
 {
     public interface IUnitOfWork : IDisposable
     {
-        IGenericRepository<T> Repository<T>() where T : class, IEntity;
         Task<int> SaveAsync(CancellationToken cancellationToken);
         int Save();
 
