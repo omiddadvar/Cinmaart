@@ -50,8 +50,13 @@ namespace Cinamaart.Persistence.Contexts
         public DbSet<User> Users { get; set; }
         #endregion
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {   
-            ConfigureAllEntities.Configure(modelBuilder);   
+        {
+            // Apply all configurations without filteration
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(MainDBContext).Assembly);
+
+            // Apply all configurations with filteration capability
+            //ConfigureAllEntities.Configure(modelBuilder);   
+
             base.OnModelCreating(modelBuilder);
         }
     }
