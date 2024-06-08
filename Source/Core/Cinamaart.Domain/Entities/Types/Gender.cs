@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities.Types
 {
-    [Table("Genders")]
     public class Gender : BaseTypeEntity
     {
         public ICollection<Artist> Artists { get; } = new List<Artist>();

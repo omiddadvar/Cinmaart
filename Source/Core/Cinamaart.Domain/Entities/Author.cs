@@ -10,18 +10,14 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
-    [Table("Authors")]
     public class Author : BaseEntity<int>
     {
-        [StringLength(200)]
         public string Name { get; set; }
-        [StringLength(4000)]
         public string? Description { get; set; }
 
-        public ICollection<Subtitle>? Subtitles {  get; set; }
-
-        [ForeignKey("User")]
         public long UserId { get; set; }
         public User User { get; set; }
+        public ICollection<Subtitle>? Subtitles {  get; set; }
+
     }
 }

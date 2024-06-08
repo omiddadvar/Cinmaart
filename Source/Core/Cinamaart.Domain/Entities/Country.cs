@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
-    [Table("Countries")]
     public class Country : BaseEntity<int>
     {
-        [StringLength(100) , Unicode(false)]
         public string Name {  get; set; }
 
         public ICollection<Artist> Artists { get; } = new List<Artist>();

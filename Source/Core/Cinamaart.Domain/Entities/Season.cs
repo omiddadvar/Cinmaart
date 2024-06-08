@@ -9,14 +9,11 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
-    [Table("Seasons")]
     public class Season : BaseAuditableEntity<int>
     {
-        [StringLength(1000)]
         public string Name { get; set; }
         public int Year { get; set; }
         public string Description { get; set; }
-        [ForeignKey("TvSerie")]
         public int TvSerieId {  get; set; }
         public TvSerie TvSerie {  get; set; }
 

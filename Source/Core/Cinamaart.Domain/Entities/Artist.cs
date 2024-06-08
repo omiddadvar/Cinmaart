@@ -12,17 +12,12 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
-    [Table("Artists")]
     public class Artist : BaseEntity<int>
     {
-        [StringLength(200)]
         public string FullName { get; set; }
-        [Column(TypeName = "Date")]
         public DateTime? BirthDate { get; set; }
-        [ForeignKey("Gender")]
         public Int16 GenderId { get; set; }
         public Gender Gender { get; set; }
-        [ForeignKey("Country")]
         public int CountryId { get; set; }
         public Country Country { get; set; }
 

@@ -10,15 +10,11 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities.Pivots
 {
-    [Table("Ratings")]
     public class Rating : BaseAuditableEntity<long>
     {
-        [Range(1,5)]
         public int Rate { get; set; }
-        [ForeignKey("User")]
         public long UserId { get; set; }
         public User User { get; set; }
-        [ForeignKey("Subtitle")]
         public long SubtitleId { get; set; }
         public Subtitle Subtitle { get; set; }
     }

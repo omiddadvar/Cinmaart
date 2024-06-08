@@ -9,13 +9,10 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities.Pivots
 {
-    [Table("MovieGenres")]
     public class MovieGenre : BaseEntity<long>
     {
-        [ForeignKey("Movie")]
         public int MovieId { get; set; }
         public Movie Movie { get; set; }
-        [ForeignKey("Genre")]
         public int GenreId { get; set; }
         public Genre Genre { get; set; }
     }

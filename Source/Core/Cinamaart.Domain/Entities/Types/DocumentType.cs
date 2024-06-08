@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities.Types
 {
-    [Table("DocumentTypes")]
     public class DocumentType : BaseTypeEntity
     {
         public ICollection<Document> Documents { get; set;} = new List<Document>(); 

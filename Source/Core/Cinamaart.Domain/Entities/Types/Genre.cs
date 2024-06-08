@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities.Types
 {
-    [Table("Genres")]
     public class Genre : BaseTypeEntity
     {
         public ICollection<MovieGenre> MovieGenres { get; set; } = new List<MovieGenre>();

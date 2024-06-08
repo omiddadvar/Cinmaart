@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities.Types
 {
-    [Table("Tags")]
     public class Tag : BaseTypeEntity
     {
         public ICollection<MovieTag> MovieTags { get; set; } = new List<MovieTag>();
