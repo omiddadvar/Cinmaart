@@ -2,6 +2,7 @@ using Cinamaart.Presentation;
 using Cinamaart.Persistence;
 using Cinamaart.Application;
 using Serilog;
+using Cinamaart.WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddApplication();
 builder.Services.AddPersistence();
-builder.Services.AddPresentation();
+builder.Services.AddWebAPI();
 
 builder.Host.UseSerilog((context , config) =>{
     config.ReadFrom.Configuration(context.Configuration);
