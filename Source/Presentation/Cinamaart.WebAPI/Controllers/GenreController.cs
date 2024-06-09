@@ -17,7 +17,7 @@ namespace Cinamaart.WebAPI.Controllers
         {
             throw new NotImplementedException();
         }
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         [OutputCache(PolicyName = "OutputCacheWithAuthPolicy", Tags = [CacheTags.Genre] , VaryByQueryKeys = ["id"])]
         public async Task<IActionResult> GetGenre(int id)
         {
