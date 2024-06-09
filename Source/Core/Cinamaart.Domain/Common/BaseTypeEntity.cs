@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Common
 {
-    [NotMapped]
     public class BaseTypeEntity : BaseEntity<int>
     {
-        [StringLength(100)]
         public string Name { get; set; }
     }
 }
