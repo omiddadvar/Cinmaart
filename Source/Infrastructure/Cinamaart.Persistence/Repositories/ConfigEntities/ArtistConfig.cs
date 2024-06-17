@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,8 +27,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
             builder.HasOne(t => t.Country)
                 .WithMany(e => e.Artists)
                 .HasForeignKey(t => t.CountryId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired();
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.ToTable(nameof(Artist));
         }

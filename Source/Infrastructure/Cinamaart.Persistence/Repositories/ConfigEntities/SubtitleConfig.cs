@@ -20,8 +20,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
             builder.HasOne(t => t.Author)
                 .WithMany(e => e.Subtitles)
                 .HasForeignKey(t => t.AuthorId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired();
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.ToTable(nameof(Subtitle));
         }

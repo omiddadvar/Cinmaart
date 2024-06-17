@@ -18,8 +18,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
             builder.HasOne(t => t.Country)
                 .WithMany(e => e.Movies)
                 .HasForeignKey(t => t.CountryId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired();
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.ToTable(nameof(Movie));
         }

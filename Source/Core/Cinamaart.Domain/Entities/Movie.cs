@@ -16,8 +16,8 @@ namespace Cinamaart.Domain.Entities
         public string Name {  get; set; }
         public int Year {  get; set; }
         public string Description { get; set; }
-        public int CountryId {  get; set; }
-        public Country Country {  get; set; }
+        public int? CountryId {  get; set; }
+        public Country? Country {  get; set; }
 
 
         public ICollection<MovieArtist> MovieArtists { get; set; } = new List<MovieArtist>();

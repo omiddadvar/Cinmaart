@@ -3,18 +3,24 @@ using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Entities.Pivots;
 using Cinamaart.Domain.Entities.Types;
 using Cinamaart.Persistence.Repositories.ConfigEntities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Cinamaart.Persistence.Contexts
 {
-    public class MainDBContext : DbContext
+    public class MainDBContext : IdentityDbContext<User,Role , long>
     {
+        //#region Identity Tables
+        //public DbSet<Role> Roles { get; set; }
+        //public DbSet<User> Users { get; set; }
+        //#endregion
+        public MainDBContext(DbContextOptions options) : base(options) { }
+
         #region Main Tables
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Author> Authors { get; set; }
@@ -44,10 +50,6 @@ namespace Cinamaart.Persistence.Contexts
         public DbSet<TvSerieGenre> TvSerieGenres { get; set; }
         public DbSet<TvSerieTag> TvSerieTags { get; set; }
         public DbSet<UserDocument> UserDocuments { get; set; }
-        #endregion
-        #region Identity Tables
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<User> Users { get; set; }
         #endregion
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -9,11 +9,8 @@ using Cinamaart.Domain.Abstractions;
 
 namespace Cinamaart.Domain.Common
 {
-    [NotMapped]
     public class BaseEntity<TPrimaryKey> : IBaseEntity<TPrimaryKey>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public TPrimaryKey Id { get; set; }
     }
 }

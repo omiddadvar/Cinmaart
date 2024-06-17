@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities.Identity
 {
-    public class Role : IdentityRole<int> , IBaseEntity<int>
+    public class Role : IdentityRole<long> 
     {
 
     }
