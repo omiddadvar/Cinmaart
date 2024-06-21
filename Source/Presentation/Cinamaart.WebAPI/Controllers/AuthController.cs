@@ -6,7 +6,7 @@ namespace Cinamaart.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController(UserManager<User> _userManager,
+    public class AuthController(UserManager<User> _userManager,
         RoleManager<Role> _roleManager) : ControllerBase
     {
         [HttpPost]

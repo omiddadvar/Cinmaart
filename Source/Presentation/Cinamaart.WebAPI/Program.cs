@@ -37,10 +37,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+/*
 app.MapGroup("/auth")
    .MapIdentityApi<User>();
-
+*/
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
