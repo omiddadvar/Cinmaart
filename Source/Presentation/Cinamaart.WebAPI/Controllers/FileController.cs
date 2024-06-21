@@ -40,13 +40,13 @@ namespace Cinamaart.WebAPI.Controllers
             throw new NotImplementedException();
         }
         [HttpPost("UserProfile")]
-        [Authorize(Roles = "Administrator,User")]
+        [Authorize]
         public async Task<IActionResult> AddUserProfile()
         {
             throw new NotImplementedException();
         }
         [HttpDelete("UserProfile")]
-        [Authorize)]
+        [Authorize]
         public async Task<IActionResult> RemoveUserProfile()
         {
             throw new NotImplementedException();

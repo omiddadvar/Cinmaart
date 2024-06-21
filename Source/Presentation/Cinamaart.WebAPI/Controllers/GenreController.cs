@@ -12,33 +12,33 @@ namespace Cinamaart.WebAPI.Controllers
     public class GenreController(IMediator mediator , IOutputCacheStore cacheStore) : ControllerBase
     {
         [HttpGet]
-        [OutputCache(PolicyName = "OutputCacheWithAuthPolicy", Tags = [CacheTags.Genre])]
+        [OutputCache(PolicyName = CachePolicyNames.OutputCacheWithAuth, Tags = [CacheTags.Genre])]
         public async Task<IActionResult> GetAllGenres()
         {
             throw new NotImplementedException();
         }
         [HttpGet("{id}")]
-        [OutputCache(PolicyName = "OutputCacheWithAuthPolicy", Tags = [CacheTags.Genre] , VaryByQueryKeys = ["id"])]
+        [OutputCache(PolicyName = CachePolicyNames.OutputCacheWithAuth, Tags = [CacheTags.Genre] , VaryByQueryKeys = ["id"])]
         public async Task<IActionResult> GetGenre(int id)
         {
             throw new NotImplementedException();
         }
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = RoleNames.Administrator)]
         public async Task<IActionResult> AddGenre()
         {
             await cacheStore.EvictByTagAsync(CacheTags.Genre, CancellationToken.None);
             return null;
         }
         [HttpPut]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = RoleNames.Administrator)]
         public async Task<IActionResult> UpdateGenre()
         {
             await cacheStore.EvictByTagAsync(CacheTags.Genre, CancellationToken.None);
             return null;
         }
         [HttpDelete]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = RoleNames.Administrator)]
         public async Task<IActionResult> RemoveGenre()
         {
             await cacheStore.EvictByTagAsync(CacheTags.Genre, CancellationToken.None);

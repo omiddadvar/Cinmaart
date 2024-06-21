@@ -16,7 +16,7 @@ namespace Cinamaart.WebAPI.Controllers
             throw new NotImplementedException();
         }
         [HttpGet("{id}")]
-        [OutputCache(PolicyName = "OutputCacheWithAuthPolicy", Tags = [CacheTags.Movie], VaryByQueryKeys = ["id"])]
+        [OutputCache(PolicyName = CachePolicyNames.OutputCacheWithAuth, Tags = [CacheTags.Movie], VaryByQueryKeys = ["id"])]
         public async Task<IActionResult> GetMovieById(int id)
         {
             throw new NotImplementedException();

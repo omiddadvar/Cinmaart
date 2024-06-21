@@ -12,20 +12,20 @@ namespace Cinamaart.WebAPI.Controllers
     public class TagController(IMediator mediator, IOutputCacheStore cacheStore) : ControllerBase
     {
         [HttpGet]
-        [OutputCache(PolicyName = "OutputCacheWithAuthPolicy", Tags = [CacheTags.Tag])]
+        [OutputCache(PolicyName = CachePolicyNames.OutputCacheWithAuth, Tags = [CacheTags.Tag])]
         public async Task<IActionResult> GetTags()
         {
             throw new NotImplementedException();
         }
         [HttpGet("{id}")]
-        [OutputCache(PolicyName = "OutputCacheWithAuthPolicy", Tags = [CacheTags.Tag])]
+        [OutputCache(PolicyName = CachePolicyNames.OutputCacheWithAuth, Tags = [CacheTags.Tag])]
 
         public async Task<IActionResult> GetTagById(long id)
         {
             throw new NotImplementedException();
         }
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = RoleNames.Administrator)]
 
         public async Task<IActionResult> AddTag()
         {
@@ -33,7 +33,7 @@ namespace Cinamaart.WebAPI.Controllers
             return null;
         }
         [HttpPut]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = RoleNames.Administrator)]
 
         public async Task<IActionResult> EditTag()
         {
@@ -41,7 +41,7 @@ namespace Cinamaart.WebAPI.Controllers
             return null;
         }
         [HttpDelete]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = RoleNames.Administrator)]
 
         public async Task<IActionResult> DeleteTag()
         {

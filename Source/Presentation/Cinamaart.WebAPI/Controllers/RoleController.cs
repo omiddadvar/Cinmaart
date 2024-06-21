@@ -12,22 +12,22 @@ namespace Cinamaart.WebAPI.Controllers
     public class RoleController(IMediator mediator, IOutputCacheStore cacheStore) : ControllerBase
     {
         [HttpGet]
-        [Authorize(Roles = "Administrator")]
-        [OutputCache(PolicyName = "OutputCacheWithAuthPolicy", Tags = [CacheTags.Role])]
+        [Authorize]
+        [OutputCache(PolicyName = CachePolicyNames.OutputCacheWithAuth, Tags = [CacheTags.Role])]
         public async Task<IActionResult> GetRoles()
         {
             throw new NotImplementedException();
         }
         [HttpGet("{id}")]
-        [Authorize(Roles = "Administrator")]
-        [OutputCache(PolicyName = "OutputCacheWithAuthPolicy", Tags = [CacheTags.Role])]
+        [Authorize]
+        [OutputCache(PolicyName = CachePolicyNames.OutputCacheWithAuth, Tags = [CacheTags.Role])]
 
         public async Task<IActionResult> GetRoleById(long id)
         {
             throw new NotImplementedException();
         }
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = RoleNames.Administrator)]
 
         public async Task<IActionResult> AddRole()
         {
@@ -35,7 +35,7 @@ namespace Cinamaart.WebAPI.Controllers
             return null;
         }
         [HttpPut]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = RoleNames.Administrator)]
 
         public async Task<IActionResult> EditRole()
         {
@@ -43,7 +43,7 @@ namespace Cinamaart.WebAPI.Controllers
             return null;
         }
         [HttpDelete]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = RoleNames.Administrator)]
 
         public async Task<IActionResult> DeleteRole()
         {
