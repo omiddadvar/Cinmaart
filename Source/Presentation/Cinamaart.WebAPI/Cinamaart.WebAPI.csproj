@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Reports\" />
     <Folder Include="Extentions\" />
     <Folder Include="Middlewares\" />
     <Folder Include="Migrations\" />
