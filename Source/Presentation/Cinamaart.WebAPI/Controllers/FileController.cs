@@ -17,7 +17,7 @@ namespace Cinamaart.WebAPI.Controllers
         }
         [HttpGet("Subtitle/{SubtitleId}")]
         [Authorize]
-        public async Task<IActionResult> GetFilesInfoBySubtitleId(long SubtitleId)
+        public async Task<IActionResult> GetFileBySubtitleId(long SubtitleId)
         {
             throw new NotImplementedException();
         }
