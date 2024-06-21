@@ -1,9 +1,11 @@
 ﻿using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Persistence.Contexts;
 using Cinamaart.WebAPI.Policies;
+using Cinamaart.WebAPI.Policies.AccessLevels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Cinamaart.WebAPI
 {
@@ -20,7 +22,11 @@ namespace Cinamaart.WebAPI
                 options.DefaultExpirationTimeSpan = TimeSpan.FromDays(1);
             });
 
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddRequireContentEditionAccessPolicy();
+                options.AddRequireSubtitleEditionAccessPolicy();
+            });
             services.AddAuthentication();
 
             services.AddIdentityCore<User>(options =>
