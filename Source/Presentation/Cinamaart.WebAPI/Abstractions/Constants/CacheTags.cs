@@ -8,5 +8,6 @@
         public const string Artist = "Artist";
         public const string Movie = "Movie";
         public const string TvSerie = "TvSerie";
+        public const string Country = "Country";
     }
 }
