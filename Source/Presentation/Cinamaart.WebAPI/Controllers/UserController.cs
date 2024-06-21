@@ -6,7 +6,8 @@ namespace Cinamaart.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController(UserManager<User> _userManager) : ControllerBase
+    public class UserController(UserManager<User> _userManager,
+        RoleManager<Role> _roleManager) : ControllerBase
     {
         [HttpPost]
         public async Task<IActionResult> AddUser()

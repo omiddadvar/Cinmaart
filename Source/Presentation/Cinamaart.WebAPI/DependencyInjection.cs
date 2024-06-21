@@ -3,6 +3,7 @@ using Cinamaart.Persistence.Contexts;
 using Cinamaart.WebAPI.Policies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Cinamaart.WebAPI
 {
@@ -19,7 +20,10 @@ namespace Cinamaart.WebAPI
                 options.DefaultExpirationTimeSpan = TimeSpan.FromDays(1);
             });
 
-            services.AddIdentity<User, Role>(options =>
+            services.AddAuthorization();
+            services.AddAuthentication();
+
+            services.AddIdentityCore<User>(options =>
             {
                 // Password settings.
                 options.Password.RequireNonAlphanumeric = true;
@@ -34,8 +38,10 @@ namespace Cinamaart.WebAPI
 
                 options.User.RequireUniqueEmail = true;
             })
+                //.AddRoles<Role>()
                 .AddEntityFrameworkStores<MainDBContext>()
-                .AddDefaultTokenProviders();
+                //.AddDefaultTokenProviders()
+                .AddApiEndpoints();
 
             return services;
         }

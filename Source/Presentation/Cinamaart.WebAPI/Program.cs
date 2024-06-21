@@ -3,15 +3,18 @@ using Cinamaart.Application;
 using Serilog;
 using Cinamaart.WebAPI;
 using System.Configuration;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Cinamaart.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Cinamaart.Domain.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplication();
 builder.Services.AddPersistence();
@@ -29,6 +32,14 @@ builder.Services.AddDbContext<MainDBContext>(
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.MapGroup("/auth")
+   .MapIdentityApi<User>();
 
 app.UseHttpsRedirection();
 
