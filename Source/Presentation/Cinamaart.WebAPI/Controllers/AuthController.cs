@@ -1,4 +1,6 @@
 ﻿using Cinamaart.Domain.Entities.Identity;
+using Cinamaart.WebAPI.Abstractions.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,11 +33,6 @@ namespace Cinamaart.WebAPI.Controllers
         }
         [HttpGet("ConfirmEmail")]
         public async Task<IActionResult> ConfirmEmail()
-        {
-            throw new NotImplementedException();
-        }
-        [HttpGet("ConfirmEmail")]
-        public async Task<IActionResult> DeActivateUser()
         {
             throw new NotImplementedException();
         }
