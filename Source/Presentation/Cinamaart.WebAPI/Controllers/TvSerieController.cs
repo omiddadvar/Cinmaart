@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Cinamaart.WebAPI.Abstractions.Constants;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace Cinamaart.WebAPI.Controllers
 {
@@ -7,5 +10,34 @@ namespace Cinamaart.WebAPI.Controllers
     [ApiController]
     public class TvSerieController : ControllerBase
     {
+        [HttpGet("Paginate")]
+        public async Task<IActionResult> GetPaginatedTvSeries()
+        {
+            throw new NotImplementedException();
+        }
+        [HttpGet("{id}")]
+        [OutputCache(PolicyName = "OutputCacheWithAuthPolicy", Tags = [CacheTags.TvSerie], VaryByQueryKeys = ["id"])]
+        public async Task<IActionResult> GetTvSerieById(int id)
+        {
+            throw new NotImplementedException();
+        }
+        [HttpPost]
+        [Authorize(Policy = PolicyNames.RequireContentEditionAccess)]
+        public async Task<IActionResult> AddTvSerie()
+        {
+            throw new NotImplementedException();
+        }
+        [HttpPut]
+        [Authorize(Policy = PolicyNames.RequireContentEditionAccess)]
+        public async Task<IActionResult> EditTvSerie()
+        {
+            throw new NotImplementedException();
+        }
+        [HttpDelete]
+        [Authorize(Policy = PolicyNames.RequireContentEditionAccess)]
+        public async Task<IActionResult> RemoveTvSerie()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

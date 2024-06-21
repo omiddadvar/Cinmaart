@@ -12,6 +12,16 @@ namespace Cinamaart.WebAPI.Controllers
         {
             throw new NotImplementedException();
         }
+        [HttpGet("Paginate")]
+        public async Task<IActionResult> GetPaginatedArtiests()
+        {
+            throw new NotImplementedException();
+        }
+        [HttpGet("Country/{id}")]
+        public async Task<IActionResult> GetArtistsByCountry(int id)
+        {
+            throw new NotImplementedException();
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetArtisById(long id)
         {

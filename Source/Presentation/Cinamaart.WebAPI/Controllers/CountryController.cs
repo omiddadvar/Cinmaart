@@ -8,34 +8,35 @@ namespace Cinamaart.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MovieController : ControllerBase
+    public class CountryController : ControllerBase
     {
-        [HttpGet("Paginate")]
-        public async Task<IActionResult> GetPaginatedMovies()
+        [HttpGet]
+        [OutputCache(PolicyName = "OutputCacheWithAuthPolicy", Tags = [CacheTags.Country])]
+        public async Task<IActionResult> GetCountries()
         {
             throw new NotImplementedException();
         }
         [HttpGet("{id}")]
-        [OutputCache(PolicyName = "OutputCacheWithAuthPolicy", Tags = [CacheTags.Movie], VaryByQueryKeys = ["id"])]
-        public async Task<IActionResult> GetMovieById(int id)
+        [OutputCache(PolicyName = "OutputCacheWithAuthPolicy", Tags = [CacheTags.Country])]
+        public async Task<IActionResult> GetCountryById(int id)
         {
             throw new NotImplementedException();
         }
         [HttpPost]
-        [Authorize(Policy = PolicyNames.RequireContentEditionAccess)]
-        public async Task<IActionResult> AddMovie()
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> AddCountry()
         {
             throw new NotImplementedException();
         }
         [HttpPut]
-        [Authorize(Policy = PolicyNames.RequireContentEditionAccess)]
-        public async Task<IActionResult> EditMovie()
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> EditCountry()
         {
             throw new NotImplementedException();
         }
         [HttpDelete]
-        [Authorize(Policy = PolicyNames.RequireContentEditionAccess)]
-        public async Task<IActionResult> RemoveMovie()
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> RemoveCountry()
         {
             throw new NotImplementedException();
         }

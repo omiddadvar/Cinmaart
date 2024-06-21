@@ -39,7 +39,7 @@ namespace Cinamaart.WebAPI.Controllers
         }
         [HttpDelete]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> DeleteGenre()
+        public async Task<IActionResult> RemoveGenre()
         {
             await cacheStore.EvictByTagAsync(CacheTags.Genre, CancellationToken.None);
             return null;

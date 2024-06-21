@@ -34,5 +34,10 @@ namespace Cinamaart.WebAPI.Controllers
         {
             throw new NotImplementedException();
         }
+        [HttpGet("ConfirmEmail")]
+        public async Task<IActionResult> DeActivateUser()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
