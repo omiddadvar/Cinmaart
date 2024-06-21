@@ -37,5 +37,10 @@ namespace Cinamaart.WebAPI.Controllers
         {
             throw new NotImplementedException();
         }
+        [HttpDelete]
+        public async Task<IActionResult> RemoveArtist()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
