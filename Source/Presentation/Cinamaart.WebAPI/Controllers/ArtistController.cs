@@ -13,7 +13,7 @@ namespace Cinamaart.WebAPI.Controllers
             throw new NotImplementedException();
         }
         [HttpGet("Paginate")]
-        public async Task<IActionResult> GetPaginatedArtiests()
+        public async Task<IActionResult> GetPaginatedArtists()
         {
             throw new NotImplementedException();
         }
