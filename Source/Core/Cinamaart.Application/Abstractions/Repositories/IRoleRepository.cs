@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Entities.Identity;
+﻿using Cinamaart.Domain.Abstractions;
+using Cinamaart.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

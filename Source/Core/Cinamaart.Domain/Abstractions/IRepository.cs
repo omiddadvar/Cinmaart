@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinamaart.Application.Abstractions.Repositories
+namespace Cinamaart.Domain.Abstractions
 {
     public interface IRepository;
 }

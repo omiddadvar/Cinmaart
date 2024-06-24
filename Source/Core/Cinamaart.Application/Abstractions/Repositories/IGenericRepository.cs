@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Application.Abstractions.Repositories;
+using Cinamaart.Domain.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
