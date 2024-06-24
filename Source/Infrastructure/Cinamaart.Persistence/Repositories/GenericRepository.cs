@@ -17,56 +17,56 @@ namespace Cinamaart.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<T> Add(T entity)
+        public async Task<T> AddAsync(T entity)
         {
             await _dbContext.AddAsync(entity);
             return entity;
         }
 
-        public async Task Delete(long id)
+        public async Task DeleteAsync(long id)
         {
-            var entity = await Get(id);
-            Delete(entity);
+            var entity = await GetAsync(id);
+            DeleteAsync(entity);
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var entity = await Get(id);
-            Delete(entity);
+            var entity = await GetAsync(id);
+            DeleteAsync(entity);
         }
 
-        public async Task Delete(T entity)
+        public async Task DeleteAsync(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
         }
 
-        public async Task<bool> Exist(long id, CancellationToken cancellationToken = default)
+        public async Task<bool> ExistAsync(long id, CancellationToken cancellationToken = default)
         {
-            var entity = await Get(id, cancellationToken);
+            var entity = await GetAsync(id, cancellationToken);
             return entity != null;
         }
 
-        public async Task<bool> Exist(int id, CancellationToken cancellationToken = default)
+        public async Task<bool> ExistAsync(int id, CancellationToken cancellationToken = default)
         {
-            var entity = await Get(id, cancellationToken);
+            var entity = await GetAsync(id, cancellationToken);
             return entity != null;
         }
 
-        public async Task<T> Get(long id, CancellationToken cancellationToken = default)
+        public async Task<T> GetAsync(long id, CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<T>().FindAsync(id, cancellationToken);
         }
 
-        public async Task<T> Get(int id, CancellationToken cancellationToken = default)
+        public async Task<T> GetAsync(int id, CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<T>().FindAsync(id, cancellationToken);
         }
 
-        public async Task<IEnumerable<T>> GetAll(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<T>().ToListAsync(cancellationToken);
         }
-        public async Task<IEnumerable<T>> Get(Expression<Func<T, bool>> Where = null,
+        public async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> Where = null,
                 Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                 CancellationToken cancellationToken = default,
                 params Expression<Func<T, object>>[] includeProperties)
@@ -93,20 +93,20 @@ namespace Cinamaart.Persistence.Repositories
             }
         }
 
-        public async Task Update(T entity)
+        public async Task UpdateAsync(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public async Task Update(long id)
+        public async Task UpdateAsync(long id)
         {
-            var entity = await Get(id);
+            var entity = await GetAsync(id);
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public async Task Update(int id)
+        public async Task UpdateAsync(int id)
         {
-            var entity = await Get(id);
+            var entity = await GetAsync(id);
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
     }
