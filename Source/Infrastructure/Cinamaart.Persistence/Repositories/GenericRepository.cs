@@ -1,6 +1,8 @@
 ﻿using Cinamaart.Application.Interfaces.Repositories;
+using Cinamaart.Domain.Abstractions;
 using Cinamaart.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,6 +110,33 @@ namespace Cinamaart.Persistence.Repositories
         {
             var entity = await GetAsync(id);
             _dbContext.Entry(entity).State = EntityState.Modified;
+        }
+
+        public async Task<PagedList<T>> PaginateAsync(
+            int page, 
+            int pageSize, 
+            Expression<Func<T, bool>> Where = null, 
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, 
+            CancellationToken cancellationToken = default, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _dbContext.Set<T>();
+            int totalCount = await query.CountAsync(cancellationToken);
+
+            if (Where != null)
+            {
+                query = query.Where(Where);
+            }
+
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+            return await PagedList<T>.CreateAsync(query, page, pageSize);
         }
     }
 }
