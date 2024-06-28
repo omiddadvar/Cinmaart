@@ -24,11 +24,6 @@ builder.Host.UseSerilog((context , config) =>{
     config.ReadFrom.Configuration(context.Configuration);
 });
 
-builder.Services.AddDbContext<MainDBContext>(
-    options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection" ,
-                        b => b.MigrationsAssembly(typeof(Program).Assembly.GetName().Name)));
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
