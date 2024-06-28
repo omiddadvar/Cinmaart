@@ -15,11 +15,7 @@ namespace Cinamaart.Persistence.Contexts
 {
     public class MainDBContext : IdentityDbContext<User,Role , long>
     {
-        //#region Identity Tables
-        //public DbSet<Role> Roles { get; set; }
-        //public DbSet<User> Users { get; set; }
-        //#endregion
-        public MainDBContext(DbContextOptions options) : base(options) { }
+        public MainDBContext(DbContextOptions<MainDBContext> options) : base(options) { }
 
         #region Main Tables
         public DbSet<Artist> Artists { get; set; }
