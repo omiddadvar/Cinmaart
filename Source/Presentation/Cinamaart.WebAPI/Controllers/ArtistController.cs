@@ -1,16 +1,22 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Cinamaart.Application.Features.Artists.Queries.GetAllArtists;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
+using Microsoft.Identity.Client;
 
 namespace Cinamaart.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ArtistController : ControllerBase
+    public class ArtistController(IMediator mediator, IOutputCacheStore cacheStore) : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> GetArtists()
+        public async Task<IActionResult> GetArtists(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var query = new GetAllArtistsQuery();
+            var result = await mediator.Send(query, cancellationToken);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
         [HttpGet("Paginate")]
         public async Task<IActionResult> GetPaginatedArtists()
