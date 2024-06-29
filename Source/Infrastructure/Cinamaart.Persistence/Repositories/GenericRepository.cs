@@ -68,8 +68,9 @@ namespace Cinamaart.Persistence.Repositories
         {
             return await _dbContext.Set<T>().ToListAsync(cancellationToken);
         }
-        public async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> Where = null,
-                Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+        public async Task<IEnumerable<T>> GetAsync(
+                Expression<Func<T, bool>>? Where = null,
+                Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
                 CancellationToken cancellationToken = default,
                 params Expression<Func<T, object>>[] includeProperties)
         {
