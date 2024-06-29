@@ -8,8 +8,10 @@ namespace Cinamaart.Domain.Common.Enums
 {
     public enum GenderEnum
     {
-        Female = 0,
-        Male = 1,
-        Unkown = 2
+        Male = 0,
+        Female = 1,
+        NonBinary = 2,
+        Other = 3,
+        PreferNotToSay = 4
     }
 }
