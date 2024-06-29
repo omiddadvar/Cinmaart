@@ -19,6 +19,11 @@ namespace Cinamaart.Persistence.Seeders
        
         public virtual void Seed()
         {
+            // Check if already seeded
+            if (dbContext.Set<TEntity>().Any())
+                return;
+
+            // Seeding by enum
             foreach (TEnum enumType in Enum.GetValues(typeof(TEnum)))
             {
                 dbContext.Set<TEntity>().Add(new TEntity
