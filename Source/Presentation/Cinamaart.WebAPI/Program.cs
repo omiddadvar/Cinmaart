@@ -16,8 +16,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddApplication();
 builder.Services.AddPersistence();
+builder.Services.AddApplication();
 builder.Services.AddWebAPI();
 
 builder.Host.UseSerilog((context , config) =>{

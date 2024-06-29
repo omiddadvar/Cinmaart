@@ -46,7 +46,7 @@ namespace Cinamaart.WebAPI
             })
                 //.AddRoles<Role>()
                 .AddEntityFrameworkStores<MainDBContext>()
-                //.AddDefaultTokenProviders()
+                .AddDefaultTokenProviders()
                 .AddApiEndpoints();
 
             return services;
