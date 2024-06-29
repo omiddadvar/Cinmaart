@@ -34,3 +34,4 @@ namespace Cinamaart.Application.Features
             return next();
         }
     }
+}
