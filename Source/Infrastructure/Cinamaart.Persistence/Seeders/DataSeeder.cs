@@ -28,8 +28,9 @@ namespace Cinamaart.Persistence.Seeders
             var assembly = Assembly.GetAssembly(typeof(MainDBContext));
             var seederClasses = assembly.GetTypes()
                     .Where(t => typeof(ISeeder).IsAssignableFrom(t)
-                                && !t.IsInterface)
-                    .Select(t => Activator.CreateInstance(t , dbContext) as ISeeder)
+                                && !t.IsInterface
+                                && !t.Equals(typeof(BaseEnumSeeder<,>)))
+                    .Select(t => Activator.CreateInstance(t ,args: dbContext) as ISeeder)
                     .OrderBy(s => s.Order)
                     .ToArray();
 

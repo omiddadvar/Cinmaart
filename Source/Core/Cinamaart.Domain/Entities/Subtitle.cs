@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Common;
+﻿using Cinamaart.Domain.Abstractions;
+using Cinamaart.Domain.Common;
 using Cinamaart.Domain.Entities.Pivots;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
-    public class Subtitle : BaseAuditableEntity<long>
+    public class Subtitle : IAuditablaEntity<long>
     {
+        public long Id { get; set; }
         public string Name {  get; set; }
-
         public string Description { get; set; }
         public string? AuthorName { get; set; }
         public int? AuthorId { get; set; }
@@ -23,6 +24,7 @@ namespace Cinamaart.Domain.Entities
         public ICollection<MovieSubtitle> MovieSubtitles { get; set; } = new List<MovieSubtitle>();
         public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
         public ICollection<SubtitleDocument> SubtitleDocuments { get; set; } = new List<SubtitleDocument>();
-
+        public DateTime CraetedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
 }

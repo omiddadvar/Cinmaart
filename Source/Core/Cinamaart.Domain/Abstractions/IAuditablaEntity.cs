@@ -8,7 +8,7 @@ namespace Cinamaart.Domain.Abstractions
 {
     internal interface IAuditablaEntity<TPrimaryKey> : IBaseEntity<TPrimaryKey>
     {
-        public DateTime CraetedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime CraetedAt { get; set; } 
+        public DateTime UpdatedAt { get; set; } 
     }
 }

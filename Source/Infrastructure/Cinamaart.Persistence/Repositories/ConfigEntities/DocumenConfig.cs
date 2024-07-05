@@ -13,6 +13,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
     {
         public void Configure(EntityTypeBuilder<Document> builder)
         {
+            builder.HasKey(t => t.Id);
             builder.Property(t => t.Name).HasMaxLength(500);
             builder.Property(t => t.Extention).IsUnicode(false).HasMaxLength(100);
             builder.Property(t => t.SavedName).IsUnicode(false).HasMaxLength(1000);

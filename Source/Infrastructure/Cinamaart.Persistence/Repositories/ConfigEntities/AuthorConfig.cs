@@ -14,6 +14,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
     {
         public void Configure(EntityTypeBuilder<Author> builder)
         {
+            builder.HasKey(t => t.Id);
             builder.Property(t => t.Name).HasMaxLength(maxLength: 100);
             builder.Property(t => t.Description).HasMaxLength(maxLength: 4000);
 

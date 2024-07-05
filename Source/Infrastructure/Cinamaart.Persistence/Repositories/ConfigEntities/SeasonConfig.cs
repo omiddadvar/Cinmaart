@@ -13,6 +13,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
     {
         public void Configure(EntityTypeBuilder<Season> builder)
         {
+            builder.HasKey(t => t.Id);
             builder.Property(t => t.Name).HasMaxLength(1000);
 
             builder.HasOne(t => t.TvSerie)

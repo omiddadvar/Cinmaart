@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Common;
+﻿using Cinamaart.Domain.Abstractions;
+using Cinamaart.Domain.Common;
 using Cinamaart.Domain.Entities.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,9 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
-    public class Author : BaseEntity<int>
+    public class Author : IBaseEntity<int>
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
 

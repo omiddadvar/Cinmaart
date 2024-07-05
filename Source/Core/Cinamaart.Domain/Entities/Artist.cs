@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Common;
+﻿using Cinamaart.Domain.Abstractions;
+using Cinamaart.Domain.Common;
 using Cinamaart.Domain.Entities.Pivots;
 using Cinamaart.Domain.Entities.Types;
 using System;
@@ -12,8 +13,9 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
-    public class Artist : BaseEntity<int>
+    public class Artist : IBaseEntity<int>
     {
+        public int Id { get; set; }
         public string FullName { get; set; }
         public DateTime? BirthDate { get; set; }
         public int GenderId { get; set; }

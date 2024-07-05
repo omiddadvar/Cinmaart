@@ -13,6 +13,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Pivots
     {
         public void Configure(EntityTypeBuilder<SubtitleDocument> builder)
         {
+            builder.HasKey(t => t.Id);
             builder.HasOne(t => t.Subtitle)
                .WithMany(e => e.SubtitleDocuments)
                .HasForeignKey(t => t.SubtitleId)

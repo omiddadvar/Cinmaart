@@ -3,6 +3,7 @@ using Cinamaart.Domain.Abstractions;
 using Cinamaart.Persistence.Abstractions;
 using Cinamaart.Persistence.Contexts;
 using Cinamaart.Persistence.Repositories;
+using Cinamaart.Persistence.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -22,7 +23,6 @@ namespace Cinamaart.Persistence
               options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
             
             services.AddRepositories();
-            
             return services;
         }
 

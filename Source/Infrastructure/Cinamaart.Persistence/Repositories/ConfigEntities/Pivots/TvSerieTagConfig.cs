@@ -13,6 +13,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Pivots
     {
         public void Configure(EntityTypeBuilder<TvSerieTag> builder)
         {
+            builder.HasKey(t => t.Id);
             builder.HasOne(t => t.TvSerie)
                .WithMany(e => e.TvSerieTags)
                .HasForeignKey(t => t.TvSerieId)

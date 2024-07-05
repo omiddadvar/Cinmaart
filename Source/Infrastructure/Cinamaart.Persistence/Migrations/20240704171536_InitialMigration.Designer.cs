@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cinamaart.Persistence.Migrations
 {
     [DbContext(typeof(MainDBContext))]
-    [Migration("20240628171631_InitialMigration")]
+    [Migration("20240704171536_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

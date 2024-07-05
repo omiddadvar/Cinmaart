@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Common;
+﻿using Cinamaart.Domain.Abstractions;
+using Cinamaart.Domain.Common;
 using Cinamaart.Domain.Entities.Pivots;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,8 +12,10 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities.Types
 {
-    public class Tag : BaseTypeEntity
+    public class Tag : IBaseTypeEntity
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
         public ICollection<MovieTag> MovieTags { get; set; } = new List<MovieTag>();
         public ICollection<TvSerieTag> TvSerieTags { get; set; } = new List<TvSerieTag>();
 

@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Common;
+﻿using Cinamaart.Domain.Abstractions;
+using Cinamaart.Domain.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities.Pivots
 {
-    public class TvSerieArtist : BaseEntity<long>
+    public class TvSerieArtist : IBaseEntity<long>
     {
+        public long Id { get; set; }
         public int TvSerieId { get; set; }
         public TvSerie TvSerie { get; set; }
         public int ArtistId { get; set; }

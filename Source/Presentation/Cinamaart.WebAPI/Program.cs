@@ -7,6 +7,7 @@ using Cinamaart.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Cinamaart.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
+using Cinamaart.Persistence.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,9 @@ builder.Host.UseSerilog((context , config) =>{
 });
 
 var app = builder.Build();
+
+
+DataSeeder.SeedData(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

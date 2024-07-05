@@ -1,4 +1,5 @@
 ﻿using AutoMapper.Execution;
+using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Common;
 using Cinamaart.Persistence.Abstractions;
 using Cinamaart.Persistence.Contexts;
@@ -13,7 +14,7 @@ namespace Cinamaart.Persistence.Seeders
 {
     public abstract class BaseEnumSeeder<TEnum,TEntity>(MainDBContext dbContext) : ISeeder
         where TEnum : Enum
-        where TEntity : BaseTypeEntity, new()
+        where TEntity : class, IBaseTypeEntity, new()
     {
         public abstract uint Order { get; }
        
@@ -24,14 +25,17 @@ namespace Cinamaart.Persistence.Seeders
                 return;
 
             // Seeding by enum
+            var dataList = new List<TEntity>();
             foreach (TEnum enumType in Enum.GetValues(typeof(TEnum)))
             {
-                dbContext.Set<TEntity>().Add(new TEntity
+                dataList.Add(new TEntity
                 {
                     Id = (int)(object)enumType,
                     Name = enumType.ToString()
                 });
             }
+            dbContext.Set<TEntity>().AddRange(dataList);
+            dbContext.SaveChanges();
         }
     }
 }
