@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Abstractions
 {
-    internal interface IAuditablaEntity<TPrimaryKey> : IBaseEntity<TPrimaryKey>
+    public interface IAuditablaEntity<TPrimaryKey> : IBaseEntity<TPrimaryKey> , IBaseAuditablaEntity
     {
-        public DateTime CraetedAt { get; set; } 
-        public DateTime UpdatedAt { get; set; } 
     }
 }

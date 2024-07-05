@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Entities;
+﻿using Cinamaart.Domain.Abstractions;
+using Cinamaart.Domain.Entities;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Entities.Pivots;
 using Cinamaart.Domain.Entities.Types;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Cinamaart.Domain.Abstractions;
 
 namespace Cinamaart.Persistence.Contexts
 {
@@ -56,6 +58,34 @@ namespace Cinamaart.Persistence.Contexts
             //ConfigureAllEntities.Configure(modelBuilder);   
 
             base.OnModelCreating(modelBuilder);
+        }
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            _ChangeTrackingForAuditableEntitties();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+        public override int SaveChanges()
+        {
+            _ChangeTrackingForAuditableEntitties();
+            return base.SaveChanges();
+        }
+        private void _ChangeTrackingForAuditableEntitties()
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is IBaseAuditablaEntity && (
+                e.State == EntityState.Added
+                || e.State == EntityState.Modified));
+
+            foreach (var entityEntry in entries)
+            {
+                ((IBaseAuditablaEntity)entityEntry.Entity).UpdatedAt = DateTime.Now;
+
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((IBaseAuditablaEntity)entityEntry.Entity).CraetedAt = DateTime.Now;
+                }
+            }
         }
     }
 }
