@@ -1,14 +1,15 @@
 ﻿using Cinamaart.Persistence.Abstractions;
 using Cinamaart.Persistence.Contexts;
+using Cinamaart.Persistence.Seeders;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
 
-namespace Cinamaart.Persistence.Seeders
+namespace Cinamaart.Persistence.Extentions
 {
-    public class DataSeeder
+    public static class DataSeeder
     {
-        public static void SeedData(IHost app)
+        public static IHost SeedData(this IHost app)
         {
             var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
             using (var scope = scopedFactory.CreateScope())
@@ -16,6 +17,7 @@ namespace Cinamaart.Persistence.Seeders
                 var dbContext = scope.ServiceProvider.GetService<MainDBContext>();
                 _CallAllSeeders(dbContext);
             }
+            return app;
         }
         private static void _CallAllSeeders(MainDBContext dbContext)
         {

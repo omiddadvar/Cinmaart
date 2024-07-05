@@ -1,7 +1,10 @@
 using Cinamaart.Application;
 using Cinamaart.Persistence;
-using Cinamaart.Persistence.Seeders;
+using Cinamaart.Persistence.Contexts;
+using Cinamaart.Persistence.Extentions;
 using Cinamaart.WebAPI;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,14 +27,17 @@ builder.Host.UseSerilog((context, config) =>
 var app = builder.Build();
 
 
-DataSeeder.SeedData(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    await app.MigrateDebugDatabase();
 }
+
+app.SeedData();
 /*
 app.MapGroup("/auth")
    .MapIdentityApi<User>();
