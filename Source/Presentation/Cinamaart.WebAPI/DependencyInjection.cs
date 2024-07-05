@@ -3,9 +3,6 @@ using Cinamaart.Persistence.Contexts;
 using Cinamaart.WebAPI.Policies;
 using Cinamaart.WebAPI.Policies.AccessLevels;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 namespace Cinamaart.WebAPI
 {

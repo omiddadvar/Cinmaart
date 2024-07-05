@@ -8,11 +8,12 @@ namespace Cinamaart.WebAPI.Policies.AccessLevels
         public static void AddRequireContentEditionAccessPolicy(this AuthorizationOptions options)
         {
             options.AddPolicy(PolicyNames.RequireContentEditionAccess,
-                policy => {
+                policy =>
+                {
                     policy.RequireRole(RoleNames.Administrator);
                     policy.RequireRole(RoleNames.ContentWriter);
                     policy.RequireRole(RoleNames.Support);
-            });
+                });
         }
     }
 }

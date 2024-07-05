@@ -1,9 +1,7 @@
 ﻿using Cinamaart.Application.Features.Artists.Queries.GetAllArtists;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
-using Microsoft.Identity.Client;
 
 namespace Cinamaart.WebAPI.Controllers
 {

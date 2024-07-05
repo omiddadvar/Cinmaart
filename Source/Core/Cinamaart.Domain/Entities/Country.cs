@@ -1,5 +1,4 @@
 ﻿using Cinamaart.Domain.Abstractions;
-using Cinamaart.Domain.Common;
 
 namespace Cinamaart.Domain.Entities
 {

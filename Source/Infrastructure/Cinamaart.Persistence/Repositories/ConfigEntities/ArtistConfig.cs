@@ -1,12 +1,6 @@
 ﻿using Cinamaart.Domain.Entities;
-using Cinamaart.Domain.Entities.Types;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Persistence.Repositories.ConfigEntities
 {
@@ -17,7 +11,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
             builder.HasKey(t => t.Id);
             builder.Property(t => t.FullName).HasMaxLength(maxLength: 200);
             builder.Property(t => t.BirthDate).HasColumnType("Date");
-            
+
             builder.HasOne(t => t.Gender)
                 .WithMany(e => e.Artists)
                 .HasForeignKey(t => t.GenderId)

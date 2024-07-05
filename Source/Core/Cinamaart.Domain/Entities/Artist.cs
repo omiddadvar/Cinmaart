@@ -1,15 +1,6 @@
 ﻿using Cinamaart.Domain.Abstractions;
-using Cinamaart.Domain.Common;
 using Cinamaart.Domain.Entities.Pivots;
 using Cinamaart.Domain.Entities.Types;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {

@@ -8,7 +8,8 @@ namespace Cinamaart.WebAPI.Policies.AccessLevels
         public static void AddRequireSubtitleEditionAccessPolicy(this AuthorizationOptions options)
         {
             options.AddPolicy(PolicyNames.RequireSubtitleEditionAccess,
-                policy => {
+                policy =>
+                {
                     policy.RequireRole(RoleNames.Administrator);
                     policy.RequireRole(RoleNames.ContentWriter);
                     policy.RequireRole(RoleNames.Author);

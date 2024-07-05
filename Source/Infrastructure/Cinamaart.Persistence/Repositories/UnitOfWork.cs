@@ -1,15 +1,6 @@
 ﻿using Cinamaart.Application.Interfaces.Repositories;
-using Cinamaart.Domain.Abstractions;
-using Cinamaart.Domain.Common;
 using Cinamaart.Persistence.Contexts;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Persistence.Repositories
 {
@@ -18,7 +9,7 @@ namespace Cinamaart.Persistence.Repositories
         private readonly MainDBContext _dbContext;
         private readonly ILogger<UnitOfWork> _logger;
 
-        public UnitOfWork(MainDBContext dbContext , ILogger<UnitOfWork> logger)
+        public UnitOfWork(MainDBContext dbContext, ILogger<UnitOfWork> logger)
         {
             _dbContext = dbContext;
             _logger = logger;

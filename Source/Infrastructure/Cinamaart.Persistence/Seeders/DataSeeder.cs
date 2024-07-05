@@ -2,13 +2,7 @@
 using Cinamaart.Persistence.Contexts;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Persistence.Seeders
 {
@@ -30,13 +24,13 @@ namespace Cinamaart.Persistence.Seeders
                     .Where(t => typeof(ISeeder).IsAssignableFrom(t)
                                 && !t.IsInterface
                                 && !t.Equals(typeof(BaseEnumSeeder<,>)))
-                    .Select(t => Activator.CreateInstance(t ,args: dbContext) as ISeeder)
+                    .Select(t => Activator.CreateInstance(t, args: dbContext) as ISeeder)
                     .OrderBy(s => s.Order)
                     .ToArray();
 
-            if(seederClasses is not null)
+            if (seederClasses is not null)
             {
-                foreach(var seeder in seederClasses)
+                foreach (var seeder in seederClasses)
                 {
                     seeder?.Seed();
                 }

@@ -3,19 +3,12 @@ using Cinamaart.Domain.Entities;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Entities.Pivots;
 using Cinamaart.Domain.Entities.Types;
-using Cinamaart.Persistence.Repositories.ConfigEntities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cinamaart.Domain.Abstractions;
 
 namespace Cinamaart.Persistence.Contexts
 {
-    public class MainDBContext : IdentityDbContext<User,Role , long>
+    public class MainDBContext : IdentityDbContext<User, Role, long>
     {
         public MainDBContext(DbContextOptions<MainDBContext> options) : base(options) { }
 

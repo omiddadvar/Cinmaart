@@ -1,6 +1,4 @@
 ﻿using Cinamaart.Domain.Entities.Identity;
-using Cinamaart.WebAPI.Abstractions.Constants;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cinamaart.Domain.Abstractions
+﻿namespace Cinamaart.Domain.Abstractions
 {
     public class Result
     {
-        public Result(bool isSuccess , object? data, Error error)
+        public Result(bool isSuccess, object? data, Error error)
         {
             if (isSuccess && error != Error.None ||
                !isSuccess && error == Error.None)
@@ -24,11 +18,11 @@ namespace Cinamaart.Domain.Abstractions
         public Error Error { get; }
         public object? Data { get; }
 
-        public static Result Success(object data) 
-            => new Result(true , data, Error.None);
-        public static Result Failure(Error error) 
-            => new Result(false,null, error);
+        public static Result Success(object data)
+            => new Result(true, data, Error.None);
+        public static Result Failure(Error error)
+            => new Result(false, null, error);
         public static Result Failure(string code, string? description = null)
-            => new Result(false,null, new Error(code, description));
+            => new Result(false, null, new Error(code, description));
     }
 }

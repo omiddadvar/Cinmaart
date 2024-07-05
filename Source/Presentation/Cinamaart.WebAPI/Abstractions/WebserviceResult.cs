@@ -4,8 +4,8 @@ namespace Cinamaart.WebAPI.Abstractions
 {
     public class WebserviceResult
     {
-        public bool IsSuccess {  get; set; }
-        public object? Data {  get; set; }
+        public bool IsSuccess { get; set; }
+        public object? Data { get; set; }
         public IEnumerable<WebserviceError>? Errors { get; set; } = null;
         public static WebserviceResult Success(object Data) => new WebserviceResult
         {

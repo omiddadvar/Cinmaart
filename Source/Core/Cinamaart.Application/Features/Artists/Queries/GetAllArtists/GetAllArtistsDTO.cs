@@ -1,12 +1,4 @@
-﻿using Cinamaart.Domain.Entities.Types;
-using Cinamaart.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cinamaart.Application.Features.Artists.Queries.GetAllArtists
+﻿namespace Cinamaart.Application.Features.Artists.Queries.GetAllArtists
 {
     public class GetAllArtistsDTO
     {

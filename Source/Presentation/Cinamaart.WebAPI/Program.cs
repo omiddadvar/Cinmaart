@@ -1,13 +1,8 @@
-using Cinamaart.Persistence;
 using Cinamaart.Application;
-using Serilog;
-using Cinamaart.WebAPI;
-using System.Configuration;
-using Cinamaart.Persistence.Contexts;
-using Microsoft.EntityFrameworkCore;
-using Cinamaart.Domain.Entities.Identity;
-using Microsoft.AspNetCore.Identity;
+using Cinamaart.Persistence;
 using Cinamaart.Persistence.Seeders;
+using Cinamaart.WebAPI;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +16,8 @@ builder.Services.AddPersistence();
 builder.Services.AddApplication();
 builder.Services.AddWebAPI();
 
-builder.Host.UseSerilog((context , config) =>{
+builder.Host.UseSerilog((context, config) =>
+{
     config.ReadFrom.Configuration(context.Configuration);
 });
 

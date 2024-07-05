@@ -1,20 +1,12 @@
 ﻿using Cinamaart.Domain.Abstractions;
-using Cinamaart.Domain.Common;
 using Cinamaart.Domain.Entities.Pivots;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
     public class Subtitle : IAuditablaEntity<long>
     {
         public long Id { get; set; }
-        public string Name {  get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public string? AuthorName { get; set; }
         public int? AuthorId { get; set; }

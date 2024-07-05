@@ -1,14 +1,9 @@
-﻿using Cinamaart.Domain.Entities.Types;
-using Cinamaart.Persistence.Repositories.ConfigEntities.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Cinamaart.Domain.Entities;
-using Cinamaart.Persistence.Repositories.ConfigEntities.Pivots;
+﻿using Cinamaart.Domain.Entities;
 using Cinamaart.Domain.Entities.Pivots;
+using Cinamaart.Domain.Entities.Types;
+using Cinamaart.Persistence.Repositories.ConfigEntities.Pivots;
+using Cinamaart.Persistence.Repositories.ConfigEntities.Types;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cinamaart.Persistence.Repositories.ConfigEntities
 {

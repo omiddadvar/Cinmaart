@@ -2,13 +2,7 @@
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Persistence.Repositories
 {
@@ -114,10 +108,10 @@ namespace Cinamaart.Persistence.Repositories
         }
 
         public async Task<PagedList<T>> PaginateAsync(
-            int page, 
-            int pageSize, 
-            Expression<Func<T, bool>> Where = null, 
-            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, 
+            int page,
+            int pageSize,
+            Expression<Func<T, bool>> Where = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             CancellationToken cancellationToken = default, params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = _dbContext.Set<T>();

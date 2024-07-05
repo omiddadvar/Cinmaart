@@ -1,25 +1,16 @@
 ﻿using Cinamaart.Domain.Abstractions;
-using Cinamaart.Domain.Common;
 using Cinamaart.Domain.Entities.Pivots;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Domain.Entities
 {
     public class Movie : IAuditablaEntity<int>
     {
-        public int Id {  get; set; }
-        public string Name {  get; set; }
-        public int Year {  get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Year { get; set; }
         public string Description { get; set; }
-        public int? CountryId {  get; set; }
-        public Country? Country {  get; set; }
+        public int? CountryId { get; set; }
+        public Country? Country { get; set; }
         public DateTime CraetedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 

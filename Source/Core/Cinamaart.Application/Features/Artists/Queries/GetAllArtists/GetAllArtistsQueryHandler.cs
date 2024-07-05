@@ -2,13 +2,11 @@
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
-using Cinamaart.Domain.Abstractions;
-using System.Collections.Generic;
 
 namespace Cinamaart.Application.Features.Artists.Queries.GetAllArtists
 {
     public class GetAllArtistsQueryHandler(
-            IMapper mapper, 
+            IMapper mapper,
             IArtistRepository artistRepository) :
         IRequestHandler<GetAllArtistsQuery, Result>
     {

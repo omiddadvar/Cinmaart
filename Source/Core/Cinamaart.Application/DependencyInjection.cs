@@ -1,13 +1,8 @@
-﻿using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Cinamaart.Application.Features;
 using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Cinamaart.Application.Features;
 
 namespace Cinamaart.Application
 {

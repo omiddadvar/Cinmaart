@@ -1,8 +1,6 @@
 ﻿using Cinamaart.WebAPI.Abstractions.Constants;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace Cinamaart.WebAPI.Controllers
 {
