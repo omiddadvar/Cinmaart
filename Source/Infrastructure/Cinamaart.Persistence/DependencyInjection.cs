@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Application.Abstractions.Repositories;
+using Cinamaart.Application.Interfaces.Repositories;
 using Cinamaart.Persistence.Contexts;
 using Cinamaart.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ namespace Cinamaart.Persistence
                   options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
               });
 
+            services.AddScoped<IUnitOfWork,UnitOfWork>();
             services.AddRepositories();
             return services;
         }
