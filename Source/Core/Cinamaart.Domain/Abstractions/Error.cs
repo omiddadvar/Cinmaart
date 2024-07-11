@@ -4,6 +4,6 @@
     {
         public static readonly Error None = new Error(string.Empty);
 
-        public static implicit operator Result(Error error) => Result.Failure(error);
+        public static implicit operator Result<object>(Error error) => Result<object>.Failure(error);
     }
 }
