@@ -8,7 +8,7 @@ namespace Cinamaart.Application.Mappings.Profiles
     {
         public ArtistProfile()
         {
-            CreateMap<Artist, GetArtistsDTO>()
+            CreateMap<Artist, GetArtistDTO>()
                 .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country.Name))
                 .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.Name));
 

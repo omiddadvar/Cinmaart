@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Artists.Queries.GetPaginatedArtists
 {
-    public class GetPaginatedArtistsQuery : PaginationDTO , IRequest<Result<PagedList<GetArtistsDTO>>>
+    public class GetPaginatedArtistsQuery : PaginationDTO , IRequest<Result<PagedList<GetArtistDTO>>>
     {
         public string NameSearchKeyword {  get; set; }
         public List<int>? Countries {  get; set; }

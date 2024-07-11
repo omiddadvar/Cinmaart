@@ -16,9 +16,9 @@ namespace Cinamaart.Application.Features.Artists.Queries.GetPaginatedArtists
     public class GetPaginatedArtistsQueryHandler(
         IMapper mapper,
         IArtistRepository artistRepository) 
-        : IRequestHandler<GetPaginatedArtistsQuery, Result<PagedList<GetArtistsDTO>>>
+        : IRequestHandler<GetPaginatedArtistsQuery, Result<PagedList<GetArtistDTO>>>
     {
-        public async Task<Result<PagedList<GetArtistsDTO>>> Handle(GetPaginatedArtistsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<PagedList<GetArtistDTO>>> Handle(GetPaginatedArtistsQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -31,12 +31,12 @@ namespace Cinamaart.Application.Features.Artists.Queries.GetPaginatedArtists
                     cancellationToken,
                 a => a.Country, e => e.Gender);
 
-                var data = mapper.Map<PagedList<Artist>,PagedList<GetArtistsDTO>>(rawData);
-                return Result<PagedList<GetArtistsDTO>>.Success(data);
+                var data = mapper.Map<PagedList<Artist>,PagedList<GetArtistDTO>>(rawData);
+                return Result<PagedList<GetArtistDTO>>.Success(data);
             }
             catch (Exception ex)
             {
-                return Result<PagedList<GetArtistsDTO>>.Failure("GetPaginatedArtists.Exception", ex.Message);
+                return Result<PagedList<GetArtistDTO>>.Failure("GetPaginatedArtists.Exception", ex.Message);
             }
         }
     }
