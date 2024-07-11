@@ -3,5 +3,5 @@ using MediatR;
 
 namespace Cinamaart.Application.Features.Artists.Queries.GetAllArtists
 {
-    public record GetAllArtistsQuery : IRequest<Result>;
+    public record GetAllArtistsQuery : IRequest<Result<List<GetArtistsDTO>>>;
 }

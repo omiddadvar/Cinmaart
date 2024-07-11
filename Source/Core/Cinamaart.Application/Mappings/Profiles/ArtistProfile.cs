@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Cinamaart.Application.Features.Artists.Queries.GetAllArtists;
+using Cinamaart.Application.Features.Artists.Queries;
 using Cinamaart.Domain.Entities;
 
 namespace Cinamaart.Application.Mappings.Profiles
@@ -8,7 +8,7 @@ namespace Cinamaart.Application.Mappings.Profiles
     {
         public ArtistProfile()
         {
-            CreateMap<Artist, GetAllArtistsDTO>()
+            CreateMap<Artist, GetArtistsDTO>()
                 .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country.Name))
                 .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.Name));
 

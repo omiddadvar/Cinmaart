@@ -1,6 +1,6 @@
-﻿namespace Cinamaart.Application.Features.Artists.Queries.GetAllArtists
+﻿namespace Cinamaart.Application.Features.Artists.Queries
 {
-    public class GetAllArtistsDTO
+    public class GetArtistsDTO
     {
         public string FullName { get; set; }
         public DateTime? BirthDate { get; set; }
