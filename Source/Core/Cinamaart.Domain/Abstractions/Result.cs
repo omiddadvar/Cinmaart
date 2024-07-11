@@ -1,7 +1,6 @@
 ﻿namespace Cinamaart.Domain.Abstractions
 {
     public class Result<T>
-        where T : class
     {
         public Result(bool isSuccess, T? data, Error error)
         {
@@ -22,8 +21,8 @@
         public static Result<T> Success(T data)
             => new Result<T>(true, data, Error.None);
         public static Result<T> Failure(Error error)
-            => new Result<T>(false, null, error);
+            => new Result<T>(false, default(T), error);
         public static Result<T> Failure(string code, string? description = null)
-            => new Result<T>(false, null, new Error(code, description));
+            => new Result<T>(false, default(T), new Error(code, description));
     }
 }

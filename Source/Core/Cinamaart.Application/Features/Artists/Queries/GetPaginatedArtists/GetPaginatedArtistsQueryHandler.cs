@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Cinamaart.Application.Abstractions.Repositories;
+using Cinamaart.Application.Features.Artists.Queries.GetAllArtists;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities;
 using Cinamaart.Domain.Extentions;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,8 @@ namespace Cinamaart.Application.Features.Artists.Queries.GetPaginatedArtists
 {
     public class GetPaginatedArtistsQueryHandler(
         IMapper mapper,
-        IArtistRepository artistRepository) 
+        IArtistRepository artistRepository,
+        ILogger<GetPaginatedArtistsQueryHandler> logger) 
         : IRequestHandler<GetPaginatedArtistsQuery, Result<PagedList<GetArtistDTO>>>
     {
         public async Task<Result<PagedList<GetArtistDTO>>> Handle(GetPaginatedArtistsQuery request, CancellationToken cancellationToken)
@@ -36,6 +39,7 @@ namespace Cinamaart.Application.Features.Artists.Queries.GetPaginatedArtists
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Error while reading paginated artist data, requested data = {request}", request.ToJson());
                 return Result<PagedList<GetArtistDTO>>.Failure("GetPaginatedArtists.Exception", ex.Message);
             }
         }

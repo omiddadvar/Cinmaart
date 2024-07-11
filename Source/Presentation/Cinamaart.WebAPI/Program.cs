@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    await app.MigrateDebugDatabase();
+    //await app.MigrateDebugDatabase();
 }
 
 app.SeedData();

@@ -13,7 +13,6 @@ namespace Cinamaart.Domain.Entities
         public Gender Gender { get; set; }
         public int? CountryId { get; set; }
         public Country? Country { get; set; }
-
         public ICollection<MovieArtist> MovieArtists { get; set; } = new List<MovieArtist>();
         public ICollection<TvSerieArtist> TvSerieArtists { get; set; } = new List<TvSerieArtist>();
     }
