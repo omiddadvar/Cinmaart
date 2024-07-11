@@ -2,7 +2,7 @@
 
 namespace Cinamaart.Domain.Entities.Pivots
 {
-    public class MovieArtist : IBaseEntity<long>
+    public class MovieArtist
     {
         public long Id { get; set; }
         public int MovieId { get; set; }

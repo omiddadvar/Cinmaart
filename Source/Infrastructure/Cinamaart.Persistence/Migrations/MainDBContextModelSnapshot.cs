@@ -84,10 +84,7 @@ namespace Cinamaart.Persistence.Migrations
             modelBuilder.Entity("Cinamaart.Domain.Entities.Country", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -704,10 +701,7 @@ namespace Cinamaart.Persistence.Migrations
             modelBuilder.Entity("Cinamaart.Domain.Entities.Types.DocumentType", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -722,10 +716,7 @@ namespace Cinamaart.Persistence.Migrations
             modelBuilder.Entity("Cinamaart.Domain.Entities.Types.Gender", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()

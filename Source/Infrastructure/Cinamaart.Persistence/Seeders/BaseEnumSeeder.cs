@@ -1,12 +1,11 @@
-﻿using Cinamaart.Domain.Abstractions;
-using Cinamaart.Persistence.Abstractions;
+﻿using Cinamaart.Persistence.Abstractions;
 using Cinamaart.Persistence.Contexts;
 
 namespace Cinamaart.Persistence.Seeders
 {
     public abstract class BaseEnumSeeder<TEnum, TEntity>(MainDBContext dbContext) : ISeeder
         where TEnum : Enum
-        where TEntity : class, IBaseTypeEntity, new()
+        where TEntity : class, new()
     {
         public abstract uint Order { get; }
 
@@ -17,17 +16,25 @@ namespace Cinamaart.Persistence.Seeders
                 return;
 
             // Seeding by enum
-            var dataList = new List<TEntity>();
+            var dataList = new List<EnumDataModel>();
             foreach (TEnum enumType in Enum.GetValues(typeof(TEnum)))
             {
-                dataList.Add(new TEntity
+                dataList.Add(new EnumDataModel
                 {
                     Id = (int)(object)enumType,
                     Name = enumType.ToString()
                 });
             }
-            dbContext.Set<TEntity>().AddRange(dataList);
+            var entityData = getPreparedData(dataList);
+            dbContext.Set<TEntity>().AddRange(entityData);
             dbContext.SaveChanges();
+        }
+        protected abstract IList<TEntity> getPreparedData(List<EnumDataModel> enumData);
+
+        protected struct EnumDataModel
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
         }
     }
 }

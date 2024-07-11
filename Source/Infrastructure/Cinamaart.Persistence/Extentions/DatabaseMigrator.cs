@@ -22,9 +22,9 @@ namespace Cinamaart.Persistence.Extentions
                 bool isDeleted = await dbContext.Database.EnsureDeletedAsync(cancellation);
                 if (!isDeleted) 
                     throw new OperationCanceledException("Database's not deleted successfully.");
-                bool isCreated = await dbContext.Database.EnsureCreatedAsync(cancellation);
-                if (!isCreated)
-                    throw new OperationCanceledException("Database's not created successfully.");
+                //bool isCreated = await dbContext.Database.EnsureCreatedAsync(cancellation);
+                //if (!isCreated)
+                //    throw new OperationCanceledException("Database's not created successfully.");
                 await dbContext.Database.MigrateAsync(cancellation);
             }
             return app;

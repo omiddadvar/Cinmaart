@@ -2,7 +2,7 @@
 
 namespace Cinamaart.Domain.Entities.Types
 {
-    public class DocumentType : IBaseTypeEntity
+    public class DocumentType
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -3,7 +3,7 @@ using Cinamaart.Domain.Entities.Types;
 
 namespace Cinamaart.Domain.Entities.Pivots
 {
-    public class TvSerieTag : IBaseEntity<long>
+    public class TvSerieTag 
     {
         public long Id { get; set; }
         public int TvSerieId { get; set; }

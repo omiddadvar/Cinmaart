@@ -9,6 +9,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities
         public void Configure(EntityTypeBuilder<Country> builder)
         {
             builder.HasKey(t => t.Id);
+            builder.Property(t => t.Id).ValueGeneratedNever();
             builder.Property(t => t.Name).IsUnicode(false).HasMaxLength(100);
             builder.ToTable(nameof(Country));
         }

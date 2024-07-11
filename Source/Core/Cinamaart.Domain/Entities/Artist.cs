@@ -4,7 +4,7 @@ using Cinamaart.Domain.Entities.Types;
 
 namespace Cinamaart.Domain.Entities
 {
-    public class Artist : IBaseEntity<int>
+    public class Artist
     {
         public int Id { get; set; }
         public string FullName { get; set; }

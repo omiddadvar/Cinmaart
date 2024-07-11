@@ -4,7 +4,7 @@ using Cinamaart.Domain.Entities.Types;
 
 namespace Cinamaart.Domain.Entities
 {
-    public class Document : IAuditablaEntity<long>
+    public class Document : IAuditablaEntity
     {
         public long Id { get; set; }
         public string Name { get; set; }

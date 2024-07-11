@@ -66,17 +66,17 @@ namespace Cinamaart.Persistence.Contexts
         {
             var entries = ChangeTracker
                 .Entries()
-                .Where(e => e.Entity is IBaseAuditablaEntity && (
+                .Where(e => e.Entity is IAuditablaEntity && (
                 e.State == EntityState.Added
                 || e.State == EntityState.Modified));
 
             foreach (var entityEntry in entries)
             {
-                ((IBaseAuditablaEntity)entityEntry.Entity).UpdatedAt = DateTime.Now;
+                ((IAuditablaEntity)entityEntry.Entity).UpdatedAt = DateTime.Now;
 
                 if (entityEntry.State == EntityState.Added)
                 {
-                    ((IBaseAuditablaEntity)entityEntry.Entity).CraetedAt = DateTime.Now;
+                    ((IAuditablaEntity)entityEntry.Entity).CraetedAt = DateTime.Now;
                 }
             }
         }

@@ -2,7 +2,7 @@
 
 namespace Cinamaart.Domain.Entities
 {
-    public class Country : IBaseTypeEntity
+    public class Country
     {
         public int Id { get; set; }
         public string Name { get; set; }

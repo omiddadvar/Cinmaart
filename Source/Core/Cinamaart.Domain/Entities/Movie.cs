@@ -3,7 +3,7 @@ using Cinamaart.Domain.Entities.Pivots;
 
 namespace Cinamaart.Domain.Entities
 {
-    public class Movie : IAuditablaEntity<int>
+    public class Movie : IAuditablaEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

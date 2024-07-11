@@ -2,7 +2,7 @@
 
 namespace Cinamaart.Domain.Entities.Types
 {
-    public class Gender : IBaseTypeEntity
+    public class Gender
     {
         public int Id { get; set; }
         public string Name { get; set; }

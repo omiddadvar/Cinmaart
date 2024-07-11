@@ -2,7 +2,7 @@
 
 namespace Cinamaart.Domain.Entities
 {
-    public class Season : IAuditablaEntity<int>
+    public class Season : IAuditablaEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

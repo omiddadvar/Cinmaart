@@ -1,6 +1,8 @@
 ﻿namespace Cinamaart.Domain.Abstractions
 {
-    public interface IAuditablaEntity<TPrimaryKey> : IBaseEntity<TPrimaryKey>, IBaseAuditablaEntity
+    public interface IAuditablaEntity 
     {
+        public DateTime CraetedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

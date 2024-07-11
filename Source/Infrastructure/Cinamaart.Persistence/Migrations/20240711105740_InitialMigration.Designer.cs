@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cinamaart.Persistence.Migrations
 {
     [DbContext(typeof(MainDBContext))]
-    [Migration("20240704171536_InitialMigration")]
+    [Migration("20240711105740_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -87,10 +87,7 @@ namespace Cinamaart.Persistence.Migrations
             modelBuilder.Entity("Cinamaart.Domain.Entities.Country", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -707,10 +704,7 @@ namespace Cinamaart.Persistence.Migrations
             modelBuilder.Entity("Cinamaart.Domain.Entities.Types.DocumentType", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -725,10 +719,7 @@ namespace Cinamaart.Persistence.Migrations
             modelBuilder.Entity("Cinamaart.Domain.Entities.Types.Gender", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()

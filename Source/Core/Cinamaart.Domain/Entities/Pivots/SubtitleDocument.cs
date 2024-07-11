@@ -2,7 +2,7 @@
 
 namespace Cinamaart.Domain.Entities.Pivots
 {
-    public class SubtitleDocument : IAuditablaEntity<long>
+    public class SubtitleDocument : IAuditablaEntity
     {
         public long Id { get; set; }
         public long SubtitleId { get; set; }

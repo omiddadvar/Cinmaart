@@ -3,7 +3,7 @@ using Cinamaart.Domain.Entities.Identity;
 
 namespace Cinamaart.Domain.Entities
 {
-    public class Author : IBaseEntity<int>
+    public class Author
     {
         public int Id { get; set; }
         public string Name { get; set; }

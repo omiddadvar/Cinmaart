@@ -8,5 +8,18 @@ namespace Cinamaart.Persistence.Seeders.EntitySeeders
         BaseEnumSeeder<DocumentTypeEnum, DocumentType>(dbContext)
     {
         public override uint Order => 3;
+        protected override IList<DocumentType> getPreparedData(List<EnumDataModel> enumData)
+        {
+            var data = new List<DocumentType>();
+            enumData.ForEach(item =>
+            {
+                data.Add(new()
+                {
+                    Id = item.Id,
+                    Name = item.Name
+                });
+            });
+            return data;
+        }
     }
 }

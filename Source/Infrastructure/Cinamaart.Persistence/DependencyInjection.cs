@@ -11,7 +11,10 @@ namespace Cinamaart.Persistence
         public static IServiceCollection AddPersistence(this IServiceCollection services)
         {
             services.AddDbContext<MainDBContext>(
-              options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+              options => {
+                  options.UseSqlServer("name=ConnectionStrings:DefaultConnection");
+                  options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+              });
 
             services.AddRepositories();
             return services;

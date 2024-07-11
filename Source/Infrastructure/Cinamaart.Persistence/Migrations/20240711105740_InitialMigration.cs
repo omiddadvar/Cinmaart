@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -55,8 +56,7 @@ namespace Cinamaart.Persistence.Migrations
                 name: "Country",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -68,8 +68,7 @@ namespace Cinamaart.Persistence.Migrations
                 name: "DocumentType",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -81,8 +80,7 @@ namespace Cinamaart.Persistence.Migrations
                 name: "Gender",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -667,9 +665,9 @@ namespace Cinamaart.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SeasonId = table.Column<int>(type: "int", nullable: false),
                     CraetedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SeasonId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

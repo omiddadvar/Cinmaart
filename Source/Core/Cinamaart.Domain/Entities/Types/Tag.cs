@@ -3,7 +3,7 @@ using Cinamaart.Domain.Entities.Pivots;
 
 namespace Cinamaart.Domain.Entities.Types
 {
-    public class Tag : IBaseTypeEntity
+    public class Tag
     {
         public int Id { get; set; }
         public string Name { get; set; }
