@@ -4,7 +4,7 @@ using Cinamaart.Application.Features.Artists.Commands.UpdateArtist;
 using Cinamaart.Application.Features.Artists.Queries;
 using Cinamaart.Domain.Entities;
 
-namespace Cinamaart.Application.Mappings.Profiles
+namespace Cinamaart.Application.Common.Mappings.Profiles
 {
     public class ArtistProfile : Profile
     {
