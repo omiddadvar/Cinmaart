@@ -1,13 +1,23 @@
-﻿using Cinamaart.WebAPI.Abstractions.Constants;
+﻿using Cinamaart.Application.Features.Users.Commands.Register;
+using Cinamaart.WebAPI.Abstractions.Constants;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
+using System.Threading;
 
 namespace Cinamaart.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController(IMediator mediator) : ControllerBase
     {
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register(RegisterCommand command , CancellationToken cancellationToken = default)
+        {
+            var result = await mediator.Send(command, cancellationToken);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
+        }
         [HttpGet("{id}")]
         [Authorize]
         public async Task<IActionResult> GetUser(long id)

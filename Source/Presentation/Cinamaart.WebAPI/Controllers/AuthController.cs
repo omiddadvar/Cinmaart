@@ -9,11 +9,6 @@ namespace Cinamaart.WebAPI.Controllers
     public class AuthController(UserManager<User> _userManager,
         RoleManager<Role> _roleManager) : ControllerBase
     {
-        [HttpPost("Register")]
-        public async Task<IActionResult> Register()
-        {
-            throw new NotImplementedException();
-        }
         [HttpPost("Login")]
         public async Task<IActionResult> Login()
         {
