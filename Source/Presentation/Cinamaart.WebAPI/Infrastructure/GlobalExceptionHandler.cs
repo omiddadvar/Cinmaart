@@ -1,4 +1,6 @@
-﻿using Cinamaart.WebAPI.Abstractions;
+﻿using Cinamaart.Domain.Abstractions;
+using Cinamaart.WebAPI.Abstractions;
+using Cinamaart.WebAPI.Abstractions.ExceptionHandlerss;
 using Microsoft.AspNetCore.Diagnostics;
 
 namespace Cinamaart.WebAPI.Infrastructure
@@ -22,7 +24,8 @@ namespace Cinamaart.WebAPI.Infrastructure
                 BadHttpRequestException => StatusCodes.Status400BadRequest,
                 _ => StatusCodes.Status500InternalServerError
             };
-            var result = WebserviceResult.Failure("GlobalException", exception.Message);
+            var eceptionHandler = GlobalErrorHandlerFactory.CreateHandler(exception);
+            var result = eceptionHandler.ProcessException();
 
             await httpContext.Response.WriteAsJsonAsync(result);
             return true;

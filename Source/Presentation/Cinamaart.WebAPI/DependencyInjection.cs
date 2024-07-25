@@ -1,5 +1,6 @@
 ﻿using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Persistence.Contexts;
+using Cinamaart.WebAPI.Infrastructure;
 using Cinamaart.WebAPI.Policies;
 using Cinamaart.WebAPI.Policies.AccessLevels;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,7 @@ namespace Cinamaart.WebAPI
             services.AddAuthDI();
             services.AddIdentityDI();
             services.AddLocalizationDI();
+            services.AddExceptionHandler<GlobalExceptionHandler>();
             return services;
         }
         private static IServiceCollection AddOutputCacheDI(this IServiceCollection services)

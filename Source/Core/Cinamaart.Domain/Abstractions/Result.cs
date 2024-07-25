@@ -1,4 +1,6 @@
-﻿namespace Cinamaart.Domain.Abstractions
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace Cinamaart.Domain.Abstractions
 {
     public class Result<T>
     {
@@ -10,12 +12,29 @@
                 throw new ArgumentException("Invalid error", nameof(error));
             }
             IsSuccess = isSuccess;
-            Error = error;
+            Errors = new[] { error };
+            Data = data;
+        }
+        public Result(bool isSuccess, T? data, IList<Error>? errors)
+        {
+            if(errors is not null)
+            {
+                Error? invalidError = errors
+                    .Where(e => (isSuccess && e != Error.None || !isSuccess && e == Error.None))
+                    .Select(e => e)
+                    .FirstOrDefault();
+                if (invalidError is not null)
+                {
+                    throw new ArgumentException("Invalid error", nameof(invalidError));
+                }
+            }
+            IsSuccess = isSuccess;
+            Errors = errors;
             Data = data;
         }
         public bool IsSuccess { get; }
         public bool IsFailure => !IsSuccess;
-        public Error Error { get; }
+        public IList<Error>? Errors { get; }
         public T? Data { get; }
 
         public static Result<T> Success(T data)
@@ -24,5 +43,7 @@
             => new Result<T>(false, default(T), error);
         public static Result<T> Failure(string code, string? description = null)
             => new Result<T>(false, default(T), new Error(code, description));
+        public static Result<T> Failure(IList<Error>? errors)
+            => new Result<T>(false, default(T), errors);
     }
 }
