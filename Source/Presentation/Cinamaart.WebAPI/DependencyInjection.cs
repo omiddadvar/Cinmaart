@@ -40,7 +40,7 @@ namespace Cinamaart.WebAPI
                 options.AddRequireSubtitleEditionAccessPolicy();
             });
             services.AddAuthentication();
-            return services
+            return services;
         }
         private static IServiceCollection AddIdentityDI(this IServiceCollection services)
         {
@@ -67,10 +67,8 @@ namespace Cinamaart.WebAPI
         }
         private static IServiceCollection AddLocalizationDI(this IServiceCollection services)
         {
-            services.AddLocalization(options =>
-            {
-                options.ResourcesPath = "Cinamaart.SharedKernel.Resources";
-            });
+            services.AddLocalization();
+
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new List<CultureInfo>()
@@ -78,11 +76,12 @@ namespace Cinamaart.WebAPI
                     new CultureInfo("en-US"),
                     new CultureInfo("fa-IR")
                 };
+                options.ApplyCurrentCultureToResponseHeaders = true;
                 options.DefaultRequestCulture = new RequestCulture(culture: "fa-IR");
                 options.SupportedCultures = supportedCultures;
                 options.RequestCultureProviders = new[]
                 {
-                  new RouteDataRequestCultureProvider()
+                  new AcceptLanguageHeaderRequestCultureProvider()
                 };
             });
             return services;

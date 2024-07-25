@@ -3,7 +3,6 @@ using Cinamaart.Persistence;
 using Cinamaart.Persistence.Contexts;
 using Cinamaart.Persistence.Extentions;
 using Cinamaart.WebAPI;
-using Cinamaart.WebAPI.Extentions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Client;
@@ -41,7 +40,10 @@ if (app.Environment.IsDevelopment())
 
 app.SeedData();
 
-app.UseRequestLocalization();
+
+var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
+app.UseRequestLocalization(localizationOptions.Value);
+
 /*
 app.MapGroup("/auth")
    .MapIdentityApi<User>();

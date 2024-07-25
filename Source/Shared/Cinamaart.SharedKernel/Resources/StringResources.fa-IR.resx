@@ -120,6 +120,9 @@
   <data name="ConfirmEmailNotValid" xml:space="preserve">
     <value>مقدار ایمیل و تاییدیه ایمیل وارد شده یکسان نمی باشد</value>
   </data>
+  <data name="ConfirmPasswordNotValid" xml:space="preserve">
+    <value>مقدارکلمه عبور و تاییدیه کلمه عبور وارد شده یکسان نمی باشد</value>
+  </data>
   <data name="ObligatoryValue" xml:space="preserve">
     <value>مقدار {0} اجباری می باشد</value>
   </data>

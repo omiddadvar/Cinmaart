@@ -120,6 +120,9 @@
   <data name="ConfirmEmailNotValid" xml:space="preserve">
     <value>Email and confirm email values are not the same</value>
   </data>
+  <data name="ConfirmPasswordNotValid" xml:space="preserve">
+    <value>Password and confirm password values are not the same</value>
+  </data>
   <data name="ObligatoryValue" xml:space="preserve">
     <value>{0} should not be empty</value>
   </data>
