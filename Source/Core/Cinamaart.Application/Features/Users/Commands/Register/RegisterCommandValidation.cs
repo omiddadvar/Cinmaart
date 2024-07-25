@@ -14,8 +14,6 @@ namespace Cinamaart.Application.Features.Users.Commands.Register
     {
         public RegisterCommandValidation(IStringLocalizer<StringResources> _localizer)
         {
-            string frfrfr = _localizer[LocalStringKeyword.ConfirmPasswordNotValid].Value;
-            string aaaaaaa = _localizer[LocalStringKeyword.ObligatoryValue, "Username"];
             RuleFor(x => x.Username).NotNull().NotEmpty().WithMessage(_localizer[LocalStringKeyword.ObligatoryValue,"Username"]);
             RuleFor(x => x.Password).NotNull().NotEmpty().WithMessage(_localizer[LocalStringKeyword.ObligatoryValue, "Password"]);
             RuleFor(x => x.ConfirmPassword).NotNull().NotEmpty().WithMessage(_localizer[LocalStringKeyword.ObligatoryValue, "ConfirmPassword"]);
