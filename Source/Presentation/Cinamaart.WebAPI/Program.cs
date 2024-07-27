@@ -40,6 +40,8 @@ if (app.Environment.IsDevelopment())
 
 app.SeedData();
 
+app.UseExceptionHandler();
+
 
 var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
 app.UseRequestLocalization(localizationOptions.Value);

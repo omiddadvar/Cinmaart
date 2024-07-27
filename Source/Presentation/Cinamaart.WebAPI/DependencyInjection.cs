@@ -20,7 +20,10 @@ namespace Cinamaart.WebAPI
             services.AddAuthDI();
             services.AddIdentityDI();
             services.AddLocalizationDI();
+
             services.AddExceptionHandler<GlobalExceptionHandler>();
+            services.AddProblemDetails();
+
             return services;
         }
         private static IServiceCollection AddOutputCacheDI(this IServiceCollection services)

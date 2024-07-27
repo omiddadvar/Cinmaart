@@ -33,7 +33,7 @@ namespace Cinamaart.Application.Features.Users.Commands.Register
                 if (identityResult.Succeeded)
                     return Result<long?>.Success(user.Id);
                 else
-                    return Result<long?>.Failure("Register.Failure", identityResult.Errors.ToString());
+                    return Result<long?>.Failure(identityResult.Errors.ToErrors());
             }
             catch (Exception ex)
             {
