@@ -1,10 +1,13 @@
-﻿using Cinamaart.Application.Features.Users.Commands.Register;
+﻿using Cinamaart.Application.Features.Artists.Commands.RemoveArtist;
+using Cinamaart.Application.Features.Users.Commands.Register;
+using Cinamaart.Application.Features.Users.Commands.RemoveUser;
 using Cinamaart.WebAPI.Abstractions.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using System.Threading;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Cinamaart.WebAPI.Controllers
 {
@@ -31,10 +34,11 @@ namespace Cinamaart.WebAPI.Controllers
             throw new NotImplementedException();
         }
         [HttpDelete]
-        [Authorize(Roles = RoleNames.Administrator)]
-        public async Task<IActionResult> RemoveUser(int id)
+        //[Authorize(Roles = RoleNames.Administrator)]
+        public async Task<IActionResult> RemoveUser(RemoveUserCommand command,CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var result = await mediator.Send(command, cancellationToken);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
     }
 }

@@ -2,8 +2,11 @@
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Extentions;
+using Cinamaart.SharedKernel;
+using Cinamaart.SharedKernel.Resources;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -15,7 +18,8 @@ namespace Cinamaart.Application.Features.Users.Commands.RemoveUser
 {
     public class RemoveUserCommandHandler(
             UserManager<User> userManager,
-            ILogger<RegisterCommandHandler> logger
+            ILogger<RegisterCommandHandler> logger,
+            IStringLocalizer<StringResources> localizer
         ) : IRequestHandler<RemoveUserCommand, Result<bool>>
     {
         public async Task<Result<bool>> Handle(RemoveUserCommand request, CancellationToken cancellationToken)
@@ -29,7 +33,8 @@ namespace Cinamaart.Application.Features.Users.Commands.RemoveUser
                     return identityResult.ToStandardResult<bool>();
                 }
                 else
-                    return Result<bool>.Failure("RemoveUser.NotFound", );
+                    return Result<bool>.Failure("RemoveUser.NotFound", 
+                        localizer[LocalStringKeyword.User_NotFound , request.UserId]);
             }
             catch (Exception ex)
             {

@@ -126,4 +126,7 @@
   <data name="ObligatoryValue" xml:space="preserve">
     <value>مقدار {0} اجباری می باشد</value>
   </data>
+  <data name="User.NotFound" xml:space="preserve">
+    <value>کاربری با شناسه {0} یافت نشد</value>
+  </data>
 </root>

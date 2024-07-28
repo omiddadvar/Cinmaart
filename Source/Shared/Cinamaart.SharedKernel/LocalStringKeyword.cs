@@ -11,5 +11,6 @@ namespace Cinamaart.SharedKernel
         public const string ObligatoryValue = "ObligatoryValue";
         public const string ConfirmPasswordNotValid = "ConfirmPasswordNotValid";
         public const string ConfirmEmailNotValid = "ConfirmEmailNotValid";
+        public const string User_NotFound = "User.NotFound";
     }
 }

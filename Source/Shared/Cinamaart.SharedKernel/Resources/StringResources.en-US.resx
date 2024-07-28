@@ -126,4 +126,7 @@
   <data name="ObligatoryValue" xml:space="preserve">
     <value>{0} should not be empty</value>
   </data>
+  <data name="User.NotFound" xml:space="preserve">
+    <value>User with id {0} not found</value>
+  </data>
 </root>
