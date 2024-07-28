@@ -1,4 +1,4 @@
-﻿namespace Cinamaart.WebAPI.Abstractions.ExceptionHandlerss
+﻿namespace Cinamaart.WebAPI.Abstractions.ExceptionHandlers
 {
     public class GlobalErrorHandlerFactory
     {

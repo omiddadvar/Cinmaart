@@ -1,7 +1,7 @@
 ﻿using Cinamaart.Domain.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Cinamaart.WebAPI.Abstractions.ExceptionHandlerss
+namespace Cinamaart.WebAPI.Abstractions.ExceptionHandlers
 {
     public interface IGlobalExceptionHandler
     {

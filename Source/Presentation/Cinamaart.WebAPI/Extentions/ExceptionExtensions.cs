@@ -5,7 +5,7 @@ using System;
 
 namespace Cinamaart.WebAPI.Extentions
 {
-    public static class ExcetionExtentions
+    public static class ExceptionExtensions
     {
         public static IList<Error> ToStandardErrors(this ValidationException ex)
         {
