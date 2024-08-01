@@ -1,6 +1,7 @@
 ﻿using Cinamaart.Application.Features.Artists.Commands.RemoveArtist;
 using Cinamaart.Application.Features.Users.Commands.Register;
 using Cinamaart.Application.Features.Users.Commands.RemoveUser;
+using Cinamaart.Application.Features.Users.Queries.GetUserById;
 using Cinamaart.WebAPI.Abstractions.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -23,9 +24,11 @@ namespace Cinamaart.WebAPI.Controllers
         }
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<IActionResult> GetUser(long id)
+        public async Task<IActionResult> GetUser(long id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var command = new GetUserByIdCommand(id);
+            var result = await mediator.Send(command, cancellationToken);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
         [HttpPut]
         [Authorize]

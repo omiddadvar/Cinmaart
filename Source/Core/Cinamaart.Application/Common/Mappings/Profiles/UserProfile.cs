@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Cinamaart.Application.Features.Users.Commands.Register;
+using Cinamaart.Application.Features.Users.Queries;
 using Cinamaart.Domain.Entities.Identity;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Cinamaart.Application.Common.Mappings.Profiles
         public UserProfile() 
         {
             CreateMap<RegisterCommand, User>();
+            CreateMap<User, UserDTO>();
         }
     }
 }
