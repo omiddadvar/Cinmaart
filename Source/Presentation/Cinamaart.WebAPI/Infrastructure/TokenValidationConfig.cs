@@ -1,4 +1,4 @@
-﻿using Cinamaart.Application.Common.Security;
+﻿using Cinamaart.Infrastructure.Services.Token;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Cinamaart.WebAPI.Infrastructure

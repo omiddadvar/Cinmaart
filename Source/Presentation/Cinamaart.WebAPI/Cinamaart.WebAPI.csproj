@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Cinamaart.Application\Cinamaart.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Cinamaart.Infrastructure\Cinamaart.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Cinamaart.Persistence\Cinamaart.Persistence.csproj" />
   </ItemGroup>
 

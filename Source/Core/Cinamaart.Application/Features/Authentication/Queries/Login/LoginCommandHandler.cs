@@ -1,4 +1,5 @@
-﻿using Cinamaart.Application.Common.Security;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Common.Security;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Extentions;
@@ -6,6 +7,7 @@ using Cinamaart.SharedKernel;
 using Cinamaart.SharedKernel.Resources;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
@@ -15,7 +17,8 @@ namespace Cinamaart.Application.Features.Authentication.Queries.Login
     public class LoginCommandHandler(
         UserManager<User> userManager,
         ILogger<LoginCommandHandler> logger,
-        IStringLocalizer<StringResources> localizer
+        IStringLocalizer<StringResources> localizer,
+        [FromKeyedServices("JWT")] ITokenGenerator tokenGenerator
         )
         : IRequestHandler<LoginCommand, Result<LoginResultDTO>>
     {
@@ -43,7 +46,7 @@ namespace Cinamaart.Application.Features.Authentication.Queries.Login
                     bool passwordIsValid = await userManager.CheckPasswordAsync(user, request.Password);
                     if (passwordIsValid)
                     {
-                        string token = await JwtTokenGenerator.GenerateJwtTokenAsync(user);
+                        string token = await tokenGenerator.GenerateJwtTokenAsync(user);
 
                         return Result<LoginResultDTO>.Success(
                             new LoginResultDTO(token, TOKEN_EXPIRATION_MINUTES));

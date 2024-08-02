@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Entities.Identity;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Entities.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,11 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinamaart.Application.Common.Security
+namespace Cinamaart.Infrastructure.Services.Token
 {
-    internal class JwtTokenGenerator
+    public class JWTBearerTokenGenerator : ITokenGenerator
     {
-        public static async Task<string> GenerateJwtTokenAsync(User user)
+        public async Task<string> GenerateTokenAsync(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor

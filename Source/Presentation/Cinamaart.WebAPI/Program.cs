@@ -3,11 +3,8 @@ using Cinamaart.Persistence;
 using Cinamaart.Persistence.Contexts;
 using Cinamaart.Persistence.Extentions;
 using Cinamaart.WebAPI;
-using Cinamaart.WebAPI.Policies.AccessLevels;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Microsoft.Identity.Client;
+using Cinamaart.Infrastructure;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +17,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddPersistence();
 builder.Services.AddApplication();
+builder.Services.AddInfrastructure();
 builder.Services.AddWebAPI();
 
 builder.Host.UseSerilog((context, config) =>
