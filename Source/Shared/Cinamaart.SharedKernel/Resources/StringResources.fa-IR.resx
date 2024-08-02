@@ -123,10 +123,16 @@
   <data name="ConfirmPasswordNotValid" xml:space="preserve">
     <value>مقدارکلمه عبور و تاییدیه کلمه عبور وارد شده یکسان نمی باشد</value>
   </data>
+  <data name="Login.PasswordInCorrect" xml:space="preserve">
+    <value>رمز عبور اشتباه می باشد</value>
+  </data>
   <data name="ObligatoryValue" xml:space="preserve">
     <value>مقدار {0} اجباری می باشد</value>
   </data>
   <data name="User.NotFound" xml:space="preserve">
+    <value>کاربر یافت نشد</value>
+  </data>
+  <data name="User.NotFoundById" xml:space="preserve">
     <value>کاربری با شناسه {0} یافت نشد</value>
   </data>
 </root>

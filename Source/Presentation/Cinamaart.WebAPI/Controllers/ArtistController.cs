@@ -8,6 +8,7 @@ using Cinamaart.Application.Features.Artists.Queries.GetPaginatedArtists;
 using Cinamaart.Application.Features.Artists.Commands.AddArtist;
 using Cinamaart.Application.Features.Artists.Queries.GetArtistById;
 using Cinamaart.Application.Features.Artists.Commands.UpdateArtist;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cinamaart.WebAPI.Controllers
 {
@@ -36,6 +37,7 @@ namespace Cinamaart.WebAPI.Controllers
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddArtist(AddArtistCommand command , CancellationToken cancellationToken =default)
         {
             var result = await mediator.Send(command, cancellationToken);

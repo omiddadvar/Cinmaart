@@ -12,7 +12,8 @@ namespace Cinamaart.Domain.Abstractions
                 throw new ArgumentException("Invalid error", nameof(error));
             }
             IsSuccess = isSuccess;
-            Errors = new[] { error };
+            if(error != Error.None)
+                Errors = new[] { error };
             Data = data;
         }
         public Result(bool isSuccess, T? data, IList<Error>? errors)

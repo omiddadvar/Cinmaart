@@ -3,6 +3,7 @@ using Cinamaart.Persistence.Contexts;
 using Cinamaart.WebAPI.Infrastructure;
 using Cinamaart.WebAPI.Policies;
 using Cinamaart.WebAPI.Policies.AccessLevels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Localization.Routing;
@@ -17,8 +18,8 @@ namespace Cinamaart.WebAPI
         {
 
             services.AddOutputCacheDI();
-            services.AddAuthDI();
             services.AddIdentityDI();
+            services.AddAuthDI();
             services.AddLocalizationDI();
 
             services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -39,12 +40,17 @@ namespace Cinamaart.WebAPI
         }
         private static IServiceCollection AddAuthDI(this IServiceCollection services)
         {
-            services.AddAuthorization(options =>
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddRequireContentEditionAccessPolicy();
+            //    options.AddRequireSubtitleEditionAccessPolicy();
+            //});
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(x =>
             {
-                options.AddRequireContentEditionAccessPolicy();
-                options.AddRequireSubtitleEditionAccessPolicy();
+                x.TokenValidationParameters = TokenValidationConfig.GetTokenValidationParameters();
             });
-            services.AddAuthentication();
+            services.AddAuthorization();
             return services;
         }
         private static IServiceCollection AddIdentityDI(this IServiceCollection services)
@@ -66,8 +72,10 @@ namespace Cinamaart.WebAPI
             })
                 //.AddRoles<Role>()
                 .AddEntityFrameworkStores<MainDBContext>()
-                .AddDefaultTokenProviders()
+                .AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider)
+                //.AddDefaultTokenProviders()
                 .AddApiEndpoints();
+
             return services;
         }
         private static IServiceCollection AddLocalizationDI(this IServiceCollection services)

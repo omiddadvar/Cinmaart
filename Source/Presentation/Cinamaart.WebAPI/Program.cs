@@ -3,6 +3,8 @@ using Cinamaart.Persistence;
 using Cinamaart.Persistence.Contexts;
 using Cinamaart.Persistence.Extentions;
 using Cinamaart.WebAPI;
+using Cinamaart.WebAPI.Policies.AccessLevels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Client;

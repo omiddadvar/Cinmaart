@@ -37,7 +37,7 @@ namespace Cinamaart.Application.Features.Users.Queries.GetUserById
                     return Result<UserDTO>.Success(userDTO);
                 }
                 else
-                    return Result<UserDTO>.Failure("User.NotFound", localizer[LocalStringKeyword.User_NotFound, request.UserId]);
+                    return Result<UserDTO>.Failure("User.NotFound", localizer[LocalStringKeyword.User_NotFoundById, request.UserId]);
             }
             catch (Exception ex)
             {

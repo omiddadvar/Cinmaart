@@ -34,7 +34,7 @@ namespace Cinamaart.Application.Features.Users.Commands.RemoveUser
                 }
                 else
                     return Result<bool>.Failure("RemoveUser.NotFound", 
-                        localizer[LocalStringKeyword.User_NotFound , request.UserId]);
+                        localizer[LocalStringKeyword.User_NotFoundById , request.UserId]);
             }
             catch (Exception ex)
             {

@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Extentions\" />
     <Folder Include="Features\Authentication\Commands\" />
-    <Folder Include="Features\Authentication\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +17,7 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.2" />
     <PackageReference Include="MediatR" Version="12.3.0" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.7" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>

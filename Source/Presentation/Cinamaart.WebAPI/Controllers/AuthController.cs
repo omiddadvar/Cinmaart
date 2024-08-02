@@ -1,18 +1,21 @@
-﻿using Cinamaart.Domain.Entities.Identity;
+﻿using Cinamaart.Application.Features.Authentication.Queries.Login;
+using Cinamaart.Domain.Entities.Identity;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 
 namespace Cinamaart.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(UserManager<User> _userManager,
-        RoleManager<Role> _roleManager) : ControllerBase
+    public class AuthController(IMediator mediator) : ControllerBase
     {
         [HttpPost("Login")]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(LoginCommand command , CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var result = await mediator.Send(command, cancellationToken);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
         [HttpPost("Refresh")]
         public async Task<IActionResult> Refresh()

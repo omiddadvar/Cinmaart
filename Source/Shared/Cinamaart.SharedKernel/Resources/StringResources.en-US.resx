@@ -123,10 +123,16 @@
   <data name="ConfirmPasswordNotValid" xml:space="preserve">
     <value>Password and confirm password values are not the same</value>
   </data>
+  <data name="Login.PasswordInCorrect" xml:space="preserve">
+    <value>Password is not correct</value>
+  </data>
   <data name="ObligatoryValue" xml:space="preserve">
     <value>{0} should not be empty</value>
   </data>
   <data name="User.NotFound" xml:space="preserve">
+    <value>User not found</value>
+  </data>
+  <data name="User.NotFoundById" xml:space="preserve">
     <value>User with id {0} not found</value>
   </data>
 </root>
