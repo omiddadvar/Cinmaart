@@ -1,4 +1,6 @@
 ﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Abstractions.Settings;
+using Cinamaart.Infrastructure.Configurations;
 using Cinamaart.Infrastructure.Services.Token;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +17,8 @@ namespace Cinamaart.Infrastructure
         {
 
             services.AddKeyedTransient<ITokenGenerator, JWTBearerTokenGenerator>("JWT");
+
+            services.AddSingleton<IJwtSettting, JwtSettting>();
 
             return services;
         }

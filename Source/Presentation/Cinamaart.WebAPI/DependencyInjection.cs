@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Entities.Identity;
+﻿using Cinamaart.Application.Abstractions.Settings;
+using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Persistence.Contexts;
 using Cinamaart.WebAPI.Infrastructure;
 using Cinamaart.WebAPI.Policies;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
+using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 
 namespace Cinamaart.WebAPI
@@ -40,15 +42,14 @@ namespace Cinamaart.WebAPI
         }
         private static IServiceCollection AddAuthDI(this IServiceCollection services)
         {
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddRequireContentEditionAccessPolicy();
-            //    options.AddRequireSubtitleEditionAccessPolicy();
-            //});
+            var serviceProvider = services.BuildServiceProvider();
+            var JwtSetting = serviceProvider.GetRequiredService<IJwtSettting>();
+            var tokenValidationConfig = new TokenValidationConfig(JwtSetting);
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(x =>
             {
-                x.TokenValidationParameters = TokenValidationConfig.GetTokenValidationParameters();
+                x.TokenValidationParameters = tokenValidationConfig.GetTokenValidationParameters();
             });
             services.AddAuthorization();
             return services;

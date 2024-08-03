@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Abstractions.Settings;
 using Cinamaart.Domain.Entities.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Infrastructure.Services.Token
 {
-    public class JWTBearerTokenGenerator : ITokenGenerator
+    public class JWTBearerTokenGenerator(IJwtSettting jwtSettting) : ITokenGenerator
     {
         public async Task<string> GenerateTokenAsync(User user)
         {
@@ -23,10 +24,10 @@ namespace Cinamaart.Infrastructure.Services.Token
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             }),
-                Expires = DateTime.UtcNow.AddHours(2),
-                SigningCredentials = new SigningCredentials(CustomSecurityKeyBasic.SymmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature),
-                Issuer = "Cinamaart Server",
-                Audience = "Cinamaart Client"
+                Expires = DateTime.UtcNow.AddMinutes(jwtSettting.Expiration),
+                SigningCredentials = new SigningCredentials(jwtSettting.SecretKey, SecurityAlgorithms.HmacSha256Signature),
+                Issuer = jwtSettting.Issuer,
+                Audience = jwtSettting.Audience
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);

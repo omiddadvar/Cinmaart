@@ -1,27 +1,28 @@
-﻿using Cinamaart.Infrastructure.Services.Token;
+﻿using Cinamaart.Application.Abstractions.Settings;
+using Cinamaart.Infrastructure.Services.Token;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Cinamaart.WebAPI.Infrastructure
 {
-    public class TokenValidationConfig
+    public class TokenValidationConfig(IJwtSettting jwtSettting)
     {
-        internal static TokenValidationParameters GetTokenValidationParameters()
+        internal TokenValidationParameters GetTokenValidationParameters()
         {
             return new TokenValidationParameters()
             {
                 ClockSkew = TimeSpan.Zero,
                 ValidateLifetime = true,
                 RequireExpirationTime = true,
-                IssuerSigningKey = CustomSecurityKeyBasic.SymmetricSecurityKey,
+                IssuerSigningKey = jwtSettting.SecretKey,
                 ValidateIssuerSigningKey = true,
                 ValidateIssuer = true,
-                ValidIssuer = "Cinamaart Server",
-                ValidAudience = "Cinamaart Client",
+                ValidIssuer = jwtSettting.Issuer,
+                ValidAudience = jwtSettting.Audience,
                 ValidateAudience = true,
                 LifetimeValidator = CustomLifetimeValidator
             };
         }
-        private static bool CustomLifetimeValidator(DateTime? notBefore, DateTime? expires,
+        private bool CustomLifetimeValidator(DateTime? notBefore, DateTime? expires,
                                     SecurityToken tokenToValidate, TokenValidationParameters @param)
         {
             if (expires != null)
