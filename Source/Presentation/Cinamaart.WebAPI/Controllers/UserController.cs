@@ -1,5 +1,4 @@
-﻿using Cinamaart.Application.Features.Artists.Commands.RemoveArtist;
-using Cinamaart.Application.Features.Users.Commands.Register;
+﻿using Cinamaart.Application.Features.Users.Commands.Register;
 using Cinamaart.Application.Features.Users.Commands.RemoveUser;
 using Cinamaart.Application.Features.Users.Queries.GetUserById;
 using Cinamaart.WebAPI.Abstractions.Constants;
@@ -8,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using System.Threading;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Cinamaart.WebAPI.Controllers
 {

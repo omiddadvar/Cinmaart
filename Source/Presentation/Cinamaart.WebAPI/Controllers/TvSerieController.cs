@@ -1,4 +1,5 @@
 ﻿using Cinamaart.WebAPI.Abstractions.Constants;
+using Cinamaart.Application.Abstractions.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;

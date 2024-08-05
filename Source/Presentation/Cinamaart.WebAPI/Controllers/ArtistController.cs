@@ -1,14 +1,15 @@
 ﻿using Cinamaart.Application.Features.Artists.Queries.GetAllArtists;
+using Cinamaart.Application.Abstractions.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Threading;
 using Cinamaart.Application.Features.Artists.Queries.GetPaginatedArtists;
 using Cinamaart.Application.Features.Artists.Commands.AddArtist;
 using Cinamaart.Application.Features.Artists.Queries.GetArtistById;
 using Cinamaart.Application.Features.Artists.Commands.UpdateArtist;
 using Microsoft.AspNetCore.Authorization;
+using Cinamaart.WebAPI.Abstractions.Constants;
 
 namespace Cinamaart.WebAPI.Controllers
 {
@@ -37,7 +38,7 @@ namespace Cinamaart.WebAPI.Controllers
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = RoleNames.Administrator)]
         public async Task<IActionResult> AddArtist(AddArtistCommand command , CancellationToken cancellationToken =default)
         {
             var result = await mediator.Send(command, cancellationToken);
