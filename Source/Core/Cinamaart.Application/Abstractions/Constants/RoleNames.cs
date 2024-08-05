@@ -1,4 +1,4 @@
-﻿namespace Cinamaart.WebAPI.Abstractions.Constants
+﻿namespace Cinamaart.Application.Abstractions.Constants
 {
     public static class RoleNames
     {
