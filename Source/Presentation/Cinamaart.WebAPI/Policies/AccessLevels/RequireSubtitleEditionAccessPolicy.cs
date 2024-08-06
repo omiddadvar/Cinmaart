@@ -1,4 +1,4 @@
-﻿using Cinamaart.WebAPI.Abstractions.Constants;
+﻿using Cinamaart.Application.Abstractions.Constants;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Cinamaart.WebAPI.Policies.AccessLevels

@@ -1,5 +1,4 @@
 ﻿using Cinamaart.Application.Abstractions;
-using Cinamaart.Application.Common.Security;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Extentions;
@@ -46,7 +45,7 @@ namespace Cinamaart.Application.Features.Authentication.Queries.Login
                     bool passwordIsValid = await userManager.CheckPasswordAsync(user, request.Password);
                     if (passwordIsValid)
                     {
-                        string token = await tokenGenerator.GenerateJwtTokenAsync(user);
+                        string token = await tokenGenerator.GenerateTokenAsync(user);
 
                         return Result<LoginResultDTO>.Success(
                             new LoginResultDTO(token, TOKEN_EXPIRATION_MINUTES));
