@@ -51,7 +51,11 @@ namespace Cinamaart.WebAPI
             {
                 x.TokenValidationParameters = tokenValidationConfig.GetTokenValidationParameters();
             });
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddRequireContentEditionAccessPolicy();
+                options.AddRequireSubtitleEditionAccessPolicy();
+            });
             return services;
         }
         private static IServiceCollection AddIdentityDI(this IServiceCollection services)
@@ -71,7 +75,7 @@ namespace Cinamaart.WebAPI
 
                 options.User.RequireUniqueEmail = true;
             })
-                //.AddRoles<Role>()
+                .AddRoles<Role>()
                 .AddEntityFrameworkStores<MainDBContext>()
                 .AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider)
                 //.AddDefaultTokenProviders()
