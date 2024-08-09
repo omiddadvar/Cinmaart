@@ -6,6 +6,8 @@ using Cinamaart.WebAPI;
 using Microsoft.Extensions.Options;
 using Cinamaart.Infrastructure;
 using Serilog;
+using StackExchange.Redis;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +26,6 @@ builder.Host.UseSerilog((context, config) =>
 {
     config.ReadFrom.Configuration(context.Configuration);
 });
-
 
 var app = builder.Build();
 

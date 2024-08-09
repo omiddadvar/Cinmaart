@@ -1,4 +1,6 @@
-﻿using Cinamaart.Application.Abstractions;
+﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.DTO;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Extentions;
@@ -14,10 +16,12 @@ using Microsoft.Extensions.Logging;
 namespace Cinamaart.Application.Features.Authentication.Queries.Login
 {
     public class LoginCommandHandler(
+        IMapper mapper,
         UserManager<User> userManager,
         ILogger<LoginCommandHandler> logger,
         IStringLocalizer<StringResources> localizer,
-        [FromKeyedServices("JWT")] ITokenGenerator tokenGenerator
+        [FromKeyedServices("JWT")] ITokenService tokenGenerator,
+        IUserDeviceService userDeviceService
         )
         : IRequestHandler<LoginCommand, Result<LoginResultDTO>>
     {
@@ -45,10 +49,17 @@ namespace Cinamaart.Application.Features.Authentication.Queries.Login
                     bool passwordIsValid = await userManager.CheckPasswordAsync(user, request.Password);
                     if (passwordIsValid)
                     {
-                        string token = await tokenGenerator.GenerateTokenAsync(user);
+                        var deviceInfo = mapper.Map<LoginCommand, DeviceInfoDTO>(request);
+                        var accessToken = await tokenGenerator.GenerateTokenAsync(user);
+                        var refreshToken = await tokenGenerator.GenerateRefreshTokenAsync(user.Id , request.DeviceId);
+                        await userDeviceService.SaveDeviceInfoAsync(user.Id, deviceInfo);
 
                         return Result<LoginResultDTO>.Success(
-                            new LoginResultDTO(token, TOKEN_EXPIRATION_MINUTES));
+                            new LoginResultDTO(
+                                accessToken.Token , 
+                                accessToken.Expiration,
+                                refreshToken.Token,
+                                refreshToken.Expiration));
                     }
                     else
                     {

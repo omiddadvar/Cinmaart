@@ -13,8 +13,12 @@ namespace Cinamaart.Application.Abstractions.Settings
         public string Audience { get; }
         public SymmetricSecurityKey SecretKey { get; }
         /// <summary>
-        /// Token Expiration In Minutes
+        /// Access Token Expiration
         /// </summary>
-        public int Expiration { get; }
+        public TimeSpan AccessTokenExpiration { get; }
+        /// <summary>
+        /// Refresh Token Expiration
+        /// </summary>
+        public TimeSpan RefreshTokenExpiration { get; }
     }
 }

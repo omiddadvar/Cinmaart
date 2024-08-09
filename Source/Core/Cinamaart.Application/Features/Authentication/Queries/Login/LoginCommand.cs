@@ -11,6 +11,9 @@ namespace Cinamaart.Application.Features.Authentication.Queries.Login
     public record LoginCommand (
         string? Email,
         string? UserName,
-        string Password
-        ): IRequest<Result<LoginResultDTO>>;
+        string Password,
+        string DeviceId,
+        string DeviceName,
+        string OSVersion
+        ) : IRequest<Result<LoginResultDTO>>;
 }

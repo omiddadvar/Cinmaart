@@ -18,6 +18,8 @@ namespace Cinamaart.Infrastructure.Configurations
 
         public SymmetricSecurityKey SecretKey => CustomSecurityKeyBasic.SymmetricSecurityKey;
 
-        public int Expiration => Convert.ToInt32(configuration["JWT:Expire"] ?? "120");
+        public TimeSpan AccessTokenExpiration => TimeSpan.FromMinutes(Convert.ToInt32(configuration["JWT:AccessTokenExpireMin"] ?? "120"));
+
+        public TimeSpan RefreshTokenExpiration => TimeSpan.FromDays(Convert.ToInt32(configuration["JWT:RefreshTokenExpireDay"] ?? "7"));
     }
 }

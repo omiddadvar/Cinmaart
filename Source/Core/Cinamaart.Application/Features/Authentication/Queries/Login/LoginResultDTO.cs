@@ -6,5 +6,10 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Authentication.Queries.Login
 {
-    public record LoginResultDTO(string Token , int ExpirationMinutes);
+    public record LoginResultDTO(
+        string Token , 
+        DateTime TokenExpiresAt,
+        string RefreshToken,
+        DateTime RefreshTokenExpiresAt
+        );
 }
