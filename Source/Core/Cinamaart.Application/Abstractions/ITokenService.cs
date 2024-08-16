@@ -17,6 +17,6 @@ namespace Cinamaart.Application.Abstractions
         Task<bool> ValidateRefreshTokenAsync(long userId, string deviceId, string refreshToken);
         Task RevokeRefreshTokenAsync(long userId , string deviceId);
         Task RevokeAllRefreshTokensAsync(string userId);
-
+        public Task<long> GetUserIdFromExpiredTokenAsync(string expiredAccessToken);
     }
 }

@@ -15,18 +15,18 @@ using Microsoft.Extensions.Logging;
 
 namespace Cinamaart.Application.Features.Authentication.Queries.Login
 {
-    public class LoginCommandHandler(
+    public class LoginQueryHandler(
         IMapper mapper,
         UserManager<User> userManager,
-        ILogger<LoginCommandHandler> logger,
+        ILogger<LoginQueryHandler> logger,
         IStringLocalizer<StringResources> localizer,
         [FromKeyedServices("JWT")] ITokenService tokenGenerator,
         IUserDeviceService userDeviceService
         )
-        : IRequestHandler<LoginCommand, Result<LoginResultDTO>>
+        : IRequestHandler<LoginQuery, Result<AuthenticationResultDTO>>
     {
         private const int TOKEN_EXPIRATION_MINUTES = 120;
-        public async Task<Result<LoginResultDTO>> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<Result<AuthenticationResultDTO>> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -42,20 +42,20 @@ namespace Cinamaart.Application.Features.Authentication.Queries.Login
 
                 if(user is null)
                 {
-                    return Result<LoginResultDTO>.Failure("User.NotFound" , localizer[LocalStringKeyword.User_NotFound]);
+                    return Result<AuthenticationResultDTO>.Failure("User.NotFound" , localizer[LocalStringKeyword.User_NotFound]);
                 }
                 else
                 {
                     bool passwordIsValid = await userManager.CheckPasswordAsync(user, request.Password);
                     if (passwordIsValid)
                     {
-                        var deviceInfo = mapper.Map<LoginCommand, DeviceInfoDTO>(request);
+                        var deviceInfo = mapper.Map<LoginQuery, DeviceInfoDTO>(request);
                         var accessToken = await tokenGenerator.GenerateTokenAsync(user);
                         var refreshToken = await tokenGenerator.GenerateRefreshTokenAsync(user.Id , request.DeviceId);
                         await userDeviceService.SaveDeviceInfoAsync(user.Id, deviceInfo);
 
-                        return Result<LoginResultDTO>.Success(
-                            new LoginResultDTO(
+                        return Result<AuthenticationResultDTO>.Success(
+                            new AuthenticationResultDTO(
                                 accessToken.Token , 
                                 accessToken.Expiration,
                                 refreshToken.Token,
@@ -63,14 +63,14 @@ namespace Cinamaart.Application.Features.Authentication.Queries.Login
                     }
                     else
                     {
-                        return Result<LoginResultDTO>.Failure("Login.Failed", localizer[LocalStringKeyword.Login_PasswordInCorrect]);
+                        return Result<AuthenticationResultDTO>.Failure("Login.Failed", localizer[LocalStringKeyword.Login_PasswordInCorrect]);
                     }
                 }
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while Logging-in , requested data = {request}", request.ToJson());
-                return Result<LoginResultDTO>.Failure("Login.Exception", ex.Message);
+                return Result<AuthenticationResultDTO>.Failure("Login.Exception", ex.Message);
             }
         }
     }

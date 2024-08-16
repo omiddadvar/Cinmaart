@@ -120,6 +120,9 @@
   <data name="Auth.InvalidExpiredToken" xml:space="preserve">
     <value>توکن دسترسی قدیمی معتبر نمی باشد</value>
   </data>
+  <data name="Auth.RefreshTokenNotMatch" xml:space="preserve">
+    <value>توکن بازیابی و اطلاعات کاربر همخوانی ندارند</value>
+  </data>
   <data name="ConfirmEmailNotValid" xml:space="preserve">
     <value>مقدار ایمیل و تاییدیه ایمیل وارد شده یکسان نمی باشد</value>
   </data>

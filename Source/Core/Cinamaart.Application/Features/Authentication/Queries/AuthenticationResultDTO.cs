@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinamaart.Application.Features.Authentication.Queries.Login
+namespace Cinamaart.Application.Features.Authentication.Queries
 {
-    public record LoginResultDTO(
-        string Token , 
+    public record AuthenticationResultDTO(
+        string Token,
         DateTime TokenExpiresAt,
         string RefreshToken,
         DateTime RefreshTokenExpiresAt

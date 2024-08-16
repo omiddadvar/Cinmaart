@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Application.Features.Authentication.Queries.Login;
+using Cinamaart.Application.Features.Authentication.Queries.Refresh;
 using Cinamaart.Domain.Entities.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -12,15 +13,16 @@ namespace Cinamaart.WebAPI.Controllers
     public class AuthController(IMediator mediator) : ControllerBase
     {
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginCommand command , CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Login(LoginQuery query , CancellationToken cancellationToken = default)
         {
-            var result = await mediator.Send(command, cancellationToken);
-            return result.IsSuccess ? Ok(result) : BadRequest(result);
+            var result = await mediator.Send(query, cancellationToken);
+            return result.IsSuccess ? Ok(result) : Unauthorized(result);
         }
         [HttpPost("Refresh")]
-        public async Task<IActionResult> Refresh()
+        public async Task<IActionResult> Refresh(RefreshQuery query , CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var result = await mediator.Send(query, cancellationToken);
+            return result.IsSuccess ? Ok(result) : Unauthorized(result);
         }
         [HttpPost("ForgetPassword")]
         public async Task<IActionResult> ForgetPassword()

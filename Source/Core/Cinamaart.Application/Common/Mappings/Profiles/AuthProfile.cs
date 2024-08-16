@@ -13,7 +13,7 @@ namespace Cinamaart.Application.Common.Mappings.Profiles
     {
         public AuthProfile()
         {
-            CreateMap<LoginCommand, DeviceInfoDTO>();
+            CreateMap<LoginQuery, DeviceInfoDTO>();
         }
     }
 }

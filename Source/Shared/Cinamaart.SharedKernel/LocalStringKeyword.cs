@@ -15,5 +15,6 @@ namespace Cinamaart.SharedKernel
         public const string User_NotFound = "User.NotFound";
         public const string Login_PasswordInCorrect = "Login.PasswordInCorrect";
         public const string Auth_InvalidExpiredToken = "Auth.InvalidExpiredToken";
+        public const string Auth_RefreshTokenNotMatch = "Auth.RefreshTokenNotMatch";
     }
 }
