@@ -129,6 +129,12 @@
   <data name="ConfirmPasswordNotValid" xml:space="preserve">
     <value>مقدارکلمه عبور و تاییدیه کلمه عبور وارد شده یکسان نمی باشد</value>
   </data>
+  <data name="Email.UserRegistrationHTML" xml:space="preserve">
+    <value>لطفا به منظور تایید ایمیل روی &lt;a href='{0}'&gt;اینجا&lt;/a&gt; کلیک کنید.</value>
+  </data>
+  <data name="Email.UserRegistrationSubject" xml:space="preserve">
+    <value>تایید ایمیل - سینما آرت</value>
+  </data>
   <data name="Login.PasswordInCorrect" xml:space="preserve">
     <value>رمز عبور اشتباه می باشد</value>
   </data>

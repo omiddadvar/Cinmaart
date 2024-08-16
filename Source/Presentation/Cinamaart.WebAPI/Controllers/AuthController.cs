@@ -1,10 +1,14 @@
-﻿using Cinamaart.Application.Features.Authentication.Commands.Login;
+﻿using Cinamaart.Application.Features.Authentication.Commands.ConfirmEmail;
+using Cinamaart.Application.Features.Authentication.Commands.Login;
 using Cinamaart.Application.Features.Authentication.Commands.Refresh;
+using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Threading;
 
 namespace Cinamaart.WebAPI.Controllers
 {
@@ -30,9 +34,11 @@ namespace Cinamaart.WebAPI.Controllers
             throw new NotImplementedException();
         }
         [HttpGet("ConfirmEmail")]
-        public async Task<IActionResult> ConfirmEmail()
+        public async Task<IActionResult> ConfirmEmail(long userId, string token , CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var command = new ConfirmEmailCommand(userId, token);
+            var result = await mediator.Send(command, cancellationToken);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
     }
 }

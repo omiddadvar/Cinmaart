@@ -129,6 +129,12 @@
   <data name="ConfirmPasswordNotValid" xml:space="preserve">
     <value>Password and confirm password values are not the same</value>
   </data>
+  <data name="Email.UserRegistrationHTML" xml:space="preserve">
+    <value>Please confirm your account by clicking &lt;a href='{0}'&gt;here&lt;/a&gt;.</value>
+  </data>
+  <data name="Email.UserRegistrationSubject" xml:space="preserve">
+    <value>Confirm Email - Cinamaart</value>
+  </data>
   <data name="Login.PasswordInCorrect" xml:space="preserve">
     <value>Password is not correct</value>
   </data>

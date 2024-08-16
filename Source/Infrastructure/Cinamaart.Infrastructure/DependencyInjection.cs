@@ -5,6 +5,10 @@ using Cinamaart.Infrastructure.Services.Token;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
 using Microsoft.Extensions.Configuration;
+using Cinamaart.Application.Abstractions.Services;
+using Cinamaart.Infrastructure.Services;
+using Cinamaart.Application.Abstractions.Notification;
+using Cinamaart.Infrastructure.Services.Notification;
 
 
 namespace Cinamaart.Infrastructure
@@ -13,18 +17,18 @@ namespace Cinamaart.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            IConfiguration configuration;
-            var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
-            using (var scope = scopedFactory.CreateScope())
-            {
-                configuration = scope.ServiceProvider.GetService<IConfiguration>();
-            }
+            var serviceProvider = services.BuildServiceProvider();
 
+            var configuration = serviceProvider.GetService<IConfiguration>();
+            // Redis Service
             services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(configuration.GetConnectionString("RedisConnection")));
-            
+            // Authentication Services
             services.AddKeyedTransient<ITokenService, TokenService>("JWT");
-
             services.AddSingleton<IJwtSettting, JwtSettting>();
+            // Notification Services
+            services.AddTransient<IEmailService, EmailService>();
+            //Utility Services
+            services.AddTransient<IUrlService, UrlService>();
 
             return services;
         }
