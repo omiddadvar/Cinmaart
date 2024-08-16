@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Cinamaart.Application.DTO;
-using Cinamaart.Application.Features.Authentication.Queries.Login;
+using Cinamaart.Application.Features.Authentication.Commands.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace Cinamaart.Application.Common.Mappings.Profiles
     {
         public AuthProfile()
         {
-            CreateMap<LoginQuery, DeviceInfoDTO>();
+            CreateMap<LoginCommand, DeviceInfoDTO>();
         }
     }
 }

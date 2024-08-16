@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.DTO;
+using Cinamaart.Application.Features.Authentication.Queries;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Extentions;
@@ -13,20 +14,20 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
 
-namespace Cinamaart.Application.Features.Authentication.Queries.Login
+namespace Cinamaart.Application.Features.Authentication.Commands.Login
 {
-    public class LoginQueryHandler(
+    public class LoginCommandHandler(
         IMapper mapper,
         UserManager<User> userManager,
-        ILogger<LoginQueryHandler> logger,
+        ILogger<LoginCommandHandler> logger,
         IStringLocalizer<StringResources> localizer,
         [FromKeyedServices("JWT")] ITokenService tokenGenerator,
         IUserDeviceService userDeviceService
         )
-        : IRequestHandler<LoginQuery, Result<AuthenticationResultDTO>>
+        : IRequestHandler<LoginCommand, Result<AuthenticationResultDTO>>
     {
         private const int TOKEN_EXPIRATION_MINUTES = 120;
-        public async Task<Result<AuthenticationResultDTO>> Handle(LoginQuery request, CancellationToken cancellationToken)
+        public async Task<Result<AuthenticationResultDTO>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -40,23 +41,23 @@ namespace Cinamaart.Application.Features.Authentication.Queries.Login
                     user = await userManager.FindByNameAsync(request.UserName);
                 }
 
-                if(user is null)
+                if (user is null)
                 {
-                    return Result<AuthenticationResultDTO>.Failure("User.NotFound" , localizer[LocalStringKeyword.User_NotFound]);
+                    return Result<AuthenticationResultDTO>.Failure("User.NotFound", localizer[LocalStringKeyword.User_NotFound]);
                 }
                 else
                 {
                     bool passwordIsValid = await userManager.CheckPasswordAsync(user, request.Password);
                     if (passwordIsValid)
                     {
-                        var deviceInfo = mapper.Map<LoginQuery, DeviceInfoDTO>(request);
+                        var deviceInfo = mapper.Map<LoginCommand, DeviceInfoDTO>(request);
                         var accessToken = await tokenGenerator.GenerateTokenAsync(user);
-                        var refreshToken = await tokenGenerator.GenerateRefreshTokenAsync(user.Id , request.DeviceId);
+                        var refreshToken = await tokenGenerator.GenerateRefreshTokenAsync(user.Id, request.DeviceId);
                         await userDeviceService.SaveDeviceInfoAsync(user.Id, deviceInfo);
 
                         return Result<AuthenticationResultDTO>.Success(
                             new AuthenticationResultDTO(
-                                accessToken.Token , 
+                                accessToken.Token,
                                 accessToken.Expiration,
                                 refreshToken.Token,
                                 refreshToken.Expiration));
