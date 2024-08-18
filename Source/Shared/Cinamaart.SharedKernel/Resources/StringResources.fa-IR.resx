@@ -129,6 +129,9 @@
   <data name="ConfirmPasswordNotValid" xml:space="preserve">
     <value>مقدارکلمه عبور و تاییدیه کلمه عبور وارد شده یکسان نمی باشد</value>
   </data>
+  <data name="Country.NotFound" xml:space="preserve">
+    <value>کشور یافت نشد</value>
+  </data>
   <data name="Email.UserRegistrationHTML" xml:space="preserve">
     <value>لطفا به منظور تایید ایمیل روی &lt;a href='{0}'&gt;اینجا&lt;/a&gt; کلیک کنید.</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="Login.PasswordInCorrect" xml:space="preserve">
     <value>رمز عبور اشتباه می باشد</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>یافت نشد</value>
   </data>
   <data name="ObligatoryValue" xml:space="preserve">
     <value>مقدار {0} اجباری می باشد</value>

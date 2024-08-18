@@ -9,6 +9,7 @@ namespace Cinamaart.SharedKernel
     public static class LocalStringKeyword
     {
         public const string ObligatoryValue = "ObligatoryValue";
+        public const string NotFound = "NotFound";
         public const string ConfirmPasswordNotValid = "ConfirmPasswordNotValid";
         public const string ConfirmEmailNotValid = "ConfirmEmailNotValid";
         public const string User_NotFoundById = "User.NotFoundById";
@@ -18,5 +19,6 @@ namespace Cinamaart.SharedKernel
         public const string Auth_RefreshTokenNotMatch = "Auth.RefreshTokenNotMatch";
         public const string Email_UserRegistrationHTML = "Email.UserRegistrationHTML";
         public const string Email_UserRegistrationSubject = "Email.UserRegistrationSubject";
+        public const string Country_NotFound = "Country.NotFound";
     }
 }
