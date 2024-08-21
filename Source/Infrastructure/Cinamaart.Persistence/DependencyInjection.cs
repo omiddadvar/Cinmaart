@@ -25,6 +25,10 @@ namespace Cinamaart.Persistence
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IGenreRepository, GenreRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<ITagRepository, TagRepository>();
             return services;
         }
     }
