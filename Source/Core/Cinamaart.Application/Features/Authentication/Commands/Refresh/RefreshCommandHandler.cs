@@ -1,4 +1,4 @@
-﻿using Cinamaart.Application.Abstractions;
+﻿using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Application.Features.Authentication.Commands.Login;
 using Cinamaart.Application.Features.Authentication.Queries;
 using Cinamaart.Domain.Abstractions;

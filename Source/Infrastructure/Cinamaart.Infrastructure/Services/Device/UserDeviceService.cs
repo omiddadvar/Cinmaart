@@ -1,4 +1,4 @@
-﻿using Cinamaart.Application.Abstractions;
+﻿using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Application.DTO;
 using Newtonsoft.Json;
 using StackExchange.Redis;

@@ -1,4 +1,4 @@
-﻿using Cinamaart.Application.Abstractions;
+﻿using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Application.Abstractions.Settings;
 using Cinamaart.Application.DTO;
 using Cinamaart.Domain.Entities.Identity;
