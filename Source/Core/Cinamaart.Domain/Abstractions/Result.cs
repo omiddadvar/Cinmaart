@@ -2,7 +2,7 @@
 
 namespace Cinamaart.Domain.Abstractions
 {
-    public class Result<T>
+    public class Result<T> : IResult<T>
     {
         public Result(bool isSuccess, T? data, Error error)
         {
