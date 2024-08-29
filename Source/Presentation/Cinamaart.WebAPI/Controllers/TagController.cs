@@ -4,49 +4,64 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
+using Cinamaart.Domain.Abstractions;
+using Cinamaart.WebAPI.Abstractions;
+using Cinamaart.Application.Features.Genres.Queries.GetAllGeners;
+using System.Threading;
+using Cinamaart.Application.Features.Tags.Queries.GetAllTags;
+using Cinamaart.Application.Features.Genres.Queries.GetGenreById;
+using Cinamaart.Application.Features.Tags.Queries.GetTagById;
+using Cinamaart.Application.Features.Tags.Commands.AddTag;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Cinamaart.Application.Features.Tags.Commands.UpdateTag;
+using Cinamaart.Application.Features.Tags.Commands.RemoveTag;
 
 namespace Cinamaart.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TagController(IMediator mediator, IOutputCacheStore cacheStore) : ControllerBase
+    public class TagController(IMediator mediator, IOutputCacheStore cacheStore) : CinamaartBaseController(cacheStore)
     {
         [HttpGet]
         [OutputCache(PolicyName = CachePolicyNames.OutputCacheWithAuth, Tags = [CacheTags.Tag])]
-        public async Task<IActionResult> GetTags()
+        public async Task<IActionResult> GetTags(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var query = new GetAllTagsQuery();
+            var data = await mediator.Send(query, cancellationToken);
+            return data.IsSuccess ? Ok(data) : BadRequest(data);
         }
         [HttpGet("{id}")]
         [OutputCache(PolicyName = CachePolicyNames.OutputCacheWithAuth, Tags = [CacheTags.Tag])]
 
-        public async Task<IActionResult> GetTagById(long id)
+        public async Task<IActionResult> GetTagById(int id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var query = new GetTagByIdQuery(id);
+            var data = await mediator.Send(query, cancellationToken);
+            return data.IsSuccess ? Ok(data) : BadRequest(data);
         }
         [HttpPost]
         [Authorize(Roles = RoleNames.Administrator)]
 
-        public async Task<IActionResult> AddTag()
+        public async Task<IActionResult> AddTag(AddTagCommand command,CancellationToken cancellationToken = default)
         {
-            await cacheStore.EvictByTagAsync(CacheTags.Tag, CancellationToken.None);
-            return null;
+            var data = await mediator.Send(command, cancellationToken);
+            return await runAfterCommandOperationWithCacheReset(data);
         }
         [HttpPut]
         [Authorize(Roles = RoleNames.Administrator)]
 
-        public async Task<IActionResult> EditTag()
+        public async Task<IActionResult> EditTag(UpdateTagCommand command,CancellationToken cancellationToken = default)
         {
-            await cacheStore.EvictByTagAsync(CacheTags.Tag, CancellationToken.None);
-            return null;
+            var data = await mediator.Send(command, cancellationToken);
+            return await runAfterCommandOperationWithCacheReset(data);
         }
         [HttpDelete]
         [Authorize(Roles = RoleNames.Administrator)]
 
-        public async Task<IActionResult> DeleteTag()
+        public async Task<IActionResult> DeleteTag(RemoveTagCommand command, CancellationToken cancellationToken = default)
         {
-            await cacheStore.EvictByTagAsync(CacheTags.Tag, CancellationToken.None);
-            return null;
+            var data = await mediator.Send(command, cancellationToken);
+            return await runAfterCommandOperationWithCacheReset(data);
         }
     }
 }
