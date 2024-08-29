@@ -58,9 +58,16 @@ namespace Cinamaart.Persistence.Repositories
             return await _dbContext.Set<T>().FindAsync(id, cancellationToken);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<T>> GetAllAsync(
+             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null, 
+             CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Set<T>().ToListAsync(cancellationToken);
+            var query = _dbContext.Set<T>();
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+            return await query.ToListAsync(cancellationToken);
         }
         public async Task<IEnumerable<T>> GetAsync(
                 Expression<Func<T, bool>>? Where = null,

@@ -9,7 +9,9 @@ namespace Cinamaart.Application.Interfaces.Repositories
         Task<T> AddAsync(T entity);
         Task<T> GetAsync(long id, CancellationToken cancellationToken = default);
         Task<T> GetAsync(int id, CancellationToken cancellationToken = default);
-        Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default);
+        Task<IEnumerable<T>> GetAllAsync(
+              Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+              CancellationToken cancellationToken = default);
         Task<IEnumerable<T>> GetAsync(
             Expression<Func<T, bool>>? Where = null,
             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
