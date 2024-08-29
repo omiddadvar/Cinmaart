@@ -5,6 +5,7 @@ using Cinamaart.Application.Features.Genres.Commands.UpdateGenre;
 using Cinamaart.Application.Features.Genres.Queries.GetAllGeners;
 using Cinamaart.Application.Features.Genres.Queries.GetGenreById;
 using Cinamaart.Domain.Abstractions;
+using Cinamaart.WebAPI.Abstractions;
 using Cinamaart.WebAPI.Abstractions.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -17,7 +18,7 @@ namespace Cinamaart.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GenreController(IMediator mediator, IOutputCacheStore cacheStore) : ControllerBase
+    public class GenreController(IMediator mediator, IOutputCacheStore cacheStore) : CinamaartBaseController(cacheStore)
     {
         [HttpGet]
         [OutputCache(PolicyName = CachePolicyNames.OutputCacheWithAuth, Tags = [CacheTags.Genre])]
@@ -40,32 +41,22 @@ namespace Cinamaart.WebAPI.Controllers
         public async Task<IActionResult> AddGenre(AddGenreCommand command, CancellationToken cancellationToken = default)
         {
             var data  = await mediator.Send(command, cancellationToken);
-            return await _runAfterCommandOperation(data);
+            return await runAfterCommandOperationWithCacheReset(data);
         }
         [HttpPut]
         [Authorize(Roles = RoleNames.Administrator)]
         public async Task<IActionResult> UpdateGenre(UpdateGenreCommand command,CancellationToken cancellationToken = default)
         {
             var data = await mediator.Send(command, cancellationToken);
-            return await _runAfterCommandOperation(data);
+            return await runAfterCommandOperationWithCacheReset(data);
         }
         [HttpDelete]
         [Authorize(Roles = RoleNames.Administrator)]
         public async Task<IActionResult> RemoveGenre(RemoveGenreCommand command,CancellationToken cancellationToken = default)
         {
             var data = await mediator.Send(command, cancellationToken);
-            return await _runAfterCommandOperation(data);
+            return await runAfterCommandOperationWithCacheReset(data);
         }
 
-        private async Task<IActionResult> _runAfterCommandOperation(IBaseResult result)
-        {
-            if (result.IsSuccess)
-            {
-                await cacheStore.EvictByTagAsync(CacheTags.Genre, CancellationToken.None);
-                return Ok(result);
-            }
-            else
-                return BadRequest(result);
-        }
     }
 }
