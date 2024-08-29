@@ -37,8 +37,8 @@ namespace Cinamaart.Application.Features.Genres.Commands.UpdateGenre
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Error while editing artist, requested data = {request}", request.ToJson());
-                return Result<GenreDTO>.Failure("UpdateArtist.Exception", ex.Message);
+                logger.LogError(ex, "Error while editing genre, requested data = {request}", request.ToJson());
+                return Result<GenreDTO>.Failure("UpdateGenre.Exception", ex.Message);
             }
         }
     }
