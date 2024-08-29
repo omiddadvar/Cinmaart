@@ -23,7 +23,7 @@ namespace Cinamaart.Application.Features.Countries.Queries.GatAllCountries
         {
             try
             {
-                var countries = (await countryRepository.GetAllAsync(cancellationToken)).ToList();
+                var countries = (await countryRepository.GetAllAsync(cancellationToken: cancellationToken)).ToList();
                 var data = mapper.Map<List<CountryDTO>>(countries);
                 return Result<IList<CountryDTO>>.Success(data);
             }
