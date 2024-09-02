@@ -34,10 +34,11 @@ namespace Cinamaart.WebAPI.Controllers
         {
             throw new NotImplementedException();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         //[Authorize(Roles = RoleNames.Administrator)]
-        public async Task<IActionResult> RemoveUser(RemoveUserCommand command,CancellationToken cancellationToken = default)
+        public async Task<IActionResult> RemoveUser(long id,RemoveUserCommand command,CancellationToken cancellationToken = default)
         {
+            var command = new RemoveUserCommand(id);
             var result = await mediator.Send(command, cancellationToken);
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }

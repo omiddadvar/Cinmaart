@@ -45,7 +45,7 @@ namespace Cinamaart.WebAPI.Controllers
         public async Task<IActionResult> AddTag(AddTagCommand command,CancellationToken cancellationToken = default)
         {
             var data = await mediator.Send(command, cancellationToken);
-            return await runAfterCommandOperationWithCacheReset(data);
+            return await runAfterCommandOperationWithCacheReset(data, CacheTags.Tag);
         }
         [HttpPut]
         [Authorize(Roles = RoleNames.Administrator)]
@@ -53,15 +53,16 @@ namespace Cinamaart.WebAPI.Controllers
         public async Task<IActionResult> EditTag(UpdateTagCommand command,CancellationToken cancellationToken = default)
         {
             var data = await mediator.Send(command, cancellationToken);
-            return await runAfterCommandOperationWithCacheReset(data);
+            return await runAfterCommandOperationWithCacheReset(data, CacheTags.Tag);
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [Authorize(Roles = RoleNames.Administrator)]
 
-        public async Task<IActionResult> DeleteTag(RemoveTagCommand command, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> DeleteTag(int id,, CancellationToken cancellationToken = default)
         {
+            var command = new RemoveTagCommand(id);
             var data = await mediator.Send(command, cancellationToken);
-            return await runAfterCommandOperationWithCacheReset(data);
+            return await runAfterCommandOperationWithCacheReset(data , CacheTags.Tag);
         }
     }
 }

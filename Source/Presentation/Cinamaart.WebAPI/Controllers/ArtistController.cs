@@ -10,6 +10,8 @@ using Cinamaart.Application.Features.Artists.Queries.GetArtistById;
 using Cinamaart.Application.Features.Artists.Commands.UpdateArtist;
 using Microsoft.AspNetCore.Authorization;
 using Cinamaart.WebAPI.Abstractions.Constants;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Cinamaart.Application.Features.Artists.Commands.RemoveArtist;
 
 namespace Cinamaart.WebAPI.Controllers
 {
@@ -45,15 +47,19 @@ namespace Cinamaart.WebAPI.Controllers
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
         [HttpPut]
+        [Authorize(Roles = RoleNames.Administrator)]
         public async Task<IActionResult> EditArtist(UpdateArtistCommand command, CancellationToken cancellationToken = default)
         {
             var result = await mediator.Send(command, cancellationToken);
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
         [HttpDelete("{id}")]
+        [Authorize(Roles = RoleNames.Administrator)]
         public async Task<IActionResult> RemoveArtist(int id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var command = new RemoveArtistCommand(id);
+            var result = await mediator.Send(command, cancellationToken);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
     }
 }
