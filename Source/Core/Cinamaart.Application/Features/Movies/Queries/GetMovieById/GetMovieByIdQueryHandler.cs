@@ -16,7 +16,7 @@ namespace Cinamaart.Application.Features.Movies.Queries.GetMovieById
     internal class GetMovieByIdQueryHandler(
         IMapper mapper,
         IMovieRepository movieRepository,
-        ILogger<GetAllMoviesQueryHandler> logger
+        ILogger<GetMovieByIdQueryHandler> logger
     ) : IRequestHandler<GetMovieByIdQuery, Result<MovieDTO>>
     {
         public async Task<Result<MovieDTO>> Handle(GetMovieByIdQuery request, CancellationToken cancellationToken)
