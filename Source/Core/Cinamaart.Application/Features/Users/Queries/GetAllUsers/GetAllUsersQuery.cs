@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinamaart.Application.Features.Users.Queries.GetUserById
+namespace Cinamaart.Application.Features.Users.Queries.GetAllUsers
 {
-    public record GetUserByIdCommand(long UserId) : IRequest<Result<UserDTO>>;
+    public record GetAllUsersQuery : IRequest<Result<IList<UserDTO>>>;
 }

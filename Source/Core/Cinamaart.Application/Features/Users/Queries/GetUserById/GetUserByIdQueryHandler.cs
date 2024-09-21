@@ -17,15 +17,15 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Users.Queries.GetUserById
 {
-    public class GetUserByIdCommandHandler(
+    public class GetUserByIdQueryHandler(
         IMapper mapper,
         UserManager<User> userManager,
-        ILogger<GetUserByIdCommandHandler> logger,
+        ILogger<GetUserByIdQueryHandler> logger,
         IStringLocalizer<StringResources> localizer
         ) :
-        IRequestHandler<GetUserByIdCommand, Result<UserDTO>>
+        IRequestHandler<GetUserByIdQuery, Result<UserDTO>>
     {
-        public async Task<Result<UserDTO>> Handle(GetUserByIdCommand request, CancellationToken cancellationToken)
+        public async Task<Result<UserDTO>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {

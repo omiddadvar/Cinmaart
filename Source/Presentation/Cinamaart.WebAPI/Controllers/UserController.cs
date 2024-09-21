@@ -2,6 +2,7 @@
 using Cinamaart.Application.Features.Users.Commands.Lockout;
 using Cinamaart.Application.Features.Users.Commands.Register;
 using Cinamaart.Application.Features.Users.Commands.RemoveUser;
+using Cinamaart.Application.Features.Users.Queries.GetAllUsers;
 using Cinamaart.Application.Features.Users.Queries.GetUserById;
 using Cinamaart.WebAPI.Abstractions.Constants;
 using MediatR;
@@ -22,12 +23,20 @@ namespace Cinamaart.WebAPI.Controllers
             var result = await mediator.Send(command, cancellationToken);
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
+        [HttpGet]
+        [Authorize(Roles = RoleNames.Administrator)]
+        public async Task<IActionResult> GetAllUser(CancellationToken cancellationToken = default)
+        {
+            var query = new GetAllUsersQuery();
+            var result = await mediator.Send(query, cancellationToken);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
+        }
         [HttpGet("{id}")]
         [Authorize]
         public async Task<IActionResult> GetUser(long id, CancellationToken cancellationToken = default)
         {
-            var command = new GetUserByIdCommand(id);
-            var result = await mediator.Send(command, cancellationToken);
+            var query = new GetUserByIdQuery(id);
+            var result = await mediator.Send(query, cancellationToken);
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
         [HttpPut]
