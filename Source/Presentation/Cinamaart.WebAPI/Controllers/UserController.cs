@@ -36,7 +36,7 @@ namespace Cinamaart.WebAPI.Controllers
         }
         [HttpDelete("{id}")]
         //[Authorize(Roles = RoleNames.Administrator)]
-        public async Task<IActionResult> RemoveUser(long id,RemoveUserCommand command,CancellationToken cancellationToken = default)
+        public async Task<IActionResult> RemoveUser(long id,CancellationToken cancellationToken = default)
         {
             var command = new RemoveUserCommand(id);
             var result = await mediator.Send(command, cancellationToken);
