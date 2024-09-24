@@ -1,15 +1,21 @@
 ﻿using Cinamaart.Application.Abstractions.Constants;
+using Cinamaart.Application.Abstractions.Services;
+using Cinamaart.Application.Features.Roles.Queries.GetUserRoles;
 using Cinamaart.WebAPI.Abstractions.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
+using System.Threading;
 
 namespace Cinamaart.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RoleController(IMediator mediator, IOutputCacheStore cacheStore) : ControllerBase
+    public class RoleController(
+        IMediator mediator, 
+        IOutputCacheStore cacheStore,
+        IUserService userService) : ControllerBase
     {
         [HttpGet]
         [Authorize]
@@ -18,36 +24,39 @@ namespace Cinamaart.WebAPI.Controllers
         {
             throw new NotImplementedException();
         }
-        [HttpGet("{id}")]
+        [HttpGet]
         [Authorize]
         [OutputCache(PolicyName = CachePolicyNames.OutputCacheWithAuth, Tags = [CacheTags.Role])]
 
-        public async Task<IActionResult> GetRoleById(long id)
+        public async Task<IActionResult> GetCurrentUserRoles(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var userId = userService.GetUserId();
+            var query = new GetUserRolesQuery(userId); 
+            var data = await mediator.Send(query, cancellationToken);
+            return data.IsSuccess ? Ok(data) : BadRequest(data);
+        }
+        [HttpGet("{userId}")]
+        [Authorize]
+        [OutputCache(PolicyName = CachePolicyNames.OutputCacheWithAuth, Tags = [CacheTags.Role])]
+
+        public async Task<IActionResult> GetUserRoles(long userId, CancellationToken cancellationToken = default)
+        {
+            var query = new GetUserRolesQuery(userId);
+            var data = await mediator.Send(query, cancellationToken);
+            return data.IsSuccess ? Ok(data) : BadRequest(data);
         }
         [HttpPost]
         [Authorize(Roles = RoleNames.Administrator)]
 
-        public async Task<IActionResult> AddRole()
+        public async Task<IActionResult> AddRoleToUser(, CancellationToken cancellationToken = default)
         {
-            await cacheStore.EvictByTagAsync(CacheTags.Role, CancellationToken.None);
             return null;
         }
         [HttpPut]
         [Authorize(Roles = RoleNames.Administrator)]
 
-        public async Task<IActionResult> EditRole()
+        public async Task<IActionResult> RemoveRoleFromUser(, CancellationToken cancellationToken = default)
         {
-            await cacheStore.EvictByTagAsync(CacheTags.Role, CancellationToken.None);
-            return null;
-        }
-        [HttpDelete]
-        [Authorize(Roles = RoleNames.Administrator)]
-
-        public async Task<IActionResult> DeleteRole()
-        {
-            await cacheStore.EvictByTagAsync(CacheTags.Role, CancellationToken.None);
             return null;
         }
     }
