@@ -28,25 +28,25 @@ namespace Cinamaart.WebAPI.Controllers
         }
         [HttpPost("SubtitleFiles")]
         [Authorize(Policy = PolicyNames.RequireSubtitleEditionAccess)]
-        public async Task<IActionResult> AddSubtitleFiles()
+        public async Task<IActionResult> AddSubtitleFile([FromForm] IFormFile file, [FromForm] long SubtitleId)
         {
             throw new NotImplementedException();
         }
-        [HttpDelete("SubtitleFile")]
+        [HttpDelete("SubtitleFile/{id}")]
         [Authorize(Policy = PolicyNames.RequireSubtitleEditionAccess)]
-        public async Task<IActionResult> RemoveSubtitleFile()
+        public async Task<IActionResult> RemoveSubtitleFile(long id)
         {
             throw new NotImplementedException();
         }
         [HttpPost("UserProfile")]
         [Authorize]
-        public async Task<IActionResult> AddUserProfile()
+        public async Task<IActionResult> AddUserProfile([FromForm] IFormFile file , long UserId)
         {
             throw new NotImplementedException();
         }
-        [HttpDelete("UserProfile")]
+        [HttpDelete("UserProfile/{id}")]
         [Authorize]
-        public async Task<IActionResult> RemoveUserProfile()
+        public async Task<IActionResult> RemoveUserProfile(long id)
         {
             throw new NotImplementedException();
         }

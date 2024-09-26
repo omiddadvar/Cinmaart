@@ -8,6 +8,7 @@ using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Infrastructure.Services;
 using Cinamaart.Application.Abstractions.Notification;
 using Cinamaart.Infrastructure.Services.Notification;
+using Cinamaart.Infrastructure.Services.File;
 
 
 namespace Cinamaart.Infrastructure
@@ -28,6 +29,7 @@ namespace Cinamaart.Infrastructure
             services.AddTransient<IEmailService, EmailService>();
             //Utility Services
             services.AddTransient<IUrlService, UrlService>();
+            services.AddScoped<IFileService,  FileService>();
 
             return services;
         }
