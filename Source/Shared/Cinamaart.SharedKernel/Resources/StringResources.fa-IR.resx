@@ -138,6 +138,12 @@
   <data name="Email.UserRegistrationSubject" xml:space="preserve">
     <value>تایید ایمیل - سینما آرت</value>
   </data>
+  <data name="File.NotFound" xml:space="preserve">
+    <value>فایل مورد نظر یافت نشد</value>
+  </data>
+  <data name="File.UploadNotFound" xml:space="preserve">
+    <value>فایل بارگیری شده مشکل دارد، فایل یافت نشد</value>
+  </data>
   <data name="Login.PasswordInCorrect" xml:space="preserve">
     <value>رمز عبور اشتباه می باشد</value>
   </data>

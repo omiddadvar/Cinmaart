@@ -138,6 +138,12 @@
   <data name="Email.UserRegistrationSubject" xml:space="preserve">
     <value>Confirm Email - Cinamaart</value>
   </data>
+  <data name="File.NotFound" xml:space="preserve">
+    <value>File Not Found</value>
+  </data>
+  <data name="File.UploadNotFound" xml:space="preserve">
+    <value>Problem in finding uploaded file, file not found</value>
+  </data>
   <data name="Login.PasswordInCorrect" xml:space="preserve">
     <value>Password is not correct</value>
   </data>

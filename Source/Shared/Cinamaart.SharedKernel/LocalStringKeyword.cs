@@ -20,5 +20,7 @@ namespace Cinamaart.SharedKernel
         public const string Email_UserRegistrationHTML = "Email.UserRegistrationHTML";
         public const string Email_UserRegistrationSubject = "Email.UserRegistrationSubject";
         public const string Country_NotFound = "Country.NotFound";
+        public const string File_NotFound = "File.NotFound";
+        public const string File_UploadNotFound = "File.UploadNotFound";
     }
 }
