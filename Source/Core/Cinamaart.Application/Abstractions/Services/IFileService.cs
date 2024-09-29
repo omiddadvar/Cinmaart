@@ -10,7 +10,7 @@ namespace Cinamaart.Application.Abstractions.Services
 {
     public interface IFileService
     {
-        Task<string> UploadFileAsync(IFormFile file, DocumentTypeEnum type);
+        Task<bool> UploadFileAsync(IFormFile file, DocumentTypeEnum type);
         Task<FileStream> DownloadFileAsFileStreamAsync(string fileName, DocumentTypeEnum type);
         Task<MemoryStream> DownloadFileAsMemoryStreamAsync(string fileName, DocumentTypeEnum type);
         Task<byte[]> DownloadFileAsBytesAsync(string fileName, DocumentTypeEnum type);

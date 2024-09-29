@@ -12,7 +12,7 @@ namespace Cinamaart.Application.Abstractions.Services
     public interface ITokenService
     {
         Task<TokenResultDTO> GenerateTokenAsync(User user);
-        Task<TokenResultDTO> GenerateTokenAsync(User user, Claim[] claims);
+        Task<TokenResultDTO> GenerateTokenAsync(User user, IEnumerable<Claim> claims);
         Task<TokenResultDTO> GenerateRefreshTokenAsync(long userId, string deviceId);
         Task<bool> ValidateRefreshTokenAsync(long userId, string deviceId, string refreshToken);
         Task RevokeRefreshTokenAsync(long userId, string deviceId);

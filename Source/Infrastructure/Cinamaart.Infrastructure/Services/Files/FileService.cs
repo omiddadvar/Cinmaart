@@ -1,9 +1,11 @@
 ﻿using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Domain.Common.Enums;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +16,15 @@ namespace Cinamaart.Infrastructure.Services.Files
     {
         private const string FILESTORAGE_CONFIG_KEY = "FileSettings:FileStoragePath";
         private readonly string _fileStoragePath;
+        private readonly IConfiguration configuration;
+        private readonly HttpContext _httpContext;
 
-        public FileService(IConfiguration configuration)
+        public FileService(IConfiguration configuration, HttpContext httpContext)
         {
             _fileStoragePath = configuration[FILESTORAGE_CONFIG_KEY];
             _InitializeFolder();
+            this.configuration = configuration;
+            this._httpContext = httpContext;
         }
         private void _InitializeFolder()
         {
@@ -40,18 +46,19 @@ namespace Cinamaart.Infrastructure.Services.Files
                 }
             }
         }
-        public async Task<string> UploadFileAsync(
+        public async Task<bool> UploadFileAsync(
             IFormFile file , 
             DocumentTypeEnum type = DocumentTypeEnum.SRT)
         {
+            bool result = false;
             var filePath = Path.Combine(_fileStoragePath, type.ToString(), file.FileName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
+                result = file.Length == stream.Length;
             }
-
-            return filePath;
+            return result;
         }
         public async Task DeleteFileAsync(string fileName , DocumentTypeEnum type)
         {

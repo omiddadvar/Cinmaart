@@ -9,6 +9,7 @@ namespace Cinamaart.SharedKernel
     public static class LocalStringKeyword
     {
         public const string ObligatoryValue = "ObligatoryValue";
+        public const string UnAuthorized = "UnAuthorized";
         public const string NotFound = "NotFound";
         public const string ConfirmPasswordNotValid = "ConfirmPasswordNotValid";
         public const string ConfirmEmailNotValid = "ConfirmEmailNotValid";

@@ -5,10 +5,12 @@ using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.SharedKernel;
 using Cinamaart.SharedKernel.Resources;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -20,21 +22,25 @@ namespace Cinamaart.Infrastructure.Services.Token
     public class TokenService(
         IJwtSettting jwtSettting,
         IConnectionMultiplexer redis, 
+        UserManager<User> userManager,
         IStringLocalizer<StringResources> stringLocalizer,
         IConfiguration configuration) : ITokenService
     {
         public async Task<TokenResultDTO> GenerateTokenAsync(User user)
         {
-            var claims = new Claim[]
+            var claims = new List<Claim>()
             {
-                new Claim(JwtRegisteredClaimNames.Sid, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.UserName)
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
+            foreach (var role in await userManager.GetRolesAsync(user))
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
             return await GenerateTokenAsync(user, claims);
         }
-        public async Task<TokenResultDTO> GenerateTokenAsync(User user, Claim[] claims)
+        public async Task<TokenResultDTO> GenerateTokenAsync(User user, IEnumerable<Claim> claims)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor

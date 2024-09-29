@@ -153,6 +153,9 @@
   <data name="ObligatoryValue" xml:space="preserve">
     <value>مقدار {0} اجباری می باشد</value>
   </data>
+  <data name="UnAuthorized" xml:space="preserve">
+    <value>شما دسترسی انجام این عملیات را ندارید</value>
+  </data>
   <data name="User.NotFound" xml:space="preserve">
     <value>کاربر یافت نشد</value>
   </data>

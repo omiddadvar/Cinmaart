@@ -1,13 +1,10 @@
 using Cinamaart.Application;
 using Cinamaart.Persistence;
-using Cinamaart.Persistence.Contexts;
 using Cinamaart.Persistence.Extentions;
 using Cinamaart.WebAPI;
 using Microsoft.Extensions.Options;
 using Cinamaart.Infrastructure;
 using Serilog;
-using StackExchange.Redis;
-using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddPersistence();
 builder.Services.AddApplication();

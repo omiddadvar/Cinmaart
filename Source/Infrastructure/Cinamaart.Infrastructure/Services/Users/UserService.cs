@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinamaart.Infrastructure.Services.User
+namespace Cinamaart.Infrastructure.Services.Users
 {
     internal class UserService(IHttpContextAccessor httpContextAccessor) : IUserService
     {
