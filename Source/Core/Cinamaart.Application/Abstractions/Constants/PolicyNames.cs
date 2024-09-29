@@ -4,5 +4,6 @@
     {
         public const string RequireContentEditionAccess = "RequireContentEditionAccess";
         public const string RequireSubtitleEditionAccess = "RequireSubtitleEditionAccess";
+        public const string IsResourceOwnerOrAdmin = "IsResourceOwnerOrAdmin";
     }
 }

@@ -10,9 +10,9 @@ namespace Cinamaart.WebAPI.Policies.AccessLevels
             options.AddPolicy(PolicyNames.RequireSubtitleEditionAccess,
                 policy =>
                 {
-                    policy.RequireRole(RoleNames.Administrator);
-                    policy.RequireRole(RoleNames.ContentWriter);
-                    policy.RequireRole(RoleNames.Author);
+                    policy.RequireRole(
+                        RoleNames.Administrator,
+                        RoleNames.Author);
                 });
         }
     }
