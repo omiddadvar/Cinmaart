@@ -17,8 +17,8 @@ namespace Cinamaart.WebAPI.Policies.AccessLevels
                       if (userIdClaim == null && !isAdmin) return false;
 
                       // Assume that the route parameter is called 'userId'
-                      var routeUserId = context.Resource as HttpContext;
-                      var requestUserId = routeUserId?.Request.RouteValues["userId"]?.ToString();
+                      var httpContext = context.Resource as HttpContext;
+                      var requestUserId = httpContext?.Request.RouteValues["userId"]?.ToString();
 
                       // Grant access if the user is accessing their own data or is an admin
                       return userIdClaim == requestUserId || isAdmin;
