@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,5 @@ namespace Cinamaart.Application.Features.Countries.Commands.RemoveCountry
     public record RemoveCountryCommand(
             int Id
         )
-        : IRequest<Result<bool>>;
+        : IRequest<WebServiceResult<bool>>;
 }

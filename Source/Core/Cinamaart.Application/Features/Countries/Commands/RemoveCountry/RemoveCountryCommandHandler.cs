@@ -1,4 +1,5 @@
-﻿using Cinamaart.Application.Abstractions.Repositories;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Interfaces.Repositories;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Extentions;
@@ -16,20 +17,20 @@ namespace Cinamaart.Application.Features.Countries.Commands.RemoveCountry
             ICountryRepository countryRepository,
             IUnitOfWork unitOfWork,
             ILogger<RemoveCountryCommandHandler> logger
-        ) : IRequestHandler<RemoveCountryCommand, Result<bool>>
+        ) : IRequestHandler<RemoveCountryCommand, WebServiceResult<bool>>
     {
-        public async Task<Result<bool>> Handle(RemoveCountryCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<bool>> Handle(RemoveCountryCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 await countryRepository.DeleteAsync(request.Id);
                 await unitOfWork.SaveAsync(cancellationToken);
-                return Result<bool>.Success(true);
+                return WebServiceResult<bool>.Success(true);
             }
             catch(Exception ex)
             {
                 logger.LogError(ex, "Error while removing country, requested data = {request}", request.ToJson());
-                return Result<bool>.Failure("RemoveCountry.Exception", ex.Message);
+                return WebServiceResult<bool>.Failure("RemoveCountry.Exception", ex.Message);
             }
         }
     }

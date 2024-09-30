@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.Artists.Queries;
 using Cinamaart.Application.Interfaces.Repositories;
@@ -17,20 +18,20 @@ namespace Cinamaart.Application.Features.Countries.Queries.GatAllCountries
             IMapper mapper,
             ICountryRepository countryRepository,
             ILogger<GatAllCountriesQueryHandler> logger
-        ) : IRequestHandler<GatAllCountriesQuery, Result<IList<CountryDTO>>>
+        ) : IRequestHandler<GatAllCountriesQuery, WebServiceResult<IList<CountryDTO>>>
     {
-        public async Task<Result<IList<CountryDTO>>> Handle(GatAllCountriesQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<IList<CountryDTO>>> Handle(GatAllCountriesQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var countries = (await countryRepository.GetAllAsync(cancellationToken: cancellationToken)).ToList();
                 var data = mapper.Map<List<CountryDTO>>(countries);
-                return Result<IList<CountryDTO>>.Success(data);
+                return WebServiceResult<IList<CountryDTO>>.Success(data);
             }
             catch(Exception ex)
             {
                 logger.LogError(ex, "Error while reading all country data");
-                return Result<IList<CountryDTO>>.Failure("GatAllCountries.Exception", ex.Message);
+                return WebServiceResult<IList<CountryDTO>>.Failure("GatAllCountries.Exception", ex.Message);
 
             }
         }

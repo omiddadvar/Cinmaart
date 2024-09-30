@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.SharedKernel;
@@ -19,25 +20,25 @@ namespace Cinamaart.Application.Features.Countries.Queries.GatCountry
             ICountryRepository countryRepository,
             ILogger<GatCountryQueryHandler> logger,
             IStringLocalizer<StringResources> stringLocalizer
-        ) : IRequestHandler<GatCountryQuery, Result<CountryDTO>>
+        ) : IRequestHandler<GatCountryQuery, WebServiceResult<CountryDTO>>
     {
-        public async Task<Result<CountryDTO>> Handle(GatCountryQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<CountryDTO>> Handle(GatCountryQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var country = await countryRepository.GetAsync(request.Id);
                 if (country is null)
                 {
-                    return Result<CountryDTO>.Failure("Country.NotFound" ,
+                    return WebServiceResult<CountryDTO>.Failure("Country.NotFound" ,
                         stringLocalizer[LocalStringKeyword.Country_NotFound]);
                 }
                 var countryDTO = mapper.Map<CountryDTO>(country);
-                return Result<CountryDTO>.Success(countryDTO);
+                return WebServiceResult<CountryDTO>.Success(countryDTO);
             }
             catch(Exception ex)
             {
                 logger.LogError(ex, "Error while reading country data, countryId = {ArtistId}", request.Id);
-                return Result<CountryDTO>.Failure("GatCountry.Exception", ex.Message);
+                return WebServiceResult<CountryDTO>.Failure("GatCountry.Exception", ex.Message);
             }
         }
     }

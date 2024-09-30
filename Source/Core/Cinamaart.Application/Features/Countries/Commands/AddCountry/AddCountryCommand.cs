@@ -11,5 +11,5 @@ namespace Cinamaart.Application.Features.Countries.Commands.AddCountry
     public record AddCountryCommand(
             string Name
         ) 
-        : IRequest<Result<CountryDTO>>;
+        : IRequest<WebServiceResult<CountryDTO>>;
 }

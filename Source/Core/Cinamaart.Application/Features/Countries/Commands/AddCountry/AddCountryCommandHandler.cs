@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.Artists.Queries;
 using Cinamaart.Application.Interfaces.Repositories;
@@ -15,9 +16,9 @@ namespace Cinamaart.Application.Features.Countries.Commands.AddCountry
             ICountryRepository countryRepository,
             IUnitOfWork unitOfWork,
             ILogger<AddCountryCommandHandler> logger
-        ) : IRequestHandler<AddCountryCommand, Result<CountryDTO>>
+        ) : IRequestHandler<AddCountryCommand, WebServiceResult<CountryDTO>>
     {
-        public async Task<Result<CountryDTO>> Handle(AddCountryCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<CountryDTO>> Handle(AddCountryCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -26,12 +27,12 @@ namespace Cinamaart.Application.Features.Countries.Commands.AddCountry
                 await unitOfWork.SaveAsync(cancellationToken);
                 
                 var countryDTO = mapper.Map<CountryDTO>(country);
-                return Result<CountryDTO>.Success(countryDTO);
+                return WebServiceResult<CountryDTO>.Success(countryDTO);
             }
             catch( Exception ex )
             {
                 logger.LogError(ex, "Error while adding country, requested data = {request}", request.ToJson());
-                return Result<CountryDTO>.Failure("AddCountry.Exception", ex.Message);
+                return WebServiceResult<CountryDTO>.Failure("AddCountry.Exception", ex.Message);
             }
         }
     }
