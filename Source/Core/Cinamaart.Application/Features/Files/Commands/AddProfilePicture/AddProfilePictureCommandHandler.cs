@@ -1,4 +1,5 @@
-﻿using Cinamaart.Application.Abstractions.Services;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Application.Extentions.Files;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Common.Enums;
@@ -22,15 +23,15 @@ namespace Cinamaart.Application.Features.Files.Commands.AddProfilePicture
             UserManager<User> userManager,
             IStringLocalizer<StringResources> localizer,
             ILogger<AddProfilePictureCommandHandler> logger
-        ) : IRequestHandler<AddProfilePictureCommand,Result<string>>
+        ) : IRequestHandler<AddProfilePictureCommand, WebServiceResult<string>>
     {
-        public async Task<Result<string>> Handle(AddProfilePictureCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<string>> Handle(AddProfilePictureCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 if (request.File == null || request.File.Length == 0)
                 {
-                    return Result<string>.Failure(localizer[LocalStringKeyword.File_UploadNotFound]);
+                    return WebServiceResult<string>.Failure(localizer[LocalStringKeyword.File_UploadNotFound]);
                 }
                 
                 var isUploaded = await fileService.UploadFileAsync(request.File , request.File.GetDocType());
@@ -39,7 +40,7 @@ namespace Cinamaart.Application.Features.Files.Commands.AddProfilePicture
             catch(Exception ex)
             {
                 logger.LogError("Error while updating profile picture for user : {userId}" , request.UserId);
-                return Result<string>.Failure(ex.Message);
+                return WebServiceResult<string>.Failure(ex.Message);
             }
         }
     }

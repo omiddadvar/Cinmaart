@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -11,5 +12,5 @@ namespace Cinamaart.Application.Features.Files.Commands.AddProfilePicture
 {
     public record AddProfilePictureCommand(
         IFormFile File,
-        long UserId) : IRequest<Result<string>>;
+        long UserId) : IRequest<WebServiceResult<string>>;
 }
