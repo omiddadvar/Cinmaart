@@ -1,4 +1,5 @@
-﻿using Cinamaart.Application.Features.Authentication.Queries;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Features.Authentication.Queries;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
@@ -14,5 +15,5 @@ namespace Cinamaart.Application.Features.Authentication.Commands.Refresh
         string ExpiredAccessToken,
         string RefreshToken,
         string DeviceId
-        ) : IRequest<Result<AuthenticationResultDTO>>;
+        ) : IRequest<WebServiceResult<AuthenticationResultDTO>>;
 }

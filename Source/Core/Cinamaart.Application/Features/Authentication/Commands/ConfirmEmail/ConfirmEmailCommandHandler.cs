@@ -1,4 +1,5 @@
-﻿using Cinamaart.Application.Features.Authentication.Commands.Login;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Features.Authentication.Commands.Login;
 using Cinamaart.Application.Features.Authentication.Queries;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
@@ -23,28 +24,28 @@ namespace Cinamaart.Application.Features.Authentication.Commands.ConfirmEmail
         IStringLocalizer<StringResources> localizer,
         UserManager<User> userManager
         )
-        : IRequestHandler<ConfirmEmailCommand, Result<bool>>
+        : IRequestHandler<ConfirmEmailCommand, WebServiceResult<bool>>
     {
-        public async Task<Result<bool>> Handle(ConfirmEmailCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<bool>> Handle(ConfirmEmailCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 var user = await userManager.FindByIdAsync(request.UserId.ToString());
                 if (user == null)
                 {
-                    return Result<bool>.Failure("User.NotFound", localizer[LocalStringKeyword.User_NotFound]);
+                    return WebServiceResult<bool>.Failure("User.NotFound", localizer[LocalStringKeyword.User_NotFound]);
                 }
                 var result = await userManager.ConfirmEmailAsync(user, request.Token);
                 if (result.Succeeded)
                 {
-                    return Result<bool>.Success(true);
+                    return WebServiceResult<bool>.Success(true);
                 }
-                return result.ToStandardResult<bool>();
+                return result.ToStandardWebServiceResult<bool>();
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while Confirming Email, requested data = {request}", request.ToJson());
-                return Result<bool>.Failure("ConfirmEmail.Exception", ex.Message);
+                return WebServiceResult<bool>.Failure("ConfirmEmail.Exception", ex.Message);
             }
         }
     }

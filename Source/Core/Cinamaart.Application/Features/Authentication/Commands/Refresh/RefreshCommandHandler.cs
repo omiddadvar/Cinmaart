@@ -1,4 +1,5 @@
-﻿using Cinamaart.Application.Abstractions.Services;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Application.Features.Authentication.Commands.Login;
 using Cinamaart.Application.Features.Authentication.Queries;
 using Cinamaart.Domain.Abstractions;
@@ -24,30 +25,30 @@ namespace Cinamaart.Application.Features.Authentication.Commands.Refresh
             ILogger<LoginCommandHandler> logger,
             IStringLocalizer<StringResources> localizer,
             [FromKeyedServices("JWT")] ITokenService tokenService
-        ) : IRequestHandler<RefreshCommand, Result<AuthenticationResultDTO>>
+        ) : IRequestHandler<RefreshCommand, WebServiceResult<AuthenticationResultDTO>>
     {
-        public async Task<Result<AuthenticationResultDTO>> Handle(RefreshCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<AuthenticationResultDTO>> Handle(RefreshCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 long userID = await tokenService.GetUserIdFromExpiredTokenAsync(request.ExpiredAccessToken);
                 if (!await tokenService.ValidateRefreshTokenAsync(userID, request.DeviceId, request.RefreshToken))
                 {
-                    return Result<AuthenticationResultDTO>.Failure("RefreshToken.NotValid", localizer[LocalStringKeyword.Auth_RefreshTokenNotMatch]);
+                    return WebServiceResult<AuthenticationResultDTO>.Failure("RefreshToken.NotValid", localizer[LocalStringKeyword.Auth_RefreshTokenNotMatch]);
                 }
                 else
                 {
                     User? user = await userManager.FindByIdAsync(userID.ToString());
                     if (user is null)
                     {
-                        return Result<AuthenticationResultDTO>.Failure("User.NotFound", localizer[LocalStringKeyword.User_NotFound]);
+                        return WebServiceResult<AuthenticationResultDTO>.Failure("User.NotFound", localizer[LocalStringKeyword.User_NotFound]);
                     }
                     else
                     {
                         var accessToken = await tokenService.GenerateTokenAsync(user);
                         var refreshToken = await tokenService.GenerateRefreshTokenAsync(user.Id, request.DeviceId);
 
-                        return Result<AuthenticationResultDTO>.Success(
+                        return WebServiceResult<AuthenticationResultDTO>.Success(
                              new AuthenticationResultDTO(
                                  accessToken.Token,
                                  accessToken.Expiration,
@@ -59,7 +60,7 @@ namespace Cinamaart.Application.Features.Authentication.Commands.Refresh
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while refreshing token , requested data = {request}", request.ToJson());
-                return Result<AuthenticationResultDTO>.Failure("RefreshToken.Exception", ex.Message);
+                return WebServiceResult<AuthenticationResultDTO>.Failure("RefreshToken.Exception", ex.Message);
             }
         }
     }

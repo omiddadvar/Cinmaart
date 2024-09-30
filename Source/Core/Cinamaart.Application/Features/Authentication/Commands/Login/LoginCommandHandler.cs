@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Application.DTO;
 using Cinamaart.Application.Features.Authentication.Queries;
@@ -24,10 +25,10 @@ namespace Cinamaart.Application.Features.Authentication.Commands.Login
         [FromKeyedServices("JWT")] ITokenService tokenGenerator,
         IUserDeviceService userDeviceService
         )
-        : IRequestHandler<LoginCommand, Result<AuthenticationResultDTO>>
+        : IRequestHandler<LoginCommand, WebServiceResult<AuthenticationResultDTO>>
     {
         private const int TOKEN_EXPIRATION_MINUTES = 120;
-        public async Task<Result<AuthenticationResultDTO>> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<AuthenticationResultDTO>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -43,7 +44,7 @@ namespace Cinamaart.Application.Features.Authentication.Commands.Login
 
                 if (user is null)
                 {
-                    return Result<AuthenticationResultDTO>.Failure("User.NotFound", localizer[LocalStringKeyword.User_NotFound]);
+                    return WebServiceResult<AuthenticationResultDTO>.Failure("User.NotFound", localizer[LocalStringKeyword.User_NotFound]);
                 }
                 else
                 {
@@ -55,7 +56,7 @@ namespace Cinamaart.Application.Features.Authentication.Commands.Login
                         var refreshToken = await tokenGenerator.GenerateRefreshTokenAsync(user.Id, request.DeviceId);
                         await userDeviceService.SaveDeviceInfoAsync(user.Id, deviceInfo);
 
-                        return Result<AuthenticationResultDTO>.Success(
+                        return WebServiceResult<AuthenticationResultDTO>.Success(
                             new AuthenticationResultDTO(
                                 accessToken.Token,
                                 accessToken.Expiration,
@@ -64,14 +65,14 @@ namespace Cinamaart.Application.Features.Authentication.Commands.Login
                     }
                     else
                     {
-                        return Result<AuthenticationResultDTO>.Failure("Login.Failed", localizer[LocalStringKeyword.Login_PasswordInCorrect]);
+                        return WebServiceResult<AuthenticationResultDTO>.Failure("Login.Failed", localizer[LocalStringKeyword.Login_PasswordInCorrect]);
                     }
                 }
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while Logging-in , requested data = {request}", request.ToJson());
-                return Result<AuthenticationResultDTO>.Failure("Login.Exception", ex.Message);
+                return WebServiceResult<AuthenticationResultDTO>.Failure("Login.Exception", ex.Message);
             }
         }
     }

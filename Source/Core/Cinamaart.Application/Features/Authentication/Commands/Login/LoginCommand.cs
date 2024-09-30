@@ -1,4 +1,5 @@
-﻿using Cinamaart.Application.Features.Authentication.Queries;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Features.Authentication.Queries;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
@@ -16,5 +17,5 @@ namespace Cinamaart.Application.Features.Authentication.Commands.Login
         string DeviceId,
         string DeviceName,
         string OSVersion
-        ) : IRequest<Result<AuthenticationResultDTO>>;
+        ) : IRequest<WebServiceResult<AuthenticationResultDTO>>;
 }
