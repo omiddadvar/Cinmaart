@@ -1,4 +1,5 @@
-﻿using Cinamaart.Application.Features.Artists.Commands.AddArtist;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Features.Artists.Commands.AddArtist;
 using Cinamaart.Application.Features.Artists.Queries;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
@@ -17,5 +18,5 @@ namespace Cinamaart.Application.Features.Artists.Commands.UpdateArtist
         DateTime? BirthDate,
         int GenderId,
         int? CountryId
-    ) : IRequest<Result<GetArtistDTO>>;
+    ) : IRequest<WebServiceResult<GetArtistDTO>>;
 }

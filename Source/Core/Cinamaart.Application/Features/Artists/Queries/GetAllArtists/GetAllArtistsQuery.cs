@@ -1,7 +1,8 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 
 namespace Cinamaart.Application.Features.Artists.Queries.GetAllArtists
 {
-    public record GetAllArtistsQuery : IRequest<Result<List<GetArtistDTO>>>;
+    public record GetAllArtistsQuery : IRequest<WebServiceResult<List<GetArtistDTO>>>;
 }

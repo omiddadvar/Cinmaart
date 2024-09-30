@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.Artists.Commands.AddArtist;
 using Cinamaart.Application.Features.Artists.Queries;
@@ -21,9 +22,9 @@ namespace Cinamaart.Application.Features.Artists.Commands.UpdateArtist
         IArtistRepository artistRepository,
         IUnitOfWork unitOfWork,
         ILogger<UpdateArtistCommandHandler> logger
-        ) : IRequestHandler<UpdateArtistCommand, Result<GetArtistDTO>>
+        ) : IRequestHandler<UpdateArtistCommand, WebServiceResult<GetArtistDTO>>
     {
-        public async Task<Result<GetArtistDTO>> Handle(UpdateArtistCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<GetArtistDTO>> Handle(UpdateArtistCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -32,12 +33,12 @@ namespace Cinamaart.Application.Features.Artists.Commands.UpdateArtist
                 await unitOfWork.SaveAsync(cancellationToken);
 
                 var data = mapper.Map<GetArtistDTO>(artist);
-                return Result<GetArtistDTO>.Success(data);
+                return WebServiceResult<GetArtistDTO>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while editing artist, requested data = {request}", request.ToJson());
-                return Result<GetArtistDTO>.Failure("UpdateArtist.Exception", ex.Message);
+                return WebServiceResult<GetArtistDTO>.Failure("UpdateArtist.Exception", ex.Message);
             }
         }
     }

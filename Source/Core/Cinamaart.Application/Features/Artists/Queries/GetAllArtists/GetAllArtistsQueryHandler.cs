@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.Artists.Commands.UpdateArtist;
 using Cinamaart.Domain.Abstractions;
@@ -12,9 +13,9 @@ namespace Cinamaart.Application.Features.Artists.Queries.GetAllArtists
             IMapper mapper,
             IArtistRepository artistRepository,
             ILogger<GetAllArtistsQueryHandler> logger) :
-        IRequestHandler<GetAllArtistsQuery, Result<List<GetArtistDTO>>>
+        IRequestHandler<GetAllArtistsQuery, WebServiceResult<List<GetArtistDTO>>>
     {
-        public async Task<Result<List<GetArtistDTO>>> Handle(GetAllArtistsQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<List<GetArtistDTO>>> Handle(GetAllArtistsQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -25,12 +26,12 @@ namespace Cinamaart.Application.Features.Artists.Queries.GetAllArtists
                     a => a.Country, e => e.Gender);
 
                 var data = mapper.Map<List<GetArtistDTO>>(rawData.ToList());
-                return Result<List<GetArtistDTO>>.Success(data);
+                return WebServiceResult<List<GetArtistDTO>>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading all artist data");
-                return Result<List<GetArtistDTO>>.Failure("GetAllArtists.Exception", ex.Message);
+                return WebServiceResult<List<GetArtistDTO>>.Failure("GetAllArtists.Exception", ex.Message);
             }
         }
     }

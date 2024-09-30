@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.Artists.Commands.AddArtist;
 using Cinamaart.Application.Features.Artists.Queries;
@@ -20,20 +21,20 @@ namespace Cinamaart.Application.Features.Artists.Commands.RemoveArtist
         IArtistRepository artistRepository,
         IUnitOfWork unitOfWork,
         ILogger<AddArtistCommandHandler> logger
-        ) : IRequestHandler<RemoveArtistCommand, Result<bool>>
+        ) : IRequestHandler<RemoveArtistCommand, WebServiceResult<bool>>
     {
-        public async Task<Result<bool>> Handle(RemoveArtistCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<bool>> Handle(RemoveArtistCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 await artistRepository.DeleteAsync(request.ArtistId);
                 await unitOfWork.SaveAsync(cancellationToken);
-                return Result<bool>.Success(true);
+                return WebServiceResult<bool>.Success(true);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while removing artist, artistId = {ArtistId}", request.ArtistId);
-                return Result<bool>.Failure("RemoveArtist.Exception", ex.Message);
+                return WebServiceResult<bool>.Failure("RemoveArtist.Exception", ex.Message);
             }
         }
     }

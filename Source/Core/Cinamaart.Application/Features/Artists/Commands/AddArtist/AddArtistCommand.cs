@@ -1,13 +1,7 @@
-﻿using Cinamaart.Domain.Entities.Types;
-using Cinamaart.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cinamaart.Domain.Abstractions;
+﻿
 using MediatR;
 using Cinamaart.Application.Features.Artists.Queries;
+using Cinamaart.Application.Abstractions;
 
 namespace Cinamaart.Application.Features.Artists.Commands.AddArtist
 {
@@ -18,5 +12,5 @@ namespace Cinamaart.Application.Features.Artists.Commands.AddArtist
         int GenderId,
         int? CountryId
     )
-    : IRequest<Result<GetArtistDTO>>;
+    : IRequest<WebServiceResult<GetArtistDTO>>;
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.Artists.Queries.GetAllArtists;
 using Cinamaart.Domain.Abstractions;
@@ -19,9 +20,9 @@ namespace Cinamaart.Application.Features.Artists.Queries.GetPaginatedArtists
         IMapper mapper,
         IArtistRepository artistRepository,
         ILogger<GetPaginatedArtistsQueryHandler> logger) 
-        : IRequestHandler<GetPaginatedArtistsQuery, Result<PagedList<GetArtistDTO>>>
+        : IRequestHandler<GetPaginatedArtistsQuery, WebServiceResult<PagedList<GetArtistDTO>>>
     {
-        public async Task<Result<PagedList<GetArtistDTO>>> Handle(GetPaginatedArtistsQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<PagedList<GetArtistDTO>>> Handle(GetPaginatedArtistsQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -35,12 +36,12 @@ namespace Cinamaart.Application.Features.Artists.Queries.GetPaginatedArtists
                 a => a.Country, e => e.Gender);
 
                 var data = mapper.Map<PagedList<Artist>,PagedList<GetArtistDTO>>(rawData);
-                return Result<PagedList<GetArtistDTO>>.Success(data);
+                return WebServiceResult<PagedList<GetArtistDTO>>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading paginated artist data, requested data = {request}", request.ToJson());
-                return Result<PagedList<GetArtistDTO>>.Failure("GetPaginatedArtists.Exception", ex.Message);
+                return WebServiceResult<PagedList<GetArtistDTO>>.Failure("GetPaginatedArtists.Exception", ex.Message);
             }
         }
     }
