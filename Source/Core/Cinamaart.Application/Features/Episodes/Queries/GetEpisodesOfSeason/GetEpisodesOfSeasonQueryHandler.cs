@@ -3,14 +3,8 @@ using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cinamaart.Application.Features.Episodes.Queries.GetEpisodesOfEpisode;
-using Cinamaart.Application.Features.Episodes;
 using Cinamaart.Application.Features.Episodes.Queries.GetEpisodesOfSeason;
+using Cinamaart.Application.Abstractions;
 
 namespace Cinamaart.Application.Features.Episodes.Queries.GetEpisodesOfEpisode
 {
@@ -18,9 +12,9 @@ namespace Cinamaart.Application.Features.Episodes.Queries.GetEpisodesOfEpisode
             IMapper mapper,
             IEpisodeRepository episodeRepository,
             ILogger<GetEpisodesOfEpisodeQueryHandler> logger
-        ) : IRequestHandler<GetEpisodesOfSeasonQuery, Result<IList<EpisodeDTO>>>
+        ) : IRequestHandler<GetEpisodesOfSeasonQuery, WebServiceResult<IList<EpisodeDTO>>>
     {
-        public async Task<Result<IList<EpisodeDTO>>> Handle(GetEpisodesOfSeasonQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<IList<EpisodeDTO>>> Handle(GetEpisodesOfSeasonQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -31,12 +25,12 @@ namespace Cinamaart.Application.Features.Episodes.Queries.GetEpisodesOfEpisode
                     a => a.Season);
 
                 var data = mapper.Map<IList<EpisodeDTO>>(rawData.ToArray());
-                return Result<IList<EpisodeDTO>>.Success(data);
+                return WebServiceResult<IList<EpisodeDTO>>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading all Episodes data");
-                return Result<IList<EpisodeDTO>>.Failure("GetAllEpisodes.Exception", ex.Message);
+                return WebServiceResult<IList<EpisodeDTO>>.Failure("GetAllEpisodes.Exception", ex.Message);
             }
         }
     }

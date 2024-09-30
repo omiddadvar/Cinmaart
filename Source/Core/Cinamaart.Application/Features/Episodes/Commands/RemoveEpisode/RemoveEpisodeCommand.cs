@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Episodes.Commands.RemoveEpisode
 {
-    public record RemoveEpisodeCommand(int EpisodeId) : IRequest<Result<bool>>;
+    public record RemoveEpisodeCommand(int EpisodeId) : IRequest<WebServiceResult<bool>>;
 }

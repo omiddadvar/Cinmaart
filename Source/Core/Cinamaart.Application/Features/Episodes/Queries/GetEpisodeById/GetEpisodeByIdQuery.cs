@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Episodes.Queries.GetEpisodeById
 {
-    public record GetEpisodeByIdQuery(int EpisodeId) : IRequest<Result<EpisodeDTO>>;
+    public record GetEpisodeByIdQuery(int EpisodeId) : IRequest<WebServiceResult<EpisodeDTO>>;
 }

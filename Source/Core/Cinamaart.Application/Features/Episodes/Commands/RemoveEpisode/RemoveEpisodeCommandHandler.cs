@@ -1,4 +1,5 @@
-﻿using Cinamaart.Application.Abstractions.Repositories;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Interfaces.Repositories;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
@@ -10,20 +11,20 @@ namespace Cinamaart.Application.Features.Episodes.Commands.RemoveEpisode
             IEpisodeRepository episodeRepository,
             IUnitOfWork unitOfWork,
             ILogger<RemoveEpisodeCommandHandler> logger
-        ) : IRequestHandler<RemoveEpisodeCommand, Result<bool>>
+        ) : IRequestHandler<RemoveEpisodeCommand, WebServiceResult<bool>>
     {
-        public async Task<Result<bool>> Handle(RemoveEpisodeCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<bool>> Handle(RemoveEpisodeCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 await episodeRepository.DeleteAsync(request.EpisodeId);
                 await unitOfWork.SaveAsync(cancellationToken);
-                return Result<bool>.Success(true);
+                return WebServiceResult<bool>.Success(true);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while removing Episode, EpisodeId = {EpisodeId}", request.EpisodeId);
-                return Result<bool>.Failure("RemoveEpisode.Exception", ex.Message);
+                return WebServiceResult<bool>.Failure("RemoveEpisode.Exception", ex.Message);
             }
         }
     }

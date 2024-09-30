@@ -19,9 +19,9 @@ namespace Cinamaart.Application.Features.Episodes.Commands.AddEpisode
             IEpisodeRepository episodeRepository,
             IUnitOfWork unitOfWork,
             ILogger<AddEpisodeCommandHandler> logger
-        ) : IRequestHandler<AddEpisodeCommand, Result<EpisodeDTO>>
+        ) : IRequestHandler<AddEpisodeCommand, WebServiceResult<EpisodeDTO>>
     {
-        public async Task<Result<EpisodeDTO>> Handle(AddEpisodeCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<EpisodeDTO>> Handle(AddEpisodeCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -30,12 +30,12 @@ namespace Cinamaart.Application.Features.Episodes.Commands.AddEpisode
                 await unitOfWork.SaveAsync(cancellationToken);
 
                 var data = mapper.Map<EpisodeDTO>(Episode);
-                return Result<EpisodeDTO>.Success(data);
+                return WebServiceResult<EpisodeDTO>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while adding Episode, requested data = {request}", request.ToJson());
-                return Result<EpisodeDTO>.Failure("AddEpisode.Exception", ex.Message);
+                return WebServiceResult<EpisodeDTO>.Failure("AddEpisode.Exception", ex.Message);
             }
         }
     }

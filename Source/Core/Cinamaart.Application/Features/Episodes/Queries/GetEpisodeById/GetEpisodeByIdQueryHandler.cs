@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.Episodes;
 using Cinamaart.Domain.Abstractions;
@@ -16,20 +17,20 @@ namespace Cinamaart.Application.Features.Episodes.Queries.GetEpisodeById
         IMapper mapper,
         IEpisodeRepository episodeRepository,
         ILogger<GetEpisodeByIdQueryHandler> logger
-    ) : IRequestHandler<GetEpisodeByIdQuery, Result<EpisodeDTO>>
+    ) : IRequestHandler<GetEpisodeByIdQuery, WebServiceResult<EpisodeDTO>>
     {
-        public async Task<Result<EpisodeDTO>> Handle(GetEpisodeByIdQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<EpisodeDTO>> Handle(GetEpisodeByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var artist = await episodeRepository.GetAsync(request.EpisodeId, cancellationToken);
                 var data = mapper.Map<EpisodeDTO>(artist);
-                return Result<EpisodeDTO>.Success(data);
+                return WebServiceResult<EpisodeDTO>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading Episode data, Episodeid = {Episodeid}", request.EpisodeId);
-                return Result<EpisodeDTO>.Failure("GetEpisodeById.Exception", ex.Message);
+                return WebServiceResult<EpisodeDTO>.Failure("GetEpisodeById.Exception", ex.Message);
             }
         }
     }
