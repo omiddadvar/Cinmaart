@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
@@ -15,20 +16,20 @@ namespace Cinamaart.Application.Features.Authors.Queries.GetAuthorById
             IMapper mapper,
             IAuthorRepository authorRepository,
             ILogger<GetAuthorByIdQueryHandler> logger
-        ) : IRequestHandler<GetAuthorByIdQuery, Result<AuthorDTO>>
+        ) : IRequestHandler<GetAuthorByIdQuery, WebServiceResult<AuthorDTO>>
     {
-        public async Task<Result<AuthorDTO>> Handle(GetAuthorByIdQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<AuthorDTO>> Handle(GetAuthorByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var Author = await authorRepository.GetAsync(request.AuthorId, cancellationToken);
                 var data = mapper.Map<AuthorDTO>(Author);
-                return Result<AuthorDTO>.Success(data);
+                return WebServiceResult<AuthorDTO>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading Author data, Authorid = {AuthorId}", request.AuthorId);
-                return Result<AuthorDTO>.Failure("GetAuthor.Exception", ex.Message);
+                return WebServiceResult<AuthorDTO>.Failure("GetAuthor.Exception", ex.Message);
             }
         }
     }

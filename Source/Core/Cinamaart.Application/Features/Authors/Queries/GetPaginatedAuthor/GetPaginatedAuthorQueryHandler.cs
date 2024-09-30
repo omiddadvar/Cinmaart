@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.Authors.Queries;
 using Cinamaart.Domain.Abstractions;
@@ -18,9 +19,9 @@ namespace Cinamaart.Application.Features.Authors.Queries.GetPaginatedAuthor
          IMapper mapper,
          IAuthorRepository authorRepository,
          ILogger<GetPaginatedAuthorQueryHandler> logger
-        ) : IRequestHandler<GetPaginatedAuthorQuery, Result<PagedList<AuthorDTO>>>
+        ) : IRequestHandler<GetPaginatedAuthorQuery, WebServiceResult<PagedList<AuthorDTO>>>
     {
-        public async Task<Result<PagedList<AuthorDTO>>> Handle(GetPaginatedAuthorQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<PagedList<AuthorDTO>>> Handle(GetPaginatedAuthorQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -32,12 +33,12 @@ namespace Cinamaart.Application.Features.Authors.Queries.GetPaginatedAuthor
                     cancellationToken);
 
                 var data = mapper.Map<PagedList<Author>, PagedList<AuthorDTO>>(rawData);
-                return Result<PagedList<AuthorDTO>>.Success(data);
+                return WebServiceResult<PagedList<AuthorDTO>>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading paginated Author data, requested data = {request}", request.ToJson());
-                return Result<PagedList<AuthorDTO>>.Failure("GetPaginatedAuthors.Exception", ex.Message);
+                return WebServiceResult<PagedList<AuthorDTO>>.Failure("GetPaginatedAuthors.Exception", ex.Message);
             }
         }
     }

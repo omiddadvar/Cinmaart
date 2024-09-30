@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.Authors.Queries;
 using Cinamaart.Application.Interfaces.Repositories;
@@ -21,9 +22,9 @@ namespace Cinamaart.Application.Features.Authors.Commands.UpdateAuthor
         IAuthorRepository authorRepository,
         IUnitOfWork unitOfWork,
         ILogger<UpdateAuthorCommandHandler> logger
-        ) : IRequestHandler<UpdateAuthorCommand, Result<AuthorDTO>>
+        ) : IRequestHandler<UpdateAuthorCommand, WebServiceResult<AuthorDTO>>
     {
-        public async Task<Result<AuthorDTO>> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<AuthorDTO>> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -32,12 +33,12 @@ namespace Cinamaart.Application.Features.Authors.Commands.UpdateAuthor
                 await unitOfWork.SaveAsync(cancellationToken);
 
                 var data = mapper.Map<AuthorDTO>(Author);
-                return Result<AuthorDTO>.Success(data);
+                return WebServiceResult<AuthorDTO>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while editing Author, requested data = {request}", request.ToJson());
-                return Result<AuthorDTO>.Failure("UpdateAuthor.Exception", ex.Message);
+                return WebServiceResult<AuthorDTO>.Failure("UpdateAuthor.Exception", ex.Message);
             }
         }
     }

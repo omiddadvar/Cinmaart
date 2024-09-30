@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,5 @@ namespace Cinamaart.Application.Features.Authors.Commands.UpdateAuthor
         int Id,
         string Name,
         string? Description
-        ) : IRequest<Result<AuthorDTO>>;
+        ) : IRequest<WebServiceResult<AuthorDTO>>;
 }

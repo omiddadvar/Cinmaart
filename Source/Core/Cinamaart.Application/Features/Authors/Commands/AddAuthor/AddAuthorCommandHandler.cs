@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Interfaces.Repositories;
 using Cinamaart.Domain.Abstractions;
@@ -14,9 +15,9 @@ namespace Cinamaart.Application.Features.Authors.Commands.AddAuthor
             IAuthorRepository authorRepository,
             IUnitOfWork unitOfWork,
             ILogger<AddAuthorCommandHandler> logger
-        ) : IRequestHandler<AddAuthorCommand, Result<AuthorDTO>>
+        ) : IRequestHandler<AddAuthorCommand, WebServiceResult<AuthorDTO>>
     {
-        public async Task<Result<AuthorDTO>> Handle(AddAuthorCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<AuthorDTO>> Handle(AddAuthorCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -25,12 +26,12 @@ namespace Cinamaart.Application.Features.Authors.Commands.AddAuthor
                 await unitOfWork.SaveAsync(cancellationToken);
 
                 var data = mapper.Map<AuthorDTO>(Author);
-                return Result<AuthorDTO>.Success(data);
+                return WebServiceResult<AuthorDTO>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while adding Author, requested data = {request}", request.ToJson());
-                return Result<AuthorDTO>.Failure("AddAuthor.Exception", ex.Message);
+                return WebServiceResult<AuthorDTO>.Failure("AddAuthor.Exception", ex.Message);
             }
         }
     }
