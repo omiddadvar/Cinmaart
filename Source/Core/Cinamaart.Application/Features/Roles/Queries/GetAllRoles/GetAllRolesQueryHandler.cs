@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
@@ -11,20 +12,20 @@ namespace Cinamaart.Application.Features.Roles.Queries.GetAllRoles
             IMapper mapper,
             IRoleRepository roleRepository,
             ILogger<GetAllRolesQueryHandler> logger
-        ) : IRequestHandler<GetAllRolesQuery, Result<IList<string>>>
+        ) : IRequestHandler<GetAllRolesQuery, WebServiceResult<IList<string>>>
     {
-        public async Task<Result<IList<string>>> Handle(GetAllRolesQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<IList<string>>> Handle(GetAllRolesQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var roles = await roleRepository.GetAllAsync();
                 var data = roles.Select(r => r.Name).ToArray();
-                return Result<IList<string>>.Success(data);
+                return WebServiceResult<IList<string>>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while fetching all roles");
-                return Result<IList<string>>.Failure("GetAllRoles.Exception", ex.Message);
+                return WebServiceResult<IList<string>>.Failure("GetAllRoles.Exception", ex.Message);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Roles.Queries.GetUserRoles
 {
-    public record GetUserRolesQuery(long? UserId) : IRequest<Result<IList<string>>>;
+    public record GetUserRolesQuery(long? UserId) : IRequest<WebServiceResult<IList<string>>>;
 }

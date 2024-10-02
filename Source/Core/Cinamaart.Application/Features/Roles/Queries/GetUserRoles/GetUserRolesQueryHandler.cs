@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.SharedKernel;
@@ -21,27 +22,27 @@ namespace Cinamaart.Application.Features.Roles.Queries.GetUserRoles
         UserManager<User> userManager,
         IStringLocalizer<StringResources> localizer,
         ILogger<GetUserRolesQueryHandler> logger
-        ) : IRequestHandler<GetUserRolesQuery, Result<IList<string>>>
+        ) : IRequestHandler<GetUserRolesQuery, WebServiceResult<IList<string>>>
     {
-        public async Task<Result<IList<string>>> Handle(GetUserRolesQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<IList<string>>> Handle(GetUserRolesQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 if (request.UserId is null)
-                    return Result<IList<string>>.Failure("GetUserRoles.NotFound", localizer[LocalStringKeyword.User_NotFound]);
+                    return WebServiceResult<IList<string>>.Failure("GetUserRoles.NotFound", localizer[LocalStringKeyword.User_NotFound]);
 
                 var user = await userManager.Users.FirstOrDefaultAsync(u => u.Id.Equals(request.UserId));
 
                 if (user is null)
-                    return Result<IList<string>>.Failure("GetUserRoles.NotFound", localizer[LocalStringKeyword.User_NotFound]);
+                    return WebServiceResult<IList<string>>.Failure("GetUserRoles.NotFound", localizer[LocalStringKeyword.User_NotFound]);
                 
                 var roles = await userManager.GetRolesAsync(user);
-                return Result<IList<string>>.Success(roles);
+                return WebServiceResult<IList<string>>.Success(roles);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while fetching roles for user, userId = {userId}", request.UserId);
-                return Result<IList<string>>.Failure("GetUserRoles.Exception", ex.Message);
+                return WebServiceResult<IList<string>>.Failure("GetUserRoles.Exception", ex.Message);
             }
         }
     }
