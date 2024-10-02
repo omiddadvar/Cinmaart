@@ -15,6 +15,7 @@ using Cinamaart.Application.Features.TvSeries;
 using Cinamaart.Domain.Entities;
 using Cinamaart.Domain.Extentions;
 using System.Linq.Expressions;
+using Cinamaart.Application.Abstractions;
 
 namespace Cinamaart.Application.Features.TvSeries.Queries.GetPaginatedTvSeries
 {
@@ -22,9 +23,9 @@ namespace Cinamaart.Application.Features.TvSeries.Queries.GetPaginatedTvSeries
             IMapper mapper,
             ITvSerieRepository tvSerieRepository,
             ILogger<GetPaginatedTvSeriesQueryHandler> logger
-        ) : IRequestHandler<GetPaginatedTvSerieQuery, Result<PagedList<TvSerieDTO>>>
+        ) : IRequestHandler<GetPaginatedTvSerieQuery, WebServiceResult<PagedList<TvSerieDTO>>>
     {
-        public async Task<Result<PagedList<TvSerieDTO>>> Handle(GetPaginatedTvSerieQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<PagedList<TvSerieDTO>>> Handle(GetPaginatedTvSerieQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -41,12 +42,12 @@ namespace Cinamaart.Application.Features.TvSeries.Queries.GetPaginatedTvSeries
                     e => e.Country);
 
                 var data = mapper.Map<PagedList<TvSerie>, PagedList<TvSerieDTO>>(rawData);
-                return Result<PagedList<TvSerieDTO>>.Success(data);
+                return WebServiceResult<PagedList<TvSerieDTO>>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading paginated TvSerie data, requested data = {request}", request.ToJson());
-                return Result<PagedList<TvSerieDTO>>.Failure("GetPaginatedTvSeries.Exception", ex.Message);
+                return WebServiceResult<PagedList<TvSerieDTO>>.Failure("GetPaginatedTvSeries.Exception", ex.Message);
             }
         }
     }

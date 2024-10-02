@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.TvSeries;
 using Cinamaart.Domain.Abstractions;
@@ -16,20 +17,20 @@ namespace Cinamaart.Application.Features.TvSeries.Queries.GetTvSerieById
         IMapper mapper,
         ITvSerieRepository tvSerieRepository,
         ILogger<GetTvSerieByIdQueryHandler> logger
-    ) : IRequestHandler<GetTvSerieByIdQuery, Result<TvSerieDTO>>
+    ) : IRequestHandler<GetTvSerieByIdQuery, WebServiceResult<TvSerieDTO>>
     {
-        public async Task<Result<TvSerieDTO>> Handle(GetTvSerieByIdQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<TvSerieDTO>> Handle(GetTvSerieByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var artist = await tvSerieRepository.GetAsync(request.TvSerieId, cancellationToken);
                 var data = mapper.Map<TvSerieDTO>(artist);
-                return Result<TvSerieDTO>.Success(data);
+                return WebServiceResult<TvSerieDTO>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading TvSerie data, TvSerieid = {TvSerieid}", request.TvSerieId);
-                return Result<TvSerieDTO>.Failure("GetTvSerieById.Exception", ex.Message);
+                return WebServiceResult<TvSerieDTO>.Failure("GetTvSerieById.Exception", ex.Message);
             }
         }
     }

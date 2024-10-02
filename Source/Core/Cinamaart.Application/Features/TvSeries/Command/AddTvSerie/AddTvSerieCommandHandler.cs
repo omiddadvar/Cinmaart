@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Interfaces.Repositories;
 using Cinamaart.Domain.Abstractions;
@@ -14,9 +15,9 @@ namespace Cinamaart.Application.Features.TvSeries.Command.AddTvSerie
             ITvSerieRepository tvSerieRepository,
             IUnitOfWork unitOfWork,
             ILogger<AddTvSerieCommandHandler> logger
-        ) : IRequestHandler<AddTvSerieCommand, Result<TvSerieDTO>>
+        ) : IRequestHandler<AddTvSerieCommand, WebServiceResult<TvSerieDTO>>
     {
-        public async Task<Result<TvSerieDTO>> Handle(AddTvSerieCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<TvSerieDTO>> Handle(AddTvSerieCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -25,12 +26,12 @@ namespace Cinamaart.Application.Features.TvSeries.Command.AddTvSerie
                 await unitOfWork.SaveAsync(cancellationToken);
 
                 var data = mapper.Map<TvSerieDTO>(TvSerie);
-                return Result<TvSerieDTO>.Success(data);
+                return WebServiceResult<TvSerieDTO>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while adding TvSerie, requested data = {request}", request.ToJson());
-                return Result<TvSerieDTO>.Failure("AddTvSerie.Exception", ex.Message);
+                return WebServiceResult<TvSerieDTO>.Failure("AddTvSerie.Exception", ex.Message);
             }
         }
     }
