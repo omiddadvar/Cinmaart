@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Users.Commands.Lockout
 {
-    public record LockoutCommand(long UserId , bool Enabled) : IRequest<Result<bool>>;
+    public record LockoutCommand(long UserId , bool Enabled) : IRequest<WebServiceResult<bool>>;
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Extentions;
@@ -22,25 +23,25 @@ namespace Cinamaart.Application.Features.Users.Queries.GetAllUsers
             UserManager<User> userManager,
             IStringLocalizer<StringResources> localizer,
             ILogger<GetAllUsersQueryHandler> logger
-        ) : IRequestHandler<GetAllUsersQuery, Result<IList<UserDTO>>{
-        public async Task<Result<IList<UserDTO>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+        ) : IRequestHandler<GetAllUsersQuery, WebServiceResult<IList<UserDTO>>{
+        public async Task<WebServiceResult<IList<UserDTO>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var users = await userManager.Users.ToArrayAsync();
                 if (users.IsNullOrEmpty())
-                    return Result<IList<UserDTO>>.Failure("GetAllUsers.NotFound",
+                    return WebServiceResult<IList<UserDTO>>.Failure("GetAllUsers.NotFound",
                         localizer[LocalStringKeyword.User_NotFound]);
                 else
                 {
                     var userData = mapper.Map<UserDTO[]>(users);
-                    return Result<IList<UserDTO>>.Success(userData);
+                    return WebServiceResult<IList<UserDTO>>.Success(userData);
                 }
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while fetching all users data");
-                return Result<IList<UserDTO>>.Failure("GetAllUsers.Exception", ex.Message);
+                return WebServiceResult<IList<UserDTO>>.Failure("GetAllUsers.Exception", ex.Message);
             }
         }
     }

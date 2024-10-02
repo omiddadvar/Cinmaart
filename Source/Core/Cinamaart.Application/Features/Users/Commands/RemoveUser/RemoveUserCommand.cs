@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Users.Commands.RemoveUser
 {
-    public record RemoveUserCommand(long UserId) : IRequest<Result<bool>>;
+    public record RemoveUserCommand(long UserId) : IRequest<WebServiceResult<bool>>;
 }

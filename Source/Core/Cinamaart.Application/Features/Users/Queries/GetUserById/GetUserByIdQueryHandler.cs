@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Features.Users.Commands.Register;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
@@ -23,9 +24,9 @@ namespace Cinamaart.Application.Features.Users.Queries.GetUserById
         ILogger<GetUserByIdQueryHandler> logger,
         IStringLocalizer<StringResources> localizer
         ) :
-        IRequestHandler<GetUserByIdQuery, Result<UserDTO>>
+        IRequestHandler<GetUserByIdQuery, WebServiceResult<UserDTO>>
     {
-        public async Task<Result<UserDTO>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<UserDTO>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -34,15 +35,15 @@ namespace Cinamaart.Application.Features.Users.Queries.GetUserById
                 if (user is not null)
                 {
                     UserDTO userDTO = mapper.Map<UserDTO>(user);
-                    return Result<UserDTO>.Success(userDTO);
+                    return WebServiceResult<UserDTO>.Success(userDTO);
                 }
                 else
-                    return Result<UserDTO>.Failure("User.NotFound", localizer[LocalStringKeyword.User_NotFoundById, request.UserId]);
+                    return WebServiceResult<UserDTO>.Failure("User.NotFound", localizer[LocalStringKeyword.User_NotFoundById, request.UserId]);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while retrieving user data by id, UserId = {id}", request.UserId);
-                return Result<UserDTO>.Failure("GetUserById.Exception", ex.Message);
+                return WebServiceResult<UserDTO>.Failure("GetUserById.Exception", ex.Message);
             }
         }
     }

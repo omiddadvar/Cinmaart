@@ -1,4 +1,6 @@
-﻿using Cinamaart.Application.Features.Users.Commands.Register;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Extentions;
+using Cinamaart.Application.Features.Users.Commands.Register;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Extentions;
@@ -20,9 +22,9 @@ namespace Cinamaart.Application.Features.Users.Commands.RemoveUser
             UserManager<User> userManager,
             ILogger<RegisterCommandHandler> logger,
             IStringLocalizer<StringResources> localizer
-        ) : IRequestHandler<RemoveUserCommand, Result<bool>>
+        ) : IRequestHandler<RemoveUserCommand, WebServiceResult<bool>>
     {
-        public async Task<Result<bool>> Handle(RemoveUserCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<bool>> Handle(RemoveUserCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -30,16 +32,16 @@ namespace Cinamaart.Application.Features.Users.Commands.RemoveUser
                 if(user is not null)
                 {
                     var identityResult = await userManager.DeleteAsync(user);
-                    return identityResult.ToStandardResult<bool>();
+                    return identityResult.ToStandardWebServiceResult<bool>();
                 }
                 else
-                    return Result<bool>.Failure("RemoveUser.NotFound", 
+                    return WebServiceResult<bool>.Failure("RemoveUser.NotFound", 
                         localizer[LocalStringKeyword.User_NotFoundById , request.UserId]);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while removing user, userId = {userId}", request.UserId);
-                return Result<bool>.Failure("RemoveUser.Exception", ex.Message);
+                return WebServiceResult<bool>.Failure("RemoveUser.Exception", ex.Message);
             }
         }
     }

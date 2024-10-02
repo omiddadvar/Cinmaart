@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Notification;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Abstractions.Services;
@@ -29,9 +30,9 @@ namespace Cinamaart.Application.Features.Users.Commands.Register
             IEmailService emailService,
             IUrlService urlService,
             IStringLocalizer<StringResources> stringLocalizer
-        ) : IRequestHandler<RegisterCommand, Result<long?>>
+        ) : IRequestHandler<RegisterCommand, WebServiceResult<long?>>
     {
-        public async Task<Result<long?>> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<long?>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -48,15 +49,15 @@ namespace Cinamaart.Application.Features.Users.Commands.Register
                             stringLocalizer[LocalStringKeyword.Email_UserRegistrationSubject],
                             stringLocalizer[LocalStringKeyword.Email_UserRegistrationSubject , confirmationLink]
                         );
-                    return Result<long?>.Success(user.Id);
+                    return WebServiceResult<long?>.Success(user.Id);
                 }
                 else
-                    return Result<long?>.Failure(identityResult.Errors.ToErrors());
+                    return WebServiceResult<long?>.Failure(identityResult.Errors.ToErrors());
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while registering user, requested data = {request}", request.ToJson());
-                return Result<long?>.Failure("Register.Exception", ex.Message);
+                return WebServiceResult<long?>.Failure("Register.Exception", ex.Message);
             }
         }
     }
