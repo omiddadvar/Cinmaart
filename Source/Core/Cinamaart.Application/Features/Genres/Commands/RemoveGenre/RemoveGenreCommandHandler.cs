@@ -1,4 +1,5 @@
-﻿using Cinamaart.Application.Abstractions.Repositories;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Interfaces.Repositories;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
@@ -16,20 +17,20 @@ namespace Cinamaart.Application.Features.Genres.Commands.RemoveGenre
             IUnitOfWork unitOfWork,
             ILogger<RemoveGenreCommandHandler> logger
         )
-        : IRequestHandler<RemoveGenreCommand, Result<bool>>
+        : IRequestHandler<RemoveGenreCommand, WebServiceResult<bool>>
     {
-        public async Task<Result<bool>> Handle(RemoveGenreCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<bool>> Handle(RemoveGenreCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 await genreRepository.DeleteAsync(request.Id);
                 await unitOfWork.SaveAsync(cancellationToken);
-                return Result<bool>.Success(true);
+                return WebServiceResult<bool>.Success(true);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while removing genre, genreId = {Id}", request.Id);
-                return Result<bool>.Failure("RemoveGenre.Exception", ex.Message);
+                return WebServiceResult<bool>.Failure("RemoveGenre.Exception", ex.Message);
             }
         }
     }

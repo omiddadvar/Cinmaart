@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
@@ -12,9 +13,9 @@ namespace Cinamaart.Application.Features.Genres.Queries.GetAllGeners
             IGenreRepository genreRepository,
             ILogger<GetAllGenersQueryHandler> logger
         )
-        : IRequestHandler<GetAllGenersQuery, Result<IList<GenreDTO>>>
+        : IRequestHandler<GetAllGenersQuery, WebServiceResult<IList<GenreDTO>>>
     {
-        public async Task<Result<IList<GenreDTO>>> Handle(GetAllGenersQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<IList<GenreDTO>>> Handle(GetAllGenersQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -24,12 +25,12 @@ namespace Cinamaart.Application.Features.Genres.Queries.GetAllGeners
                    cancellationToken);
 
                 var data = mapper.Map<List<GenreDTO>>(rawData.ToList());
-                return Result<IList<GenreDTO>>.Success(data);
+                return WebServiceResult<IList<GenreDTO>>.Success(data);
             }
             catch(Exception ex)
             {
                 logger.LogError(ex, "Error while reading all genre data");
-                return Result<IList<GenreDTO>>.Failure("GetAllGeners.Exception", ex.Message);
+                return WebServiceResult<IList<GenreDTO>>.Failure("GetAllGeners.Exception", ex.Message);
             }
         }
     }

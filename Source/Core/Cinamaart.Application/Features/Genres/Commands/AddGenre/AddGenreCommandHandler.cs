@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Interfaces.Repositories;
 using Cinamaart.Domain.Abstractions;
@@ -21,9 +22,9 @@ namespace Cinamaart.Application.Features.Genres.Commands.AddGenre
             IUnitOfWork unitOfWork,
             ILogger<AddGenreCommandHandler> logger
         )
-        : IRequestHandler<AddGenreCommand, Result<GenreDTO>>
+        : IRequestHandler<AddGenreCommand, WebServiceResult<GenreDTO>>
     {
-        public async Task<Result<GenreDTO>> Handle(AddGenreCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<GenreDTO>> Handle(AddGenreCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -32,12 +33,12 @@ namespace Cinamaart.Application.Features.Genres.Commands.AddGenre
                 await unitOfWork.SaveAsync(cancellationToken);
 
                 var genreDTO = mapper.Map<GenreDTO>(genre);
-                return Result<GenreDTO>.Success(genreDTO);
+                return WebServiceResult<GenreDTO>.Success(genreDTO);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while adding genre, requested data = {request}", request.ToJson());
-                return Result<GenreDTO>.Failure("AddGenre.Exception", ex.Message);
+                return WebServiceResult<GenreDTO>.Failure("AddGenre.Exception", ex.Message);
             }
         }
     }

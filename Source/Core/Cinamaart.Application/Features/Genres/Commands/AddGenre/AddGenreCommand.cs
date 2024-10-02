@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,5 @@ namespace Cinamaart.Application.Features.Genres.Commands.AddGenre
 {
     public record AddGenreCommand(
             string Name
-        ) : IRequest<Result<GenreDTO>>;
+        ) : IRequest<WebServiceResult<GenreDTO>>;
 }
