@@ -1,16 +1,8 @@
 ﻿using AutoMapper;
 using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
-using Cinamaart.Application.Features.Artists.Queries;
-using Cinamaart.Application.Interfaces.Repositories;
-using Cinamaart.Domain.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Countries.Queries.GatAllCountries
 {
@@ -28,7 +20,7 @@ namespace Cinamaart.Application.Features.Countries.Queries.GatAllCountries
                 var data = mapper.Map<List<CountryDTO>>(countries);
                 return WebServiceResult<IList<CountryDTO>>.Success(data);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading all country data");
                 return WebServiceResult<IList<CountryDTO>>.Failure("GatAllCountries.Exception", ex.Message);

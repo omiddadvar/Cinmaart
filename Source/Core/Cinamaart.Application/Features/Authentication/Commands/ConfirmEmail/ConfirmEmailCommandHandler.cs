@@ -1,7 +1,5 @@
 ﻿using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Features.Authentication.Commands.Login;
-using Cinamaart.Application.Features.Authentication.Queries;
-using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Extentions;
 using Cinamaart.SharedKernel;
@@ -10,12 +8,6 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Authentication.Commands.ConfirmEmail
 {

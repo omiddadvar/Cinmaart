@@ -1,6 +1,4 @@
-﻿using Cinamaart.Domain.Abstractions;
-
-namespace Cinamaart.Domain.Entities.Types
+﻿namespace Cinamaart.Domain.Entities.Types
 {
     public class Gender
     {

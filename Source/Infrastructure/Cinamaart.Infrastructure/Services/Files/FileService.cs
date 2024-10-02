@@ -1,14 +1,7 @@
 ﻿using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Domain.Common.Enums;
-using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Infrastructure.Services.Files
 {
@@ -47,7 +40,7 @@ namespace Cinamaart.Infrastructure.Services.Files
             }
         }
         public async Task<bool> UploadFileAsync(
-            IFormFile file , 
+            IFormFile file,
             DocumentTypeEnum type = DocumentTypeEnum.SRT)
         {
             bool result = false;
@@ -60,9 +53,9 @@ namespace Cinamaart.Infrastructure.Services.Files
             }
             return result;
         }
-        public async Task DeleteFileAsync(string fileName , DocumentTypeEnum type)
+        public async Task DeleteFileAsync(string fileName, DocumentTypeEnum type)
         {
-            var filePath = Path.Combine(_fileStoragePath , type.ToString(), fileName);
+            var filePath = Path.Combine(_fileStoragePath, type.ToString(), fileName);
 
             if (File.Exists(filePath))
             {

@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
-using Cinamaart.Domain.Abstractions;
+using Cinamaart.Application.Features.Episodes.Queries.GetEpisodesOfSeason;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Cinamaart.Application.Features.Episodes.Queries.GetEpisodesOfSeason;
-using Cinamaart.Application.Abstractions;
 
 namespace Cinamaart.Application.Features.Episodes.Queries.GetEpisodesOfEpisode
 {

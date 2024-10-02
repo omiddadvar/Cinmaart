@@ -1,14 +1,13 @@
-﻿using Cinamaart.Application.Abstractions.Settings;
+﻿using Cinamaart.Application.Abstractions.Notification;
+using Cinamaart.Application.Abstractions.Services;
+using Cinamaart.Application.Abstractions.Settings;
 using Cinamaart.Infrastructure.Configurations;
+using Cinamaart.Infrastructure.Services;
+using Cinamaart.Infrastructure.Services.Notification;
 using Cinamaart.Infrastructure.Services.Token;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
-using Microsoft.Extensions.Configuration;
-using Cinamaart.Application.Abstractions.Services;
-using Cinamaart.Infrastructure.Services;
-using Cinamaart.Application.Abstractions.Notification;
-using Cinamaart.Infrastructure.Services.Notification;
-using Cinamaart.Infrastructure.Services.File;
 
 
 namespace Cinamaart.Infrastructure
@@ -29,7 +28,7 @@ namespace Cinamaart.Infrastructure
             services.AddTransient<IEmailService, EmailService>();
             //Utility Services
             services.AddTransient<IUrlService, UrlService>();
-            services.AddScoped<IFileService,  FileService>();
+            services.AddScoped<IFileService, FileService>();
 
             return services;
         }

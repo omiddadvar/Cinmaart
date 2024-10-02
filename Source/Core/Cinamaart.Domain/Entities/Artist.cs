@@ -1,5 +1,4 @@
-﻿using Cinamaart.Domain.Abstractions;
-using Cinamaart.Domain.Entities.Pivots;
+﻿using Cinamaart.Domain.Entities.Pivots;
 using Cinamaart.Domain.Entities.Types;
 
 namespace Cinamaart.Domain.Entities

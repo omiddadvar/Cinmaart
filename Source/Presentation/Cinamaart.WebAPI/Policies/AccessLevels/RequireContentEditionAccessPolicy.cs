@@ -12,7 +12,7 @@ namespace Cinamaart.WebAPI.Policies.AccessLevels
                 {
                     policy.RequireRole(
                             RoleNames.Administrator,
-                            RoleNames.ContentWriter 
+                            RoleNames.ContentWriter
                         );
                 });
         }

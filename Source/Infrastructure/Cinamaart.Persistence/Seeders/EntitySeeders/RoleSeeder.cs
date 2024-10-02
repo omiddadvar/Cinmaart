@@ -2,13 +2,7 @@
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Persistence.Abstractions;
 using Cinamaart.Persistence.Contexts;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Persistence.Seeders.EntitySeeders
 {
@@ -27,10 +21,10 @@ namespace Cinamaart.Persistence.Seeders.EntitySeeders
             foreach (var p in type.GetFields(BindingFlags.Static | BindingFlags.Public))
             {
                 tempRoleName = p.GetValue(null)?.ToString() ?? null;
-                if(tempRoleName is not null)
+                if (tempRoleName is not null)
                 {
                     bool roleExists = previousRoles?.Where(r => r.Name.Equals(tempRoleName)).Any() ?? false;
-                    if(!roleExists)
+                    if (!roleExists)
                         roles.Add(new Role
                         {
                             NormalizedName = tempRoleName,

@@ -1,6 +1,4 @@
-﻿using Cinamaart.Domain.Abstractions;
-using Cinamaart.WebAPI.Abstractions;
-using Cinamaart.WebAPI.Abstractions.ExceptionHandlers;
+﻿using Cinamaart.WebAPI.Abstractions.ExceptionHandlers;
 using Microsoft.AspNetCore.Diagnostics;
 
 namespace Cinamaart.WebAPI.Infrastructure

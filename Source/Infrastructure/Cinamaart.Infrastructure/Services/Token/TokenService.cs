@@ -4,24 +4,20 @@ using Cinamaart.Application.DTO;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.SharedKernel;
 using Cinamaart.SharedKernel.Resources;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
-using System.Xml.Serialization;
 
 namespace Cinamaart.Infrastructure.Services.Token
 {
     public class TokenService(
         IJwtSettting jwtSettting,
-        IConnectionMultiplexer redis, 
+        IConnectionMultiplexer redis,
         UserManager<User> userManager,
         IStringLocalizer<StringResources> stringLocalizer,
         IConfiguration configuration) : ITokenService
@@ -91,7 +87,7 @@ namespace Cinamaart.Infrastructure.Services.Token
         {
 
             var principal = GetPrincipalFromExpiredToken(expiredAccessToken);
-            if(principal is null)
+            if (principal is null)
             {
                 throw new SecurityTokenException(stringLocalizer[LocalStringKeyword.Auth_InvalidExpiredToken]);
             }

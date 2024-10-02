@@ -1,15 +1,8 @@
 ﻿using AutoMapper;
 using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
-using Cinamaart.Application.Features.Episodes;
-using Cinamaart.Domain.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Episodes.Queries.GetEpisodeById
 {

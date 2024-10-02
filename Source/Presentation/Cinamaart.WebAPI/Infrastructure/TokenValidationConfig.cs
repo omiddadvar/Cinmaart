@@ -1,5 +1,4 @@
 ﻿using Cinamaart.Application.Abstractions.Settings;
-using Cinamaart.Infrastructure.Services.Token;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Cinamaart.WebAPI.Infrastructure

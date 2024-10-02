@@ -6,14 +6,13 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
-using System.Threading;
 
 namespace Cinamaart.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class RoleController(
-        IMediator mediator, 
+        IMediator mediator,
         IOutputCacheStore cacheStore,
         IUserService userService) : ControllerBase
     {
@@ -31,7 +30,7 @@ namespace Cinamaart.WebAPI.Controllers
         public async Task<IActionResult> GetCurrentUserRoles(CancellationToken cancellationToken = default)
         {
             var userId = userService.GetUserId();
-            var query = new GetUserRolesQuery(userId); 
+            var query = new GetUserRolesQuery(userId);
             var data = await mediator.Send(query, cancellationToken);
             return data.IsSuccess ? Ok(data) : BadRequest(data);
         }

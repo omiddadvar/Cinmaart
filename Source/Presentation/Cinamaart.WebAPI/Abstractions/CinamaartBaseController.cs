@@ -1,5 +1,4 @@
 ﻿using Cinamaart.Domain.Abstractions;
-using Cinamaart.WebAPI.Abstractions.Constants;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 
@@ -14,7 +13,7 @@ namespace Cinamaart.WebAPI.Abstractions
         {
             if (result.IsSuccess)
             {
-                if(cacheStore is not null && 
+                if (cacheStore is not null &&
                         !string.IsNullOrEmpty(cacheTag))
                     await cacheStore.EvictByTagAsync(cacheTag, CancellationToken.None);
                 return Ok(result);

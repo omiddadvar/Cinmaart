@@ -1,6 +1,4 @@
-﻿using Cinamaart.Domain.Abstractions;
-
-namespace Cinamaart.Domain.Entities.Pivots
+﻿namespace Cinamaart.Domain.Entities.Pivots
 {
     public class MovieArtist
     {

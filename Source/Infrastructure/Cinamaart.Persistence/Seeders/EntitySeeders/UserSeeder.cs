@@ -4,16 +4,10 @@ using Cinamaart.Persistence.Abstractions;
 using Cinamaart.Persistence.Contexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Persistence.Seeders.EntitySeeders
 {
-    public class UserSeeder(MainDBContext dbContext , UserManager<User> userManager) : ISeeder
+    public class UserSeeder(MainDBContext dbContext, UserManager<User> userManager) : ISeeder
     {
         public uint Order => 5;
 
@@ -41,7 +35,7 @@ namespace Cinamaart.Persistence.Seeders.EntitySeeders
                     }
                     trans.Commit();
                 }
-                catch 
+                catch
                 {
                     trans.Rollback();
                 }

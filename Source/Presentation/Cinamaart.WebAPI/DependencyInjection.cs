@@ -7,9 +7,6 @@ using Cinamaart.WebAPI.Policies.AccessLevels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Localization.Routing;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
-using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 
 namespace Cinamaart.WebAPI

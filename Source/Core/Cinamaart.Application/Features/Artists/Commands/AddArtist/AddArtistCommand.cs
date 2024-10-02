@@ -1,7 +1,7 @@
 ﻿
-using MediatR;
-using Cinamaart.Application.Features.Artists.Queries;
 using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Features.Artists.Queries;
+using MediatR;
 
 namespace Cinamaart.Application.Features.Artists.Commands.AddArtist
 {

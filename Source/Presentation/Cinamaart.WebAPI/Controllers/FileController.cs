@@ -1,6 +1,5 @@
 ﻿using Cinamaart.Application.Abstractions.Constants;
 using Cinamaart.Domain.Abstractions;
-using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.SharedKernel;
 using Cinamaart.SharedKernel.Resources;
 using Cinamaart.WebAPI.Extentions;
@@ -49,7 +48,7 @@ namespace Cinamaart.WebAPI.Controllers
         }
         [HttpPost("UserProfile")]
         [Authorize(Policy = PolicyNames.IsResourceOwnerOrAdmin)]
-        public async Task<IActionResult> AddUserProfile([FromForm] IFormFile file , [FromForm] long UserId)
+        public async Task<IActionResult> AddUserProfile([FromForm] IFormFile file, [FromForm] long UserId)
         {
             throw new NotImplementedException();
         }

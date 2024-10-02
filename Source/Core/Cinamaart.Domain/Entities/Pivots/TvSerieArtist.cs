@@ -1,8 +1,6 @@
-﻿using Cinamaart.Domain.Abstractions;
-
-namespace Cinamaart.Domain.Entities.Pivots
+﻿namespace Cinamaart.Domain.Entities.Pivots
 {
-    public class TvSerieArtist 
+    public class TvSerieArtist
     {
         public long Id { get; set; }
         public int TvSerieId { get; set; }

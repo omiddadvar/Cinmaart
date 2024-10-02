@@ -19,11 +19,11 @@ namespace Cinamaart.Persistence.Extentions
             {
                 var dbContext = scope.ServiceProvider.GetService<MainDBContext>();
                 var userManager = scope.ServiceProvider.GetService<UserManager<User>>();
-                _CallAllSeeders(dbContext , userManager);
+                _CallAllSeeders(dbContext, userManager);
             }
             return app;
         }
-        private static void _CallAllSeeders(MainDBContext dbContext , UserManager<User> userManager)
+        private static void _CallAllSeeders(MainDBContext dbContext, UserManager<User> userManager)
         {
             var assembly = Assembly.GetAssembly(typeof(MainDBContext));
             var seederClasses = assembly.GetTypes()

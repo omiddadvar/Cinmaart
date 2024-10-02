@@ -1,17 +1,11 @@
 ﻿using AutoMapper;
 using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
-using Cinamaart.Domain.Abstractions;
 using Cinamaart.SharedKernel;
 using Cinamaart.SharedKernel.Resources;
 using MediatR;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Countries.Queries.GatCountry
 {
@@ -29,13 +23,13 @@ namespace Cinamaart.Application.Features.Countries.Queries.GatCountry
                 var country = await countryRepository.GetAsync(request.Id);
                 if (country is null)
                 {
-                    return WebServiceResult<CountryDTO>.Failure("Country.NotFound" ,
+                    return WebServiceResult<CountryDTO>.Failure("Country.NotFound",
                         stringLocalizer[LocalStringKeyword.Country_NotFound]);
                 }
                 var countryDTO = mapper.Map<CountryDTO>(country);
                 return WebServiceResult<CountryDTO>.Success(countryDTO);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading country data, countryId = {ArtistId}", request.Id);
                 return WebServiceResult<CountryDTO>.Failure("GatCountry.Exception", ex.Message);

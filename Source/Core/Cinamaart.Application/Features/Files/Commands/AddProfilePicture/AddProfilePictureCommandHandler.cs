@@ -1,8 +1,6 @@
 ﻿using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Application.Extentions.Files;
-using Cinamaart.Domain.Abstractions;
-using Cinamaart.Domain.Common.Enums;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.SharedKernel;
 using Cinamaart.SharedKernel.Resources;
@@ -10,11 +8,6 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Files.Commands.AddProfilePicture
 {
@@ -33,13 +26,13 @@ namespace Cinamaart.Application.Features.Files.Commands.AddProfilePicture
                 {
                     return WebServiceResult<string>.Failure(localizer[LocalStringKeyword.File_UploadNotFound]);
                 }
-                
-                var isUploaded = await fileService.UploadFileAsync(request.File , request.File.GetDocType());
+
+                var isUploaded = await fileService.UploadFileAsync(request.File, request.File.GetDocType());
                 return filePath;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                logger.LogError("Error while updating profile picture for user : {userId}" , request.UserId);
+                logger.LogError("Error while updating profile picture for user : {userId}", request.UserId);
                 return WebServiceResult<string>.Failure(ex.Message);
             }
         }

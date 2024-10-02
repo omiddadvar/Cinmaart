@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace Cinamaart.Domain.Abstractions
+﻿namespace Cinamaart.Domain.Abstractions
 {
     public class Result<T> : IResult<T>
     {
@@ -12,13 +10,13 @@ namespace Cinamaart.Domain.Abstractions
                 throw new ArgumentException("Invalid error", nameof(error));
             }
             IsSuccess = isSuccess;
-            if(error != Error.None)
+            if (error != Error.None)
                 Errors = new[] { error };
             Data = data;
         }
         public Result(bool isSuccess, T? data, IList<Error>? errors)
         {
-            if(errors is not null)
+            if (errors is not null)
             {
                 Error? invalidError = errors
                     .Where(e => (isSuccess && e != Error.None || !isSuccess && e == Error.None))

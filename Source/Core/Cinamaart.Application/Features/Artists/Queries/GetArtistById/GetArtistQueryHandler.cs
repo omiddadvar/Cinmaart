@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
 using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
-using Cinamaart.Domain.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Artists.Queries.GetArtistById
 {
@@ -28,7 +22,7 @@ namespace Cinamaart.Application.Features.Artists.Queries.GetArtistById
             }
             catch (Exception ex)
             {
-                logger.LogError(ex , "Error while reading artist data, artistid = {ArtistId}", request.ArtistId);
+                logger.LogError(ex, "Error while reading artist data, artistid = {ArtistId}", request.ArtistId);
                 return WebServiceResult<GetArtistDTO>.Failure("GetArtist.Exception", ex.Message);
             }
         }

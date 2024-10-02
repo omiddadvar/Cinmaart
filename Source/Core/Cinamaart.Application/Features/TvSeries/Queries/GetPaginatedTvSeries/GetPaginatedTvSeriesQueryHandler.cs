@@ -1,21 +1,11 @@
 ﻿using AutoMapper;
 using Cinamaart.Application.Abstractions.Repositories;
-using Cinamaart.Application.Features.TvSeries.Queries.GetPaginatedTvSeries;
-using Cinamaart.Application.Features.TvSeries;
-using Cinamaart.Application.Features.TvSeries.Queries.GetTvSerieById;
 using Cinamaart.Domain.Abstractions;
-using MediatR;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cinamaart.Application.Features.TvSeries;
 using Cinamaart.Domain.Entities;
 using Cinamaart.Domain.Extentions;
+using MediatR;
+using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
-using Cinamaart.Application.Abstractions;
 
 namespace Cinamaart.Application.Features.TvSeries.Queries.GetPaginatedTvSeries
 {
@@ -23,9 +13,9 @@ namespace Cinamaart.Application.Features.TvSeries.Queries.GetPaginatedTvSeries
             IMapper mapper,
             ITvSerieRepository tvSerieRepository,
             ILogger<GetPaginatedTvSeriesQueryHandler> logger
-        ) : IRequestHandler<GetPaginatedTvSerieQuery, WebServiceResult<PagedList<TvSerieDTO>>>
+        ) : IRequestHandler<GetPaginatedTvSerieQuery, Result<PagedList<TvSerieDTO>>>
     {
-        public async Task<WebServiceResult<PagedList<TvSerieDTO>>> Handle(GetPaginatedTvSerieQuery request, CancellationToken cancellationToken)
+        public async Task<Result<PagedList<TvSerieDTO>>> Handle(GetPaginatedTvSerieQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -42,12 +32,12 @@ namespace Cinamaart.Application.Features.TvSeries.Queries.GetPaginatedTvSeries
                     e => e.Country);
 
                 var data = mapper.Map<PagedList<TvSerie>, PagedList<TvSerieDTO>>(rawData);
-                return WebServiceResult<PagedList<TvSerieDTO>>.Success(data);
+                return Result<PagedList<TvSerieDTO>>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading paginated TvSerie data, requested data = {request}", request.ToJson());
-                return WebServiceResult<PagedList<TvSerieDTO>>.Failure("GetPaginatedTvSeries.Exception", ex.Message);
+                return Result<PagedList<TvSerieDTO>>.Failure("GetPaginatedTvSeries.Exception", ex.Message);
             }
         }
     }

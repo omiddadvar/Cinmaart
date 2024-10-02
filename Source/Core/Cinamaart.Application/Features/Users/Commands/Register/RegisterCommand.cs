@@ -1,11 +1,5 @@
-﻿using Cinamaart.Application.Abstractions;
-using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Domain.Abstractions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Users.Commands.Register
 {
@@ -18,5 +12,5 @@ namespace Cinamaart.Application.Features.Users.Commands.Register
         string? PhoneNumber,
         string? FirstName,
         string? LastName
-    ) : IRequest<WebServiceResult<long?>>;
+    ) : IRequest<Result<long?>>;
 }

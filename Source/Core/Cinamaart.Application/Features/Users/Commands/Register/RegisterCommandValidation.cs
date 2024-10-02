@@ -2,11 +2,6 @@
 using Cinamaart.SharedKernel.Resources;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Users.Commands.Register
 {
@@ -14,7 +9,7 @@ namespace Cinamaart.Application.Features.Users.Commands.Register
     {
         public RegisterCommandValidation(IStringLocalizer<StringResources> _localizer)
         {
-            RuleFor(x => x.Username).NotNull().NotEmpty().WithMessage(_localizer[LocalStringKeyword.ObligatoryValue,"Username"]);
+            RuleFor(x => x.Username).NotNull().NotEmpty().WithMessage(_localizer[LocalStringKeyword.ObligatoryValue, "Username"]);
             RuleFor(x => x.Password).NotNull().NotEmpty().WithMessage(_localizer[LocalStringKeyword.ObligatoryValue, "Password"]);
             RuleFor(x => x.ConfirmPassword).NotNull().NotEmpty().WithMessage(_localizer[LocalStringKeyword.ObligatoryValue, "ConfirmPassword"]);
             RuleFor(x => x.Password).Equal(x => x.ConfirmPassword).WithMessage(_localizer[LocalStringKeyword.ConfirmPasswordNotValid]);

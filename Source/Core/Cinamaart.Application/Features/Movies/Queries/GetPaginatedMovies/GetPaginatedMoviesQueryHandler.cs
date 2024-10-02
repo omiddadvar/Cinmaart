@@ -1,18 +1,11 @@
 ﻿using AutoMapper;
-using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
-using Cinamaart.Application.Features.Artists.Queries;
 using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities;
 using Cinamaart.Domain.Extentions;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Movies.Queries.GetPaginatedMovies
 {
@@ -20,9 +13,9 @@ namespace Cinamaart.Application.Features.Movies.Queries.GetPaginatedMovies
             IMapper mapper,
             IMovieRepository movieRepository,
             ILogger<GetPaginatedMoviesQueryHandler> logger
-        ) : IRequestHandler<GetPaginatedMoviesQuery, WebServiceResult<PagedList<MovieDTO>>>
+        ) : IRequestHandler<GetPaginatedMoviesQuery, Result<PagedList<MovieDTO>>>
     {
-        public async Task<WebServiceResult<PagedList<MovieDTO>>> Handle(GetPaginatedMoviesQuery request, CancellationToken cancellationToken)
+        public async Task<Result<PagedList<MovieDTO>>> Handle(GetPaginatedMoviesQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -41,18 +34,18 @@ namespace Cinamaart.Application.Features.Movies.Queries.GetPaginatedMovies
                 var rawData = await movieRepository.PaginateAsync(
                     page: request.Page,
                     pageSize: request.PageSize,
-                    Where : Where,
+                    Where: Where,
                     a => a.OrderBy(e => e.Name),
                     cancellationToken,
                     e => e.Country);
 
                 var data = mapper.Map<PagedList<Movie>, PagedList<MovieDTO>>(rawData);
-                return WebServiceResult<PagedList<MovieDTO>>.Success(data);
+                return Result<PagedList<MovieDTO>>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading paginated movie data, requested data = {request}", request.ToJson());
-                return WebServiceResult<PagedList<MovieDTO>>.Failure("GetPaginatedMovies.Exception", ex.Message);
+                return Result<PagedList<MovieDTO>>.Failure("GetPaginatedMovies.Exception", ex.Message);
             }
         }
     }

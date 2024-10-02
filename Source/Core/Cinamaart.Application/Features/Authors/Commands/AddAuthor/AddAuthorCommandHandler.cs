@@ -2,7 +2,6 @@
 using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Interfaces.Repositories;
-using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities;
 using Cinamaart.Domain.Extentions;
 using MediatR;

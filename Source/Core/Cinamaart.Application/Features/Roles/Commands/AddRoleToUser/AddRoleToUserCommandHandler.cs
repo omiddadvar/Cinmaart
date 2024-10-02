@@ -6,31 +6,26 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Roles.Commands.AddRoleToUser
 {
     internal class AddRoleToUserCommandHandler(
             UserManager<User> userManager,
             ILogger<RemoveRoleFromUserCommandHandler> logger
-        ) : IRequestHandler<AddRoleToUserCommand, WebServiceResult<bool>>
+        ) : IRequestHandler<AddRoleToUserCommand, Result<bool>>
     {
-        public async Task<WebServiceResult<bool>> Handle(AddRoleToUserCommand request, CancellationToken cancellationToken)
+        public async Task<Result<bool>> Handle(AddRoleToUserCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 var user = await userManager.Users.FirstOrDefaultAsync(u => u.Id.Equals(request.UserId));
                 var result = await userManager.AddToRolesAsync(user, request.Roles);
-                return result.ToStandardWebServiceResult<bool>();
+                return result.ToStandardResult<bool>();
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while adding roles from user, data = {request}", request.ToJson());
-                return WebServiceResult<bool>.Failure("AddRoleToUser.Exception", ex.Message);
+                return Result<bool>.Failure("AddRoleToUser.Exception", ex.Message);
             }
         }
     }

@@ -1,20 +1,15 @@
-﻿using Cinamaart.WebAPI.Abstractions.Constants;
-using Cinamaart.Application.Abstractions.Constants;
+﻿using Cinamaart.Application.Abstractions.Constants;
+using Cinamaart.Application.Features.Tags.Commands.AddTag;
+using Cinamaart.Application.Features.Tags.Commands.RemoveTag;
+using Cinamaart.Application.Features.Tags.Commands.UpdateTag;
+using Cinamaart.Application.Features.Tags.Queries.GetAllTags;
+using Cinamaart.Application.Features.Tags.Queries.GetTagById;
+using Cinamaart.WebAPI.Abstractions;
+using Cinamaart.WebAPI.Abstractions.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
-using Cinamaart.Domain.Abstractions;
-using Cinamaart.WebAPI.Abstractions;
-using Cinamaart.Application.Features.Genres.Queries.GetAllGeners;
-using System.Threading;
-using Cinamaart.Application.Features.Tags.Queries.GetAllTags;
-using Cinamaart.Application.Features.Genres.Queries.GetGenreById;
-using Cinamaart.Application.Features.Tags.Queries.GetTagById;
-using Cinamaart.Application.Features.Tags.Commands.AddTag;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using Cinamaart.Application.Features.Tags.Commands.UpdateTag;
-using Cinamaart.Application.Features.Tags.Commands.RemoveTag;
 
 namespace Cinamaart.WebAPI.Controllers
 {
@@ -42,7 +37,7 @@ namespace Cinamaart.WebAPI.Controllers
         [HttpPost]
         [Authorize(Roles = RoleNames.Administrator)]
 
-        public async Task<IActionResult> AddTag(AddTagCommand command,CancellationToken cancellationToken = default)
+        public async Task<IActionResult> AddTag(AddTagCommand command, CancellationToken cancellationToken = default)
         {
             var data = await mediator.Send(command, cancellationToken);
             return await runAfterCommandOperationWithCacheReset(data, CacheTags.Tag);
@@ -50,7 +45,7 @@ namespace Cinamaart.WebAPI.Controllers
         [HttpPut]
         [Authorize(Roles = RoleNames.Administrator)]
 
-        public async Task<IActionResult> EditTag(UpdateTagCommand command,CancellationToken cancellationToken = default)
+        public async Task<IActionResult> EditTag(UpdateTagCommand command, CancellationToken cancellationToken = default)
         {
             var data = await mediator.Send(command, cancellationToken);
             return await runAfterCommandOperationWithCacheReset(data, CacheTags.Tag);
@@ -62,7 +57,7 @@ namespace Cinamaart.WebAPI.Controllers
         {
             var command = new RemoveTagCommand(id);
             var data = await mediator.Send(command, cancellationToken);
-            return await runAfterCommandOperationWithCacheReset(data , CacheTags.Tag);
+            return await runAfterCommandOperationWithCacheReset(data, CacheTags.Tag);
         }
     }
 }

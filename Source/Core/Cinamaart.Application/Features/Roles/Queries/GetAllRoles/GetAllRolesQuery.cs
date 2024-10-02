@@ -1,13 +1,7 @@
-﻿using Cinamaart.Application.Abstractions;
-using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Domain.Abstractions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Roles.Queries.GetAllRoles
 {
-    public record GetAllRolesQuery() : IRequest<WebServiceResult<IList<string>>>;
+    public record GetAllRolesQuery() : IRequest<Result<IList<string>>>;
 }

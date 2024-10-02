@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
-using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Tags.Queries.GetAllTags
 {
@@ -16,9 +10,9 @@ namespace Cinamaart.Application.Features.Tags.Queries.GetAllTags
             IMapper mapper,
             ITagRepository tagRepository,
             ILogger<GetAllTagsQueryHandler> logger
-        ) : IRequestHandler<GetAllTagsQuery, WebServiceResult<IList<TagDTO>>>
+        ) : IRequestHandler<GetAllTagsQuery, Result<IList<TagDTO>>>
     {
-        public async Task<WebServiceResult<IList<TagDTO>>> Handle(GetAllTagsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<IList<TagDTO>>> Handle(GetAllTagsQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -27,12 +21,12 @@ namespace Cinamaart.Application.Features.Tags.Queries.GetAllTags
                    cancellationToken);
 
                 var data = mapper.Map<IList<TagDTO>>(tags.ToArray());
-                return WebServiceResult<IList<TagDTO>>.Success(data);
+                return Result<IList<TagDTO>>.Success(data);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading all tag data");
-                return WebServiceResult<IList<TagDTO>>.Failure("GetAllTags.Exception", ex.Message);
+                return Result<IList<TagDTO>>.Failure("GetAllTags.Exception", ex.Message);
             }
         }
     }

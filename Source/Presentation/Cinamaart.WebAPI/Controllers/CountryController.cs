@@ -1,19 +1,15 @@
 ﻿using Cinamaart.Application.Abstractions.Constants;
+using Cinamaart.Application.Features.Countries.Commands.AddCountry;
+using Cinamaart.Application.Features.Countries.Commands.RemoveCountry;
+using Cinamaart.Application.Features.Countries.Commands.UpdateCountry;
 using Cinamaart.Application.Features.Countries.Queries.GatAllCountries;
+using Cinamaart.Application.Features.Countries.Queries.GatCountry;
+using Cinamaart.WebAPI.Abstractions;
 using Cinamaart.WebAPI.Abstractions.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using System.Threading;
-using Cinamaart.Application.Features.Countries.Queries.GatCountry;
-using Cinamaart.Application.Features.Countries.Commands.AddCountry;
-using System.Reflection.Metadata.Ecma335;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using Cinamaart.Application.Features.Countries.Commands.UpdateCountry;
-using Cinamaart.Application.Features.Countries.Commands.RemoveCountry;
-using Cinamaart.WebAPI.Abstractions;
 
 namespace Cinamaart.WebAPI.Controllers
 {
@@ -48,7 +44,7 @@ namespace Cinamaart.WebAPI.Controllers
         }
         [HttpPut]
         [Authorize(Roles = RoleNames.Administrator)]
-        public async Task<IActionResult> EditCountry(UpdateCountryCommand command , CancellationToken cancellationToken =default)
+        public async Task<IActionResult> EditCountry(UpdateCountryCommand command, CancellationToken cancellationToken = default)
         {
             var result = await mediator.Send(command, cancellationToken);
             return await runAfterCommandOperationWithCacheReset(result, CacheTags.Country);

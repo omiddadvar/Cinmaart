@@ -4,15 +4,12 @@ using Cinamaart.Application.Features.Genres.Commands.RemoveGenre;
 using Cinamaart.Application.Features.Genres.Commands.UpdateGenre;
 using Cinamaart.Application.Features.Genres.Queries.GetAllGeners;
 using Cinamaart.Application.Features.Genres.Queries.GetGenreById;
-using Cinamaart.Domain.Abstractions;
 using Cinamaart.WebAPI.Abstractions;
 using Cinamaart.WebAPI.Abstractions.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
-using System.Threading;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Cinamaart.WebAPI.Controllers
 {
@@ -40,19 +37,19 @@ namespace Cinamaart.WebAPI.Controllers
         [Authorize(Roles = RoleNames.Administrator)]
         public async Task<IActionResult> AddGenre(AddGenreCommand command, CancellationToken cancellationToken = default)
         {
-            var data  = await mediator.Send(command, cancellationToken);
+            var data = await mediator.Send(command, cancellationToken);
             return await runAfterCommandOperationWithCacheReset(data);
         }
         [HttpPut]
         [Authorize(Roles = RoleNames.Administrator)]
-        public async Task<IActionResult> UpdateGenre(UpdateGenreCommand command,CancellationToken cancellationToken = default)
+        public async Task<IActionResult> UpdateGenre(UpdateGenreCommand command, CancellationToken cancellationToken = default)
         {
             var data = await mediator.Send(command, cancellationToken);
             return await runAfterCommandOperationWithCacheReset(data);
         }
         [HttpDelete("{id}")]
         [Authorize(Roles = RoleNames.Administrator)]
-        public async Task<IActionResult> RemoveGenre(int id,,CancellationToken cancellationToken = default)
+        public async Task<IActionResult> RemoveGenre(int id,, CancellationToken cancellationToken = default)
         {
             var command = new RemoveGenreCommand(id);
             var data = await mediator.Send(command, cancellationToken);

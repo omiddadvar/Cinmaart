@@ -12,12 +12,13 @@ namespace Cinamaart.Persistence
         public static IServiceCollection AddPersistence(this IServiceCollection services)
         {
             services.AddDbContext<MainDBContext>(
-              options => {
+              options =>
+              {
                   options.UseSqlServer("name=ConnectionStrings:DefaultConnection");
                   options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
               });
 
-            services.AddScoped<IUnitOfWork,UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddRepositories();
             return services;
         }

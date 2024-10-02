@@ -3,7 +3,6 @@ using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Application.DTO;
 using Cinamaart.Application.Features.Authentication.Queries;
-using Cinamaart.Domain.Abstractions;
 using Cinamaart.Domain.Entities.Identity;
 using Cinamaart.Domain.Extentions;
 using Cinamaart.SharedKernel;

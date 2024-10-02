@@ -1,15 +1,8 @@
 ﻿using AutoMapper;
-using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
-using Cinamaart.Application.Features.TvSeries;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.TvSeries.Queries.GetAllTvSeries
 {
@@ -17,9 +10,9 @@ namespace Cinamaart.Application.Features.TvSeries.Queries.GetAllTvSeries
             IMapper mapper,
             ITvSerieRepository tvSerieRepository,
             ILogger<GetAllTvSeriesQueryHandler> logger
-        ) : IRequestHandler<GetAllTvSeriesQuery, WebServiceResult<IList<TvSerieDTO>>>
+        ) : IRequestHandler<GetAllTvSeriesQuery, Result<IList<TvSerieDTO>>>
     {
-        public async Task<WebServiceResult<IList<TvSerieDTO>>> Handle(GetAllTvSeriesQuery request, CancellationToken cancellationToken)
+        public async Task<Result<IList<TvSerieDTO>>> Handle(GetAllTvSeriesQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -30,12 +23,12 @@ namespace Cinamaart.Application.Features.TvSeries.Queries.GetAllTvSeries
                     a => a.Country);
 
                 var data = mapper.Map<IList<TvSerieDTO>>(rawData.ToArray());
-                return WebServiceResult<IList<TvSerieDTO>>.Success(data);
+                return Result<IList<TvSerieDTO>>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading all TvSeries data");
-                return WebServiceResult<IList<TvSerieDTO>>.Failure("GetAllTvSeries.Exception", ex.Message);
+                return Result<IList<TvSerieDTO>>.Failure("GetAllTvSeries.Exception", ex.Message);
             }
         }
     }

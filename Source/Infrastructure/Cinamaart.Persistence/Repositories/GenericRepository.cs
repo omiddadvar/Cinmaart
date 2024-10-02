@@ -59,7 +59,7 @@ namespace Cinamaart.Persistence.Repositories
         }
 
         public async Task<IEnumerable<T>> GetAllAsync(
-             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null, 
+             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
              CancellationToken cancellationToken = default)
         {
             var query = _dbContext.Set<T>();

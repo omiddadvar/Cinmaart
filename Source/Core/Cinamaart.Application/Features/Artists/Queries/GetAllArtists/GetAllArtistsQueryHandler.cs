@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
-using Cinamaart.Application.Features.Artists.Commands.UpdateArtist;
-using Cinamaart.Domain.Abstractions;
-using Cinamaart.Domain.Extentions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

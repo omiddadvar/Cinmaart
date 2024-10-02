@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
-using Cinamaart.Application.Features.Episodes.Commands.UpdateEpisode;
-using Cinamaart.Application.Features.Episodes;
 using Cinamaart.Application.Interfaces.Repositories;
-using Cinamaart.Domain.Abstractions;
-using MediatR;
-using Microsoft.Extensions.Logging;
 using Cinamaart.Domain.Entities;
 using Cinamaart.Domain.Extentions;
-using Cinamaart.Application.Abstractions;
+using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Cinamaart.Application.Features.Episodes.Commands.UpdateEpisode
 {

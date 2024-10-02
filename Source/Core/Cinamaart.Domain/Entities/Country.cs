@@ -1,6 +1,4 @@
-﻿using Cinamaart.Domain.Abstractions;
-
-namespace Cinamaart.Domain.Entities
+﻿namespace Cinamaart.Domain.Entities
 {
     public class Country
     {

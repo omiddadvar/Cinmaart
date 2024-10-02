@@ -1,9 +1,8 @@
-﻿using Cinamaart.Domain.Abstractions;
-using Cinamaart.Domain.Entities.Types;
+﻿using Cinamaart.Domain.Entities.Types;
 
 namespace Cinamaart.Domain.Entities.Pivots
 {
-    public class MovieGenre 
+    public class MovieGenre
     {
         public long Id { get; set; }
         public int MovieId { get; set; }

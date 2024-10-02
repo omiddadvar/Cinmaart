@@ -1,9 +1,9 @@
 using Cinamaart.Application;
+using Cinamaart.Infrastructure;
 using Cinamaart.Persistence;
 using Cinamaart.Persistence.Extentions;
 using Cinamaart.WebAPI;
 using Microsoft.Extensions.Options;
-using Cinamaart.Infrastructure;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

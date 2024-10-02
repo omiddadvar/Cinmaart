@@ -1,17 +1,12 @@
 ﻿using Cinamaart.Domain.Abstractions;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Abstractions
 {
     public class WebServiceResult<T> : Result<T>, IWebServiceResult<T>
     {
-        public WebServiceResult(int statusCode, bool isSuccess, T? data, Error error) 
-            : base(isSuccess , data , error)
+        public WebServiceResult(int statusCode, bool isSuccess, T? data, Error error)
+            : base(isSuccess, data, error)
         {
             StatusCode = statusCode;
         }
@@ -20,7 +15,7 @@ namespace Cinamaart.Application.Abstractions
         {
             StatusCode = statusCode;
         }
-        public int StatusCode { get;  }
+        public int StatusCode { get; }
 
 
         public static WebServiceResult<T> Success(T data)
@@ -36,12 +31,12 @@ namespace Cinamaart.Application.Abstractions
         public static WebServiceResult<T> Failure(int statusCode, Error error)
             => new WebServiceResult<T>(statusCode, false, default(T), error);
         public static WebServiceResult<T> Failure(int statusCode, string code, string? description = null)
-            => new WebServiceResult<T>(statusCode,false, default(T), new Error(code, description));
+            => new WebServiceResult<T>(statusCode, false, default(T), new Error(code, description));
         public static WebServiceResult<T> Failure(string code, string? description = null)
-            => new WebServiceResult<T>(StatusCodes.Status400BadRequest,false, default(T), new Error(code, description));
+            => new WebServiceResult<T>(StatusCodes.Status400BadRequest, false, default(T), new Error(code, description));
         public static WebServiceResult<T> Failure(IList<Error>? errors)
-            => new WebServiceResult<T>(StatusCodes.Status400BadRequest,false, default(T), errors);
+            => new WebServiceResult<T>(StatusCodes.Status400BadRequest, false, default(T), errors);
         public static WebServiceResult<T> Failure(int statusCode, IList<Error>? errors)
-            => new WebServiceResult<T>(statusCode,false, default(T), errors);
+            => new WebServiceResult<T>(statusCode, false, default(T), errors);
     }
 }
