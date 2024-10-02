@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Seasons.Queries.GetSeasonById
 {
-    public record GetSeasonByIdQuery(int SeasonId) : IRequest<Result<SeasonDTO>>;
+    public record GetSeasonByIdQuery(int SeasonId) : IRequest<WebServiceResult<SeasonDTO>>;
 }

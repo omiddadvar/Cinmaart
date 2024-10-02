@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
@@ -10,9 +11,9 @@ namespace Cinamaart.Application.Features.Seasons.Queries.GetAllSeasonsOfTvSerie
             IMapper mapper,
             ISeasonRepository SeasonRepository,
             ILogger<GetAllSeasonsOfTvSerieQueryHandler> logger
-        ) : IRequestHandler<GetAllSeasonsOfTvSerieQuery, Result<IList<SeasonDTO>>>
+        ) : IRequestHandler<GetAllSeasonsOfTvSerieQuery, WebServiceResult<IList<SeasonDTO>>>
     {
-        public async Task<Result<IList<SeasonDTO>>> Handle(GetAllSeasonsOfTvSerieQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<IList<SeasonDTO>>> Handle(GetAllSeasonsOfTvSerieQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -23,12 +24,12 @@ namespace Cinamaart.Application.Features.Seasons.Queries.GetAllSeasonsOfTvSerie
                     a => a.TvSerie);
 
                 var data = mapper.Map<IList<SeasonDTO>>(rawData.ToArray());
-                return Result<IList<SeasonDTO>>.Success(data);
+                return WebServiceResult<IList<SeasonDTO>>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading all Seasons data");
-                return Result<IList<SeasonDTO>>.Failure("GetAllSeasons.Exception", ex.Message);
+                return WebServiceResult<IList<SeasonDTO>>.Failure("GetAllSeasons.Exception", ex.Message);
             }
         }
     }

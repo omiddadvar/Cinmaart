@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Interfaces.Repositories;
 using Cinamaart.Domain.Abstractions;
@@ -19,9 +20,9 @@ namespace Cinamaart.Application.Features.Seasons.Commands.AddSeason
             ISeasonRepository seasonRepository,
             IUnitOfWork unitOfWork,
             ILogger<AddSeasonCommandHandler> logger
-        ) : IRequestHandler<AddSeasonCommand, Result<SeasonDTO>>
+        ) : IRequestHandler<AddSeasonCommand, WebServiceResult<SeasonDTO>>
     {
-        public async Task<Result<SeasonDTO>> Handle(AddSeasonCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<SeasonDTO>> Handle(AddSeasonCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -30,12 +31,12 @@ namespace Cinamaart.Application.Features.Seasons.Commands.AddSeason
                 await unitOfWork.SaveAsync(cancellationToken);
 
                 var data = mapper.Map<SeasonDTO>(Season);
-                return Result<SeasonDTO>.Success(data);
+                return WebServiceResult<SeasonDTO>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while adding Season, requested data = {request}", request.ToJson());
-                return Result<SeasonDTO>.Failure("AddSeason.Exception", ex.Message);
+                return WebServiceResult<SeasonDTO>.Failure("AddSeason.Exception", ex.Message);
             }
         }
     }

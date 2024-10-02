@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,5 @@ namespace Cinamaart.Application.Features.Seasons.Commands.UpdateSeason
         int Year,
         string Description,
         int TvSerieId
-    ) : IRequest<Result<SeasonDTO>>;
+    ) : IRequest<WebServiceResult<SeasonDTO>>;
 }
