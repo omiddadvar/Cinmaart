@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.Genres;
 using Cinamaart.Domain.Abstractions;
@@ -16,20 +17,20 @@ namespace Cinamaart.Application.Features.Tags.Queries.GetTagById
             IMapper mapper,
             ITagRepository tagRepository,
             ILogger<GetTagByIdQueryHandler> logger
-        ) : IRequestHandler<GetTagByIdQuery, Result<TagDTO>>
+        ) : IRequestHandler<GetTagByIdQuery, WebServiceResult<TagDTO>>
     {
-        public async Task<Result<TagDTO>> Handle(GetTagByIdQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<TagDTO>> Handle(GetTagByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var tag = await tagRepository.GetAsync(request.Id,cancellationToken);
                 var data = mapper.Map<TagDTO>(tag);
-                return Result<TagDTO>.Success(data);
+                return WebServiceResult<TagDTO>.Success(data);
             }
             catch(Exception ex)
             {
                 logger.LogError(ex, "Error while reading tag data, tagid = {tag}", request.Id);
-                return Result<TagDTO>.Failure("GetTagById.Exception", ex.Message);
+                return WebServiceResult<TagDTO>.Failure("GetTagById.Exception", ex.Message);
             }
         }
     }

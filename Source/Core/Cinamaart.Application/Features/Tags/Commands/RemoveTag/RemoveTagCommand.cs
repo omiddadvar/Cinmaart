@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Tags.Commands.RemoveTag
 {
-    public record RemoveTagCommand(int Id) : IRequest<Result<bool>>;
+    public record RemoveTagCommand(int Id) : IRequest<WebServiceResult<bool>>;
 }

@@ -1,7 +1,8 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 
 namespace Cinamaart.Application.Features.Tags.Queries.GetAllTags
 {
-    public record GetAllTagsQuery : IRequest<Result<IList<TagDTO>>>;
+    public record GetAllTagsQuery : IRequest<WebServiceResult<IList<TagDTO>>>;
 }

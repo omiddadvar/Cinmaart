@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace Cinamaart.Application.Features.Tags.Queries.GetTagById
 {
-    public record GetTagByIdQuery(int Id) : IRequest<Result<TagDTO>>;
+    public record GetTagByIdQuery(int Id) : IRequest<WebServiceResult<TagDTO>>;
 }

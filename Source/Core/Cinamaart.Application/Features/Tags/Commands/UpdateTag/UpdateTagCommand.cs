@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,5 @@ namespace Cinamaart.Application.Features.Tags.Commands.UpdateTag
     public record UpdateTagCommand (
             int Id,
             string Name
-        ) : IRequest<Result<TagDTO>>;
+        ) : IRequest<WebServiceResult<TagDTO>>;
 }

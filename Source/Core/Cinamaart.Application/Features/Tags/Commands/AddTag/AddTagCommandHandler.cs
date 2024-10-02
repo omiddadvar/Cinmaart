@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Interfaces.Repositories;
 using Cinamaart.Domain.Abstractions;
@@ -15,9 +16,9 @@ namespace Cinamaart.Application.Features.Tags.Commands.AddTag
             ITagRepository tagRepository,
             IUnitOfWork unitOfWork,
             ILogger<AddTagCommandHandler> logger
-        ) : IRequestHandler<AddTagCommand, Result<TagDTO>>
+        ) : IRequestHandler<AddTagCommand, WebServiceResult<TagDTO>>
     {
-        public async Task<Result<TagDTO>> Handle(AddTagCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<TagDTO>> Handle(AddTagCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -26,12 +27,12 @@ namespace Cinamaart.Application.Features.Tags.Commands.AddTag
                 await unitOfWork.SaveAsync(cancellationToken);
 
                 var tagDTO = mapper.Map<TagDTO>(tag);
-                return Result<TagDTO>.Success(tagDTO);
+                return WebServiceResult<TagDTO>.Success(tagDTO);
             }
             catch(Exception ex)
             {
                 logger.LogError(ex, "Error while adding tag, requested data = {request}", request.ToJson());
-                return Result<TagDTO>.Failure("AddTag.Exception", ex.Message);
+                return WebServiceResult<TagDTO>.Failure("AddTag.Exception", ex.Message);
             }
         }
     }

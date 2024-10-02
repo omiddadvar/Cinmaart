@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
@@ -15,9 +16,9 @@ namespace Cinamaart.Application.Features.Tags.Queries.GetAllTags
             IMapper mapper,
             ITagRepository tagRepository,
             ILogger<GetAllTagsQueryHandler> logger
-        ) : IRequestHandler<GetAllTagsQuery, Result<IList<TagDTO>>>
+        ) : IRequestHandler<GetAllTagsQuery, WebServiceResult<IList<TagDTO>>>
     {
-        public async Task<Result<IList<TagDTO>>> Handle(GetAllTagsQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<IList<TagDTO>>> Handle(GetAllTagsQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -26,12 +27,12 @@ namespace Cinamaart.Application.Features.Tags.Queries.GetAllTags
                    cancellationToken);
 
                 var data = mapper.Map<IList<TagDTO>>(tags.ToArray());
-                return Result<IList<TagDTO>>.Success(data);
+                return WebServiceResult<IList<TagDTO>>.Success(data);
             }
             catch(Exception ex)
             {
                 logger.LogError(ex, "Error while reading all tag data");
-                return Result<IList<TagDTO>>.Failure("GetAllTags.Exception", ex.Message);
+                return WebServiceResult<IList<TagDTO>>.Failure("GetAllTags.Exception", ex.Message);
             }
         }
     }

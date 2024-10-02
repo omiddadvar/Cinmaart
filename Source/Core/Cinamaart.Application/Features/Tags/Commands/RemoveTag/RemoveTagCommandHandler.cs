@@ -1,4 +1,5 @@
-﻿using Cinamaart.Application.Abstractions.Repositories;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Interfaces.Repositories;
 using Cinamaart.Domain.Abstractions;
 using MediatR;
@@ -15,20 +16,20 @@ namespace Cinamaart.Application.Features.Tags.Commands.RemoveTag
             ITagRepository tagRepository,
             IUnitOfWork unitOfWork,
             ILogger<RemoveTagCommandHandler> logger
-        ) : IRequestHandler<RemoveTagCommand, Result<bool>>
+        ) : IRequestHandler<RemoveTagCommand, WebServiceResult<bool>>
     {
-        public async Task<Result<bool>> Handle(RemoveTagCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<bool>> Handle(RemoveTagCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 await tagRepository.DeleteAsync(request.Id);
                 await unitOfWork.SaveAsync(cancellationToken);
-                return Result<bool>.Success(true);
+                return WebServiceResult<bool>.Success(true);
             }
             catch(Exception ex )
             {
                 logger.LogError(ex, "Error while removing tag, genreId = {Id}", request.Id);
-                return Result<bool>.Failure("RemoveTag.Exception", ex.Message);
+                return WebServiceResult<bool>.Failure("RemoveTag.Exception", ex.Message);
             }
         }
     }

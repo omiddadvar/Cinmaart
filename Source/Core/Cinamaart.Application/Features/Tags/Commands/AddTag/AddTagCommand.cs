@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,5 @@ namespace Cinamaart.Application.Features.Tags.Commands.AddTag
 {
     public record AddTagCommand(
         string Name
-        ) : IRequest<Result<TagDTO>>;
+        ) : IRequest<WebServiceResult<TagDTO>>;
 }
