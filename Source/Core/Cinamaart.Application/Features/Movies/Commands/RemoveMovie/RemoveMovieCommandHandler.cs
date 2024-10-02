@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Interfaces.Repositories;
 using Cinamaart.Domain.Abstractions;
@@ -11,20 +12,20 @@ namespace Cinamaart.Application.Features.Movies.Commands.RemoveMovie
             IMovieRepository movieRepository,
             IUnitOfWork unitOfWork,
             ILogger<RemoveMovieCommandHandler> logger
-        ) : IRequestHandler<RemoveMovieCommand, Result<bool>>
+        ) : IRequestHandler<RemoveMovieCommand, WebServiceResult<bool>>
     {
-        public async Task<Result<bool>> Handle(RemoveMovieCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<bool>> Handle(RemoveMovieCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 await movieRepository.DeleteAsync(request.MovieId);
                 await unitOfWork.SaveAsync(cancellationToken);
-                return Result<bool>.Success(true);
+                return WebServiceResult<bool>.Success(true);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while removing movie, movieId = {movieId}", request.MovieId);
-                return Result<bool>.Failure("RemoveMovie.Exception", ex.Message);
+                return WebServiceResult<bool>.Failure("RemoveMovie.Exception", ex.Message);
             }
         }
     }

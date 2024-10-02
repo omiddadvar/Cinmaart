@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.Artists.Queries;
 using Cinamaart.Domain.Abstractions;
@@ -19,9 +20,9 @@ namespace Cinamaart.Application.Features.Movies.Queries.GetPaginatedMovies
             IMapper mapper,
             IMovieRepository movieRepository,
             ILogger<GetPaginatedMoviesQueryHandler> logger
-        ) : IRequestHandler<GetPaginatedMoviesQuery, Result<PagedList<MovieDTO>>>
+        ) : IRequestHandler<GetPaginatedMoviesQuery, WebServiceResult<PagedList<MovieDTO>>>
     {
-        public async Task<Result<PagedList<MovieDTO>>> Handle(GetPaginatedMoviesQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<PagedList<MovieDTO>>> Handle(GetPaginatedMoviesQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -46,12 +47,12 @@ namespace Cinamaart.Application.Features.Movies.Queries.GetPaginatedMovies
                     e => e.Country);
 
                 var data = mapper.Map<PagedList<Movie>, PagedList<MovieDTO>>(rawData);
-                return Result<PagedList<MovieDTO>>.Success(data);
+                return WebServiceResult<PagedList<MovieDTO>>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading paginated movie data, requested data = {request}", request.ToJson());
-                return Result<PagedList<MovieDTO>>.Failure("GetPaginatedMovies.Exception", ex.Message);
+                return WebServiceResult<PagedList<MovieDTO>>.Failure("GetPaginatedMovies.Exception", ex.Message);
             }
         }
     }

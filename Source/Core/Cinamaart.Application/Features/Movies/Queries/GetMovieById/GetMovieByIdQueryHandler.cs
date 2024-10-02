@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Features.Artists.Queries;
 using Cinamaart.Application.Features.Movies.Queries.GetAllMovies;
@@ -17,20 +18,20 @@ namespace Cinamaart.Application.Features.Movies.Queries.GetMovieById
         IMapper mapper,
         IMovieRepository movieRepository,
         ILogger<GetMovieByIdQueryHandler> logger
-    ) : IRequestHandler<GetMovieByIdQuery, Result<MovieDTO>>
+    ) : IRequestHandler<GetMovieByIdQuery, WebServiceResult<MovieDTO>>
     {
-        public async Task<Result<MovieDTO>> Handle(GetMovieByIdQuery request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<MovieDTO>> Handle(GetMovieByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var artist = await movieRepository.GetAsync(request.MovieId, cancellationToken);
                 var data = mapper.Map<MovieDTO>(artist);
-                return Result<MovieDTO>.Success(data);
+                return WebServiceResult<MovieDTO>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while reading movie data, movieid = {movieid}", request.MovieId);
-                return Result<MovieDTO>.Failure("GetMovieById.Exception", ex.Message);
+                return WebServiceResult<MovieDTO>.Failure("GetMovieById.Exception", ex.Message);
             }
         }
     }

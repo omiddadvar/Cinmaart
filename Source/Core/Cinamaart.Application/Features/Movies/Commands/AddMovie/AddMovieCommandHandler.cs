@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cinamaart.Application.Abstractions;
 using Cinamaart.Application.Abstractions.Repositories;
 using Cinamaart.Application.Interfaces.Repositories;
 using Cinamaart.Domain.Abstractions;
@@ -15,9 +16,9 @@ namespace Cinamaart.Application.Features.Movies.Commands.AddMovie
             IMovieRepository movieRepository,
             IUnitOfWork unitOfWork,
             ILogger<AddMovieCommandHandler> logger
-        ) : IRequestHandler<AddMovieCommand, Result<MovieDTO>>
+        ) : IRequestHandler<AddMovieCommand, WebServiceResult<MovieDTO>>
     {
-        public async Task<Result<MovieDTO>> Handle(AddMovieCommand request, CancellationToken cancellationToken)
+        public async Task<WebServiceResult<MovieDTO>> Handle(AddMovieCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -26,12 +27,12 @@ namespace Cinamaart.Application.Features.Movies.Commands.AddMovie
                 await unitOfWork.SaveAsync(cancellationToken);
 
                 var data = mapper.Map<MovieDTO>(movie);
-                return Result<MovieDTO>.Success(data);
+                return WebServiceResult<MovieDTO>.Success(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while adding movie, requested data = {request}", request.ToJson());
-                return Result<MovieDTO>.Failure("AddMovie.Exception", ex.Message);
+                return WebServiceResult<MovieDTO>.Failure("AddMovie.Exception", ex.Message);
             }
         }
     }
