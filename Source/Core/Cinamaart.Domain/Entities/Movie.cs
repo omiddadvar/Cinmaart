@@ -19,5 +19,6 @@ namespace Cinamaart.Domain.Entities
         public ICollection<MovieGenre> MovieGenres { get; set; } = new List<MovieGenre>();
         public ICollection<MovieSubtitle> MovieSubtitles { get; set; } = new List<MovieSubtitle>();
         public ICollection<MovieTag> MovieTags { get; set; } = new List<MovieTag>();
+        public ICollection<MovieDocument> MovieDocuments { get; set; } = new List<MovieDocument>();
     }
 }

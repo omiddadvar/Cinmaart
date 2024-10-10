@@ -28,6 +28,10 @@ namespace Cinamaart.Persistence.Contexts
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<UserDocumentType> UserDocumentTypes { get; set; }
+        public DbSet<MovieDocumentType> MovieDocumentTypes { get; set; }
+        public DbSet<TvSeriesDocumentType> TvSeriesDocumentTypes { get; set; }
+        public DbSet<SubtitleDocumentType> SubtitleDocumentTypes { get; set; }
         #endregion
         #region Pivot Tables
         public DbSet<EpisodeSubtitle> EpisodeSubtitles { get; set; }
@@ -36,11 +40,13 @@ namespace Cinamaart.Persistence.Contexts
         public DbSet<MovieSubtitle> MovieSubtitles { get; set; }
         public DbSet<MovieTag> MovieTags { get; set; }
         public DbSet<Rating> Ratings { get; set; }
-        public DbSet<SubtitleDocument> SubtitleDocuments { get; set; }
         public DbSet<TvSerieArtist> TvSerieArtists { get; set; }
         public DbSet<TvSerieGenre> TvSerieGenres { get; set; }
         public DbSet<TvSerieTag> TvSerieTags { get; set; }
         public DbSet<UserDocument> UserDocuments { get; set; }
+        public DbSet<SubtitleDocument> SubtitleDocuments { get; set; }
+        public DbSet<MovieDocument> MovieDocuments { get; set; }
+        public DbSet<TvSerieDocument> TvSerieDocuments { get; set; }
         #endregion
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

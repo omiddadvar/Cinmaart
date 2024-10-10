@@ -15,6 +15,8 @@ namespace Cinamaart.Domain.Entities
 
         public ICollection<SubtitleDocument> SubtitleDocuments { get; set; } = new List<SubtitleDocument>();
         public ICollection<UserDocument> UserDocuments { get; set; } = new List<UserDocument>();
+        public ICollection<MovieDocument> MovieDocuments { get; set; } = new List<MovieDocument>();
+        public ICollection<TvSerieDocument> TvSerieDocuments { get; set; } = new List<TvSerieDocument>();
         public DateTime CraetedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
