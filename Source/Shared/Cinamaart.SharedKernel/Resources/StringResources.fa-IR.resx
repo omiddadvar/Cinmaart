@@ -141,6 +141,9 @@
   <data name="File.NotFound" xml:space="preserve">
     <value>فایل مورد نظر یافت نشد</value>
   </data>
+  <data name="File.UploadFailure" xml:space="preserve">
+    <value>عدم توانایی در بارگذاری فایل</value>
+  </data>
   <data name="File.UploadNotFound" xml:space="preserve">
     <value>فایل بارگیری شده مشکل دارد، فایل یافت نشد</value>
   </data>

@@ -17,5 +17,6 @@
         public const string Country_NotFound = "Country.NotFound";
         public const string File_NotFound = "File.NotFound";
         public const string File_UploadNotFound = "File.UploadNotFound";
+        public const string File_UploadFailure = "File.UploadFailure";
     }
 }
