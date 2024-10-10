@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cinamaart.Domain.Entities.Pivots;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,7 @@ namespace Cinamaart.Domain.Entities.Types
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public ICollection<UserDocument> UserDocuments { get; set; } = new List<UserDocument>();
+
     }
 }
