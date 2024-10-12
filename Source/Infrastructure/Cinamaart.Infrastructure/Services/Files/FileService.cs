@@ -1,4 +1,5 @@
 ﻿using Cinamaart.Application.Abstractions.Services;
+using Cinamaart.Application.Extentions.Files;
 using Cinamaart.Domain.Common.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -39,12 +40,10 @@ namespace Cinamaart.Infrastructure.Services.Files
                 }
             }
         }
-        public async Task<bool> UploadFileAsync(
-            IFormFile file,
-            DocumentTypeEnum type = DocumentTypeEnum.SRT)
+        public async Task<bool> UploadFileAsync(IFormFile file , string? filename = null)
         {
             bool result = false;
-            var filePath = Path.Combine(_fileStoragePath, type.ToString(), file.FileName);
+            var filePath = Path.Combine(_fileStoragePath, file.GetDocType().ToString(), filename ?? file.FileName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
@@ -53,18 +52,18 @@ namespace Cinamaart.Infrastructure.Services.Files
             }
             return result;
         }
-        public async Task DeleteFileAsync(string fileName, DocumentTypeEnum type)
+        public async Task DeleteFileAsync(string fileName)
         {
-            var filePath = Path.Combine(_fileStoragePath, type.ToString(), fileName);
+            var filePath = Path.Combine(_fileStoragePath , fileName.GetExtensionToUpper(), fileName);
 
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
         }
-        public async Task<FileStream> DownloadFileAsFileStreamAsync(string fileName, DocumentTypeEnum type)
+        public async Task<FileStream> DownloadFileAsFileStreamAsync(string fileName)
         {
-            var filePath = Path.Combine(_fileStoragePath, type.ToString(), fileName);
+            var filePath = Path.Combine(_fileStoragePath, fileName.GetExtensionToUpper(), fileName);
 
             if (!File.Exists(filePath))
             {
@@ -73,17 +72,17 @@ namespace Cinamaart.Infrastructure.Services.Files
 
             return new FileStream(filePath, FileMode.Open, FileAccess.Read);
         }
-        public async Task<MemoryStream> DownloadFileAsMemoryStreamAsync(string fileName, DocumentTypeEnum type)
+        public async Task<MemoryStream> DownloadFileAsMemoryStreamAsync(string fileName)
         {
-            var fileStream = await DownloadFileAsFileStreamAsync(fileName, type);
+            var fileStream = await DownloadFileAsFileStreamAsync(fileName);
             var memoryStream = new MemoryStream();
             fileStream.CopyTo(memoryStream);
             memoryStream.Position = 0;
             return memoryStream;
         }
-        public async Task<byte[]> DownloadFileAsBytesAsync(string fileName, DocumentTypeEnum type)
+        public async Task<byte[]> DownloadFileAsBytesAsync(string fileName)
         {
-            var stream = await DownloadFileAsMemoryStreamAsync(fileName, type);
+            var stream = await DownloadFileAsMemoryStreamAsync(fileName);
             return stream.ToArray();
         }
     }

@@ -6,5 +6,5 @@ namespace Cinamaart.Application.Features.Files.Commands.AddProfilePicture
 {
     public record AddProfilePictureCommand(
         IFormFile File,
-        long UserId) : IRequest<WebServiceResult<string>>;
+        long UserId) : IRequest<WebServiceResult<bool>>;
 }

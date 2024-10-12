@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Cinamaart.Persistence.Repositories
 {
@@ -35,6 +36,7 @@ namespace Cinamaart.Persistence.Repositories
                 {
                     UserId = userId,
                     DocumentId = document.Id,
+                    Document = document,
                     UserDocumentTypeId = (int)UserDocumentTypeEnum.Profile
                 };
 
@@ -48,6 +50,10 @@ namespace Cinamaart.Persistence.Repositories
             {
                 transaction.Rollback();
                 return null;
+            }
+            finally
+            {
+                await transaction.DisposeAsync();
             }
         }
 
@@ -89,6 +95,10 @@ namespace Cinamaart.Persistence.Repositories
             {
                 transaction.Rollback();
                 return false;
+            }
+            finally
+            {
+                await transaction.DisposeAsync();
             }
         }
     }
