@@ -60,6 +60,7 @@ namespace Cinamaart.Persistence.Repositories
         public async Task<UserDocument?> GetProfileUserDocument(long userId, CancellationToken cancellationToken)
         {
             var userDocument = await dBContext.UserDocuments
+                .Include(d => d.Document)
                 .FirstOrDefaultAsync(u => u.Id == userId
                     && u.UserDocumentTypeId == (int)UserDocumentTypeEnum.Profile);
             return userDocument;

@@ -34,6 +34,7 @@ namespace Cinamaart.Application.Features.Files.Commands.AddProfilePicture
                 if (currentUserProfile is not null)
                 {
                     await userProfileRepository.RemoveUserProfile(currentUserProfile, cancellationToken);
+                    await fileService.DeleteFileAsync(currentUserProfile.Document.SavedName);
                 }
                 var newUserProfile = await userProfileRepository.AddNewUserProfile(request.UserId, request.File, cancellationToken);
                 
