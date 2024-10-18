@@ -3,6 +3,7 @@ using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Application.Abstractions.Settings;
 using Cinamaart.Infrastructure.Configurations;
 using Cinamaart.Infrastructure.Services;
+using Cinamaart.Infrastructure.Services.Files;
 using Cinamaart.Infrastructure.Services.Notification;
 using Cinamaart.Infrastructure.Services.Token;
 using Microsoft.Extensions.Configuration;

@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 
 namespace Cinamaart.Application.Features.Movies.Commands.AddMovie
@@ -8,5 +9,5 @@ namespace Cinamaart.Application.Features.Movies.Commands.AddMovie
             int Year,
             string Description,
             int? CountryId
-        ) : IRequest<Result<MovieDTO>>;
+        ) : IRequest<WebServiceResult<MovieDTO>>;
 }

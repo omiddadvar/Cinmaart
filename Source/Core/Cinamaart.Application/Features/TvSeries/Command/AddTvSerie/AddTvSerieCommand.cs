@@ -1,4 +1,5 @@
-﻿using Cinamaart.Domain.Abstractions;
+﻿using Cinamaart.Application.Abstractions;
+using Cinamaart.Domain.Abstractions;
 using MediatR;
 
 namespace Cinamaart.Application.Features.TvSeries.Command.AddTvSerie
@@ -7,5 +8,5 @@ namespace Cinamaart.Application.Features.TvSeries.Command.AddTvSerie
         string Name,
         string Description,
         int? CountryId
-        ) : IRequest<Result<TvSerieDTO>>;
+        ) : IRequest<WebServiceResult<TvSerieDTO>>;
 }

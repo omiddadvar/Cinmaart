@@ -47,14 +47,14 @@ namespace Cinamaart.WebAPI.Controllers
         [HttpPost]
         [Authorize(Roles = RoleNames.Administrator)]
 
-        public async Task<IActionResult> AddRoleToUser(, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> AddRoleToUser(CancellationToken cancellationToken = default)
         {
             return null;
         }
         [HttpPut]
         [Authorize(Roles = RoleNames.Administrator)]
 
-        public async Task<IActionResult> RemoveRoleFromUser(, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> RemoveRoleFromUser(CancellationToken cancellationToken = default)
         {
             return null;
         }

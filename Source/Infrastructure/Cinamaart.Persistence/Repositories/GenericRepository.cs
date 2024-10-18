@@ -62,7 +62,7 @@ namespace Cinamaart.Persistence.Repositories
              Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
              CancellationToken cancellationToken = default)
         {
-            var query = _dbContext.Set<T>();
+            var query = _dbContext.Set<T>().AsQueryable();
             if (orderBy != null)
             {
                 query = orderBy(query);

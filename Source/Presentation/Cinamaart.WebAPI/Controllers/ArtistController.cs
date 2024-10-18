@@ -21,34 +21,34 @@ namespace Cinamaart.WebAPI.Controllers
         {
             var query = new GetAllArtistsQuery();
             var result = await mediator.Send(query, cancellationToken);
-            return result.IsSuccess ? Ok(result) : BadRequest(result);
+            return StatusCode(result.StatusCode, result);
         }
         [HttpGet("Paginate")]
         public async Task<IActionResult> GetPaginatedArtists(GetPaginatedArtistsQuery query, CancellationToken cancellationToken = default)
         {
-            var result = await mediator.Send(query, cancellationToken);
-            return result.IsSuccess ? Ok(result) : BadRequest(result);
+            var result = await mediator.Send(query, cancellationToken); 
+            return StatusCode(result.StatusCode, result);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetArtisById(int id, CancellationToken cancellationToken = default)
         {
             var query = new GetArtistQuery(id);
             var result = await mediator.Send(query, cancellationToken);
-            return result.IsSuccess ? Ok(result) : BadRequest(result);
+            return StatusCode(result.StatusCode, result);
         }
         [HttpPost]
         [Authorize(Roles = RoleNames.Administrator)]
         public async Task<IActionResult> AddArtist(AddArtistCommand command, CancellationToken cancellationToken = default)
         {
             var result = await mediator.Send(command, cancellationToken);
-            return result.IsSuccess ? Ok(result) : BadRequest(result);
+            return StatusCode(result.StatusCode, result);
         }
         [HttpPut]
         [Authorize(Roles = RoleNames.Administrator)]
         public async Task<IActionResult> EditArtist(UpdateArtistCommand command, CancellationToken cancellationToken = default)
         {
             var result = await mediator.Send(command, cancellationToken);
-            return result.IsSuccess ? Ok(result) : BadRequest(result);
+            return StatusCode(result.StatusCode, result);
         }
         [HttpDelete("{id}")]
         [Authorize(Roles = RoleNames.Administrator)]
@@ -56,7 +56,7 @@ namespace Cinamaart.WebAPI.Controllers
         {
             var command = new RemoveArtistCommand(id);
             var result = await mediator.Send(command, cancellationToken);
-            return result.IsSuccess ? Ok(result) : BadRequest(result);
+            return StatusCode(result.StatusCode, result);
         }
     }
 }

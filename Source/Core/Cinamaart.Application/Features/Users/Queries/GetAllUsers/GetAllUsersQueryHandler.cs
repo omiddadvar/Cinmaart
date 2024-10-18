@@ -17,7 +17,8 @@ namespace Cinamaart.Application.Features.Users.Queries.GetAllUsers
             UserManager<User> userManager,
             IStringLocalizer<StringResources> localizer,
             ILogger<GetAllUsersQueryHandler> logger
-        ) : IRequestHandler<GetAllUsersQuery, Result<IList<UserDTO>>{
+        ) : IRequestHandler<GetAllUsersQuery, Result<IList<UserDTO>>>
+    {
         public async Task<Result<IList<UserDTO>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
             try

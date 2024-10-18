@@ -59,7 +59,7 @@ namespace Cinamaart.WebAPI.Controllers
             bool isAccessOk = Request.HttpContext.IsSameUserOrAdmin(id);
             if (!isAccessOk)
             {
-                return Unauthorized(Result<object>.Failure(localizer[LocalStringKeyword.UnAuthorized]))
+                return Unauthorized(Result<object>.Failure(localizer[LocalStringKeyword.UnAuthorized]));
             }
             throw new NotImplementedException();
         }

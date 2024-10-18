@@ -49,7 +49,7 @@ namespace Cinamaart.WebAPI.Controllers
         }
         [HttpDelete("{id}")]
         [Authorize(Roles = RoleNames.Administrator)]
-        public async Task<IActionResult> RemoveGenre(int id,, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> RemoveGenre(int id, CancellationToken cancellationToken = default)
         {
             var command = new RemoveGenreCommand(id);
             var data = await mediator.Send(command, cancellationToken);
