@@ -11,14 +11,14 @@ namespace Cinamaart.Infrastructure.Services.Files
         private const string FILESTORAGE_CONFIG_KEY = "FileSettings:FileStoragePath";
         private readonly string _fileStoragePath;
         private readonly IConfiguration configuration;
-        private readonly HttpContext _httpContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public FileService(IConfiguration configuration, HttpContext httpContext)
+        public FileService(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _fileStoragePath = configuration[FILESTORAGE_CONFIG_KEY];
             _InitializeFolder();
             this.configuration = configuration;
-            this._httpContext = httpContext;
+            this._httpContextAccessor = httpContextAccessor;
         }
         private void _InitializeFolder()
         {

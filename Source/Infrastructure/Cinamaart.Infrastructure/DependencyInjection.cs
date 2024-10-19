@@ -3,6 +3,7 @@ using Cinamaart.Application.Abstractions.Services;
 using Cinamaart.Application.Abstractions.Settings;
 using Cinamaart.Infrastructure.Configurations;
 using Cinamaart.Infrastructure.Services;
+using Cinamaart.Infrastructure.Services.Device;
 using Cinamaart.Infrastructure.Services.Files;
 using Cinamaart.Infrastructure.Services.Notification;
 using Cinamaart.Infrastructure.Services.Token;
@@ -28,6 +29,7 @@ namespace Cinamaart.Infrastructure
             // Notification Services
             services.AddTransient<IEmailService, EmailService>();
             //Utility Services
+            services.AddTransient<IUserDeviceService, UserDeviceService>();
             services.AddTransient<IUrlService, UrlService>();
             services.AddScoped<IFileService, FileService>();
 
