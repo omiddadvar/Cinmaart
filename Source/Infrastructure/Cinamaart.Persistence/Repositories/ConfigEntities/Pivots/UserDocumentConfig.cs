@@ -24,8 +24,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Pivots
             builder.HasOne(t => t.UserDocumentType)
                  .WithMany(e => e.UserDocuments)
                  .HasForeignKey(t => t.UserDocumentTypeId)
-                 .OnDelete(DeleteBehavior.SetNull)
-                 .IsRequired();
+                 .OnDelete(DeleteBehavior.SetNull);
 
             builder.ToTable(nameof(UserDocument));
         }

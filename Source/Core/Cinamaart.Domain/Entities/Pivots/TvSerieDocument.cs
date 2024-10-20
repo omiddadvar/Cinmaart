@@ -15,8 +15,8 @@ namespace Cinamaart.Domain.Entities.Pivots
         public TvSerie TvSerie { get; set; }
         public long DocumentId { get; set; }
         public Document Document { get; set; }
-        public int TvSeriesDocumentTypeId { get; set; }
-        public TvSeriesDocumentType TvSeriesDocumentType { get; set; }
+        public int? TvSeriesDocumentTypeId { get; set; }
+        public TvSeriesDocumentType? TvSeriesDocumentType { get; set; }
         public DateTime CraetedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }

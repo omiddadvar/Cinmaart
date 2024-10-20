@@ -24,8 +24,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Pivots
             builder.HasOne(t => t.SubtitleDocumentType)
                  .WithMany(e => e.SubtitleDocuments)
                  .HasForeignKey(t => t.SubtitleDocumentTypeId)
-                 .OnDelete(DeleteBehavior.SetNull)
-                 .IsRequired();
+                 .OnDelete(DeleteBehavior.SetNull);
 
             builder.ToTable(nameof(SubtitleDocument));
         }

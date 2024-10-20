@@ -29,8 +29,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Pivots
             builder.HasOne(t => t.MovieDocumentType)
                  .WithMany(e => e.MovieDocuments)
                  .HasForeignKey(t => t.MovieDocumentTypeId)
-                 .OnDelete(DeleteBehavior.SetNull)
-                 .IsRequired();
+                 .OnDelete(DeleteBehavior.SetNull);
 
             builder.ToTable(nameof(MovieDocument));
         }
