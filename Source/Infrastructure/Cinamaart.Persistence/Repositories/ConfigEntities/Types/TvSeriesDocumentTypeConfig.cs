@@ -14,6 +14,7 @@ namespace Cinamaart.Persistence.Repositories.ConfigEntities.Types
         public void Configure(EntityTypeBuilder<TvSeriesDocumentType> builder)
         {
             builder.HasKey(t => t.Id);
+            builder.Property(t => t.Id).ValueGeneratedNever();
             builder.Property(t => t.Name).HasMaxLength(maxLength: 100);
             builder.ToTable(nameof(TvSeriesDocumentType));
         }
